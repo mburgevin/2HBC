@@ -1,2 +1,15 @@
-"backend/produits.db" 
-".claude"
+node_modules/
+venv/
+.env
+.env.*
+!.env.example
+!projet-millions/.env.production
+.vercel/
+build/
+coverage/
+*.db
+*.db-*
+*.log
+.claude/
+supabase/.temp/
+supabase/.branches/

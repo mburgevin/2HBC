@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const db = require('./database');
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || '2hbc_secret_change_moi_en_prod';
+const JWT_SECRET = require('./legacy-config').JWT_SECRET;
 
 function requireAdmin(req, res, next) {
   const authHeader = req.headers.authorization;
