@@ -3,6 +3,16 @@ import { getSupabase, supabase, isAdmin } from '../lib/supabase';
 import { ensureProfile } from '../lib/data';
 const AuthContext = createContext(null);
 const displayUser = user => user ? { ...user, nom: user.user_metadata?.nom || user.email, role: isAdmin(user) ? 'admin' : 'artisan' } : null;
+
+function authMessage(error, action = 'auth') {
+  if (!error) return 'Une erreur est survenue. Réessayez.';
+  if (error.code === 'email_address_not_authorized') return "Cette adresse ne peut pas recevoir l’email de confirmation avec la configuration actuelle. Utilisez une adresse autorisée ou configurez un SMTP personnalisé.";
+  if (error.code === 'email_address_invalid') return "Cette adresse email n’est pas acceptée par le service d’authentification. Utilisez une adresse email réelle et valide.";
+  if (error.code === 'over_email_send_rate_limit') return "Trop d’emails ont été envoyés récemment. Attendez quelques minutes avant de réessayer.";
+  if (action === 'login') return 'Connexion impossible. Vérifiez vos identifiants et la confirmation de votre email.';
+  return 'Inscription impossible. Vérifiez les champs ou réessayez plus tard.';
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,7 +37,6 @@ export function AuthProvider({ children }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(event => {
       if (event === 'SIGNED_OUT') { generation++; setUser(null); setRecovery(false); setLoading(false); return; }
       if (event === 'PASSWORD_RECOVERY') setRecovery(true);
-      // Sortir du callback avant de réutiliser Auth (verrou SDK).
       setTimeout(() => { if (active) sync(); }, 0);
     });
     sync();
@@ -35,12 +44,12 @@ export function AuthProvider({ children }) {
   }, []);
   async function login(email, password) {
     const { data, error } = await getSupabase().auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
-    if (error) throw new Error('Connexion impossible. Vérifiez vos identifiants et la confirmation de votre email.');
+    if (error) throw new Error(authMessage(error, 'login'));
     await ensureProfile(data.user); setUser(displayUser(data.user)); setAuthError('');
   }
   async function register(nom, email, password) {
     const { data, error } = await getSupabase().auth.signUp({ email: email.trim().toLowerCase(), password, options: { data: { nom: nom.trim() }, emailRedirectTo: window.location.origin } });
-    if (error) throw new Error('Inscription impossible. Vérifiez les champs ou réessayez plus tard.');
+    if (error) throw new Error(authMessage(error, 'register'));
     if (data.session) { await ensureProfile(data.user); setUser(displayUser(data.user)); }
     return { needsConfirmation: !data.session };
   }
