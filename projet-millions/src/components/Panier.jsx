@@ -66,7 +66,7 @@ export default function Panier() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [redirecting, setRedirecting] = useState(null);
+  const [redirecting] = useState(null);
   const [modalCommande, setModalCommande] = useState(null); // { fournisseur, items }
 
   // Charger le panier
