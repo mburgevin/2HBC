@@ -1,0 +1,29 @@
+name: Verify MVP
+on:
+  pull_request:
+  push:
+    branches: [feat/supabase-vercel-mvp, feature/2hbc-dev]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            projet-millions/package-lock.json
+      - run: npm ci
+      - run: npm run test:db
+      - run: npm ci
+        working-directory: projet-millions
+      - run: npm test -- --watchAll=false --runInBand
+        working-directory: projet-millions
+        env:
+          CI: true
+      - run: npm run build:deploy
+        working-directory: projet-millions
+        env:
+          CI: true
