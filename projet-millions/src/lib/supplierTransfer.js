@@ -58,7 +58,7 @@ export function validateTransfer(value, now = Date.now()) {
   return { version: 1, id: value.id, supplier: value.supplier, createdAt: value.createdAt,
     expiresAt: value.expiresAt, lines: normalizeLines(value.lines) };
 }
-export function createTransfer(supplier, items, now = Date.now(), id = globalThis.crypto.randomUUID()) {
+export function createTransfer(supplier, items, now = Date.now(), id = crypto.randomUUID()) {
   const lines = items.map(item => {
     const offer = item.produits_fournisseurs;
     if (!offer || supplierId(offer.fournisseurs?.nom) !== supplier) throw new Error('Le panier contient un autre fournisseur.');
