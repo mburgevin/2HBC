@@ -18,4 +18,10 @@ Les builds de production utilisent la configuration **publique** du projet pilot
 
 Voir [le guide de déploiement](docs/DEPLOIEMENT.md) pour le schéma, les décisions à discuter, les tests et les paramètres Vercel.
 
-Cette version est un pilote : les tarifs importés sont de démonstration, l'export CSV ne transmet aucune commande et les économies ne sont pas simulées.
+Cette version est un pilote : les tarifs importés sont de démonstration et les économies ne sont pas simulées.
+
+## Auto-panier — prototype
+
+Le panier est regroupé par fournisseur. Une extension Manifest V3 prépare les transferts par lot vers Rexel ou Sonepar, avec vérification des quantités et sans validation de commande. Les interfaces connectées doivent encore être repérées avant d’activer les profils. Les tests automatisés utilisent des fournisseurs simulés.
+
+Voir [le guide d’installation et de test](docs/AUTO_PANIER.md). Le site fournit l’archive installable sur `/auto-panier.html` après son build. Aucun mot de passe ou cookie fournisseur ne doit être transmis à 2HBC.

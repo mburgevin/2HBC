@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>2HBC — Réglages du prototype</title><link rel="stylesheet" href="ui.css"></head>
+<body class="options"><main><h1>Réglages du prototype 2HBC</h1>
+<p>Écran destiné à la préparation des essais. Les sélecteurs doivent être relevés sur les pages connectées actuelles. Les connecteurs sont désactivés tant que ce repérage n’est pas terminé.</p>
+<p>Ne renseignez aucun identifiant, mot de passe, cookie ou jeton. Le lot contient exclusivement des références et quantités. Le premier essai doit porter sur deux références réelles.</p>
+<form id="form"><label>Origine supplémentaire du site 2HBC (prévisualisation Vercel)<input id="origin" type="url" placeholder="https://adresse-du-projet.vercel.app"></label>
+<p>Les adresses de production 2HBC et localhost:3000 sont déjà autorisées. Pour ajouter une prévisualisation, vérifiez son adresse avant d’accepter la permission du navigateur.</p>
+<label>Connecteur Rexel — configuration JSON<textarea id="rexel" rows="21" spellcheck="false"></textarea></label>
+<label>Connecteur Sonepar — configuration JSON<textarea id="sonepar" rows="21" spellcheck="false"></textarea></label>
+<button type="submit">Enregistrer les réglages</button></form><p id="status" role="status"></p>
+<details><summary>Signification des réglages</summary>
+<ul><li>enabled : activer uniquement après repérage du parcours ; mode : text ou file.</li>
+<li>quickOrderUrl et cartUrl : pages du fournisseur, hors connexion et validation de commande.</li>
+<li>inputSelector : champ du lot ; analyzeSelector : bouton d’analyse facultatif.</li>
+<li>previewRows, previewRef, previewQty : lignes reconnues et leurs références/quantités exactes avant ajout.</li>
+<li>addSelector : bouton « Ajouter au panier » uniquement ; successSelector : confirmation après ajout AJAX, facultative si le site navigue au panier.</li>
+<li>cartRows, cartRef, cartQty : lignes du panier final ; emptyCartSelector : preuve explicite d’un panier vide.</li>
+<li>errorSelector : message d’erreur visible ; delimiter : virgule, point-virgule ou tabulation ; header : en-tête exact du modèle d’import, sinon chaîne vide.</li></ul>
+<p>Chaque sélecteur de référence et quantité est relatif à sa ligne. Les références doivent être lues sans préfixe et les quantités comme des entiers. Les actions « Commander », « Valider » et « Payer » sont refusées.</p>
+</details><script src="core.js"></script><script src="options.js"></script></main></body></html>
