@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Generated extension files and install archive
+/public/extension/
+/public/extension-2hbc.zip

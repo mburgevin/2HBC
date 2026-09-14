@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "2HBC — Assistant panier (prototype)",
+  "version": "0.1.0",
+  "description": "Transfère une sélection 2HBC vers la commande rapide Rexel ou Sonepar. Aucune commande n’est validée.",
+  "minimum_chrome_version": "120",
+  "permissions": [
+    "storage",
+    "scripting",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://www.rexel.fr/*",
+    "https://www.sonepar.fr/*",
+    "https://2-hbc.vercel.app/*",
+    "https://2-hbc-mburgevins-projects.vercel.app/*",
+    "https://2-hbc-git-feature-2hbc-dev-mburgevins-projects.vercel.app/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "optional_host_permissions": [
+    "https://*.vercel.app/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "2HBC — Suivre le transfert"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://2-hbc.vercel.app/*",
+        "https://2-hbc-mburgevins-projects.vercel.app/*",
+        "https://2-hbc-git-feature-2hbc-dev-mburgevins-projects.vercel.app/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "core.js",
+        "bridge.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.rexel.fr/*",
+        "https://www.sonepar.fr/*"
+      ],
+      "js": [
+        "core.js",
+        "connectors.js",
+        "supplier.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none';"
+  }
+}
