@@ -27,9 +27,10 @@ export function supplierUrl(id, value) {
 }
 export function validateOrigin(value) {
   const u = new URL(value);
-  if (u.origin !== value || u.username || u.password ||
-      !(u.protocol === 'https:' && u.hostname.endsWith('.vercel.app') ||
-        u.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(u.hostname) && u.port === '3000')) {
+  const isVercelOrigin = u.protocol === 'https:' && u.hostname.endsWith('.vercel.app');
+  const isLocalOrigin = u.protocol === 'http:' &&
+    ['localhost', '127.0.0.1'].includes(u.hostname) && u.port === '3000';
+  if (u.origin !== value || u.username || u.password || !(isVercelOrigin || isLocalOrigin)) {
     throw new Error('Utilisez l’origine exacte du site 2HBC sur Vercel ou http://localhost:3000.');
   }
   return u.origin;
