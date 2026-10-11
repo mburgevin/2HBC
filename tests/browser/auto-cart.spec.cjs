@@ -66,6 +66,7 @@ function fixture(url,{mode='text',login=false,clamp=false,badPrice=false}) {
   +quickScript.toString()+')('+JSON.stringify(clamp)+');</script>';
 }
 async function launch(options={}) {
+ const requests=[];
  const temp=await fs.mkdtemp(path.join(os.tmpdir(),'2hbc-extension-'));
  const context=await chromium.launchPersistentContext(temp,{
   channel:'chromium',headless:true,args:['--disable-extensions-except='+extensionPath,'--load-extension='+extensionPath]
@@ -73,6 +74,7 @@ async function launch(options={}) {
  // Supplier/app documents are synthetic. No real supplier network request is allowed.
  await context.route('https://**/*',async route=>{
   const url=new URL(route.request().url());
+  requests.push(url.href);
   if(url.origin===appOrigin) return route.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><html lang="fr"><title>2HBC fixture</title><h1>2HBC — test isolé</h1></html>'});
   const supplier=Object.keys(suppliers).find(k=>suppliers[k]===url.origin);
   if(supplier)return route.fulfill({contentType:'text/html; charset=utf-8',body:fixture(url.href,{...options,supplier})});
@@ -106,7 +108,13 @@ async function launch(options={}) {
   await popup.getByRole('button',{name:'Préparer automatiquement le panier'}).click();
   return {transfer,status:async()=>{const reply=await request('STATUS',{id:transfer.id});return reply.result;}};
  }
- return {context,app,popup,request,run,async close(){await context.close();await fs.rm(temp,{recursive:true,force:true});}};
+ return {context,app,popup,request,run,
+  async diagnose(){
+   // This harness serves fixtures only; never enable DOM/session logging on real accounts.
+   console.log('Fixture diagnostics',JSON.stringify({requests,pages:context.pages().map(p=>p.url()),
+    worker:await worker.evaluate(async()=>({tabs:await chrome.tabs.query({}),jobs:await chrome.storage.session.get('priceJobs')}))}));
+  },
+  async close(){await context.close();await fs.rm(temp,{recursive:true,force:true});}};
 }
 test('Rexel text lot: login resume, existing quantities preserved, no order and no duplicate',async()=>{
  const h=await launch({login:true});
@@ -176,7 +184,7 @@ test('personal price: native product page read, decimal and basis preserved, no 
   expect((await h.request('PRICE_STATUS',{...request,userId:'22222222-2222-4222-8222-222222222222'})).ok).toBe(false);
   const page=h.context.pages().find(p=>p.url()===request.url);
   expect(await page.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
- } finally {await h.close();}
+ } catch(error) {await h.diagnose();throw error;} finally {await h.close();}
 });
 test('TTC is never accepted as personal HT; the user can cancel the pending read',async()=>{
  const h=await launch({badPrice:true,profileOverride:{price:priceSelectors}});
@@ -187,5 +195,5 @@ test('TTC is never accepted as personal HT; the user can cancel the pending read
   await page.waitForTimeout(4000);
   expect((await h.request('PRICE_STATUS',request)).result).toMatchObject({state:'reading',quote:null});
   expect((await h.request('PRICE_CANCEL',request)).result.state).toBe('cancelled');
- } finally {await h.close();}
+ } catch(error) {await h.diagnose();throw error;} finally {await h.close();}
 });
