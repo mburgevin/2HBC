@@ -69,9 +69,11 @@ async function launch(options={}) {
  const requests=[];
  const temp=await fs.mkdtemp(path.join(os.tmpdir(),'2hbc-extension-'));
  const context=await chromium.launchPersistentContext(temp,{
-  channel:'chromium',headless:true,args:['--disable-extensions-except='+extensionPath,'--load-extension='+extensionPath]
+  channel:'chromium',headless:true,offline:true,
+  args:['--disable-extensions-except='+extensionPath,'--load-extension='+extensionPath]
  });
- // Supplier/app documents are synthetic. No real supplier network request is allowed.
+ // Offline also blocks the first tabs.create navigation, which Chromium may start
+ // before Playwright attaches routing. Later requests are fulfilled with fixtures.
  await context.route('https://**/*',async route=>{
   const url=new URL(route.request().url());
   requests.push(url.href);
@@ -100,6 +102,15 @@ async function launch(options={}) {
  }
  await expect.poll(async()=>{try{return (await request('PING')).ok;}catch{return false;}}).toBe(true);
  const popup=await context.newPage();await popup.goto('chrome-extension://'+id+'/popup.html');
+ async function startPrice(payload) {
+  const opened=context.waitForEvent('page');
+  const response=await request('PRICE_START',payload);expect(response.ok).toBe(true);
+  const page=await opened;
+  // Attach before navigating this test page: the initial extension-created request
+  // is blocked offline. The worker unit test separately verifies its requested URL.
+  await page.goto(payload.url);
+  return page;
+ }
  async function run(supplier='rexel') {
   const now=Date.now(),transfer={version:1,id:require('node:crypto').randomUUID(),supplier,createdAt:now,expiresAt:now+1800000,
    lines:[{ref:'00123',quantity:10},{ref:'00456',quantity:5}]};
@@ -108,7 +119,7 @@ async function launch(options={}) {
   await popup.getByRole('button',{name:'Préparer automatiquement le panier'}).click();
   return {transfer,status:async()=>{const reply=await request('STATUS',{id:transfer.id});return reply.result;}};
  }
- return {context,app,popup,request,run,
+ return {context,app,popup,request,run,startPrice,
   async diagnose(){
    // This harness serves fixtures only; never enable DOM/session logging on real accounts.
    console.log('Fixture diagnostics',JSON.stringify({requests,pages:context.pages().map(p=>p.url()),
@@ -174,7 +185,7 @@ function quoteRequest(){return {id:require('node:crypto').randomUUID(),sessionId
 test('personal price: native product page read, decimal and basis preserved, no account secret returned',async()=>{
  const h=await launch({profileOverride:{price:priceSelectors}});
  try {
-  const request=quoteRequest();expect((await h.request('PRICE_START',request)).ok).toBe(true);
+  const request=quoteRequest(),page=await h.startPrice(request);
   await expect.poll(async()=>(await h.request('PRICE_STATUS',request)).result?.state).toBe('observed');
   const result=(await h.request('PRICE_STATUS',request)).result.quote;
   expect(result).toMatchObject({amount:1234.56,basis:100,quantity:10,tax:'HT',unit:'piece'});
@@ -182,16 +193,13 @@ test('personal price: native product page read, decimal and basis preserved, no 
   expect(JSON.stringify(result)).not.toContain('Compte fictif');
   expect(JSON.stringify(result)).not.toContain('Agence Nantes');
   expect((await h.request('PRICE_STATUS',{...request,userId:'22222222-2222-4222-8222-222222222222'})).ok).toBe(false);
-  const page=h.context.pages().find(p=>p.url()===request.url);
   expect(await page.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
  } catch(error) {await h.diagnose();throw error;} finally {await h.close();}
 });
 test('TTC is never accepted as personal HT; the user can cancel the pending read',async()=>{
  const h=await launch({badPrice:true,profileOverride:{price:priceSelectors}});
  try {
-  const request=quoteRequest();expect((await h.request('PRICE_START',request)).ok).toBe(true);
-  await expect.poll(()=>h.context.pages().some(p=>p.url()===request.url)).toBe(true);
-  const page=h.context.pages().find(p=>p.url()===request.url);
+  const request=quoteRequest(),page=await h.startPrice(request);
   await page.waitForTimeout(4000);
   expect((await h.request('PRICE_STATUS',request)).result).toMatchObject({state:'reading',quote:null});
   expect((await h.request('PRICE_CANCEL',request)).result.state).toBe('cancelled');

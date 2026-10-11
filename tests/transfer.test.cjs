@@ -163,6 +163,7 @@ test('price jobs are isolated by origin, tab, user and UI session',async()=>{
  const priceFields=['accountSelector','contextSelector','refSelector','kindSelector','taxSelector','quantitySelector','unitSelector','currencySelector','priceSelector','basisSelector'];
  r.state.local.profiles.rexel={...profile,price:{enabled:true,...Object.fromEntries(priceFields.map(k=>[k,'#'+k]))}};
  let reply=await r.send({kind:'APP',action:'PRICE_START',payload:priceRequest});assert.equal(reply.ok,true);
+ assert.equal(r.state.tabs.length,1);assert.equal(r.state.tabs[0].url,priceRequest.url);
  for(const payload of [{...priceRequest,userId:'33333333-3333-4333-8333-333333333333'},{...priceRequest,sessionId:'33333333-3333-4333-8333-333333333333'}])
   assert.equal((await r.send({kind:'APP',action:'PRICE_STATUS',payload})).ok,false);
  assert.equal((await r.send({kind:'APP',action:'PRICE_STATUS',payload:priceRequest},{...r.app,tab:{id:99}})).ok,false);
