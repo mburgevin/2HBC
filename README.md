@@ -32,3 +32,10 @@ Le prototype 0.2 ajoute un catalogue pilote vérifié et une lecture des prix ne
 compte fournisseur via l’extension. Les observations sont privées, horodatées et
 séparées des tarifs communs. Guide et limites : [docs/PRIX_PERSONNELS.md](docs/PRIX_PERSONNELS.md).
 Les profils connectés nécessitent une qualification avec un compte Rexel/Sonepar.
+
+### Collecte du catalogue pilote
+
+`python3 scripts/collect_catalogue.py --limit 100` prépare un fichier de produits
+publics, sans prix ni écriture en base, avec dédoublonnage et reprise automatique.
+Le script peut aussi être téléchargé seul. Voir [le guide Windows et les limites](docs/COLLECTE_CATALOGUE.md).
+Les 100 fiches restent à collecter et contrôler : seuls les tests hors réseau ont été exécutés.
