@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "2HBC — Assistant panier (prototype)",
-  "version": "0.1.0",
+  "name": "2HBC — Paniers et prix personnels (prototype)",
+  "version": "0.2.0",
   "description": "Transfère une sélection 2HBC vers la commande rapide Rexel ou Sonepar. Aucune commande n’est validée.",
   "minimum_chrome_version": "120",
   "permissions": [
@@ -52,7 +52,9 @@
       "js": [
         "core.js",
         "connectors.js",
-        "supplier.js"
+        "supplier.js",
+        "prices-core.js",
+        "prices-supplier.js"
       ],
       "run_at": "document_idle"
     }

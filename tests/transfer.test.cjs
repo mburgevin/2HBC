@@ -134,3 +134,42 @@ test('extension has no cookie/debugger access and bundle contains no remote exec
   assert(!read('background.js').includes('fetch('));
   for(const file of ['background.js','supplier.js','bridge.js','popup.js','options.js']) new vm.Script(read(file));
 });
+
+test('reconciliation refuses success if unrelated cart items are lost',()=>{
+ const result=C.reconcile([{ref:'00123',quantity:1}],{'00123':2,OTHER:4},{'00123':3});
+ assert.equal(result.state,'partial');assert.equal(result.otherChangeCount,1);
+ assert.deepEqual(plain(result.lines.map(l=>l.ref)),['00123']);
+});
+vm.runInContext(read('prices-core.js'),context);
+const P=context.TwoHbcPrice;
+const priceRequest={id:'price-request-00000001',sessionId:'11111111-1111-4111-8111-111111111111',
+ userId:'22222222-2222-4222-8222-222222222222',offerId:1,supplier:'rexel',ref:'LEG069511L',quantity:10,
+ url:'https://www.rexel.fr/frx/item/p/73224603'};
+const price={offerId:1,supplier:'rexel',ref:'LEG069511L',quantity:10,url:priceRequest.url,amount:1234.56,basis:100,
+ unit:'piece',currency:'EUR',tax:'HT',kind:'net_account',contextKey:'a'.repeat(64),observedAt:Date.now()};
+test('price parser preserves decimal precision and refuses ambiguous values',()=>{
+ assert.equal(P.frenchDecimal('1\u202f234,56 €'),1234.56);
+ assert.equal(P.frenchDecimal('0,1234'),.1234);
+ for(const value of ['12–14 €','-4','0','1,234.56','prix 5 €'])assert.throws(()=>P.frenchDecimal(value));
+});
+test('private observations require matching product, quantity, tax and freshness',()=>{
+ assert.equal(P.validatePrice(price,priceRequest).amount,1234.56);
+ for(const overrides of [{quantity:1},{tax:'TTC'},{kind:'public'},{ref:'OTHER'},{contextKey:''},{basis:0},{observedAt:Date.now()-600000}])
+  assert.throws(()=>P.validatePrice({...price,...overrides},priceRequest));
+ for(const url of ['https://www.rexel.fr/frx/cart','https://evil.test/p/123',priceRequest.url+'?token=x'])assert.throws(()=>P.priceRequest({...priceRequest,url}));
+});
+test('price jobs are isolated by origin, tab, user and UI session',async()=>{
+ const r=runtime();
+ const priceFields=['accountSelector','contextSelector','refSelector','kindSelector','taxSelector','quantitySelector','unitSelector','currencySelector','priceSelector','basisSelector'];
+ r.state.local.profiles.rexel={...profile,price:{enabled:true,...Object.fromEntries(priceFields.map(k=>[k,'#'+k]))}};
+ let reply=await r.send({kind:'APP',action:'PRICE_START',payload:priceRequest});assert.equal(reply.ok,true);
+ for(const payload of [{...priceRequest,userId:'33333333-3333-4333-8333-333333333333'},{...priceRequest,sessionId:'33333333-3333-4333-8333-333333333333'}])
+  assert.equal((await r.send({kind:'APP',action:'PRICE_STATUS',payload})).ok,false);
+ assert.equal((await r.send({kind:'APP',action:'PRICE_STATUS',payload:priceRequest},{...r.app,tab:{id:99}})).ok,false);
+ const job=r.state.session.priceJobs[priceRequest.id];
+ const sender={url:priceRequest.url,frameId:0,tab:{id:job.supplierTab}};
+ assert.equal((await r.send({kind:'PRICE_SUPPLIER',action:'RESULT',id:job.id,quote:price},{...sender,tab:{id:999}})).result,null);
+ reply=await r.send({kind:'PRICE_SUPPLIER',action:'RESULT',id:job.id,quote:price},sender);assert.equal(reply.ok,true);
+ reply=await r.send({kind:'APP',action:'PRICE_STATUS',payload:priceRequest});assert.equal(reply.result.state,'observed');
+ assert.equal(reply.result.quote.amount,1234.56);assert.equal(JSON.stringify(reply).includes('cookie'),false);
+});

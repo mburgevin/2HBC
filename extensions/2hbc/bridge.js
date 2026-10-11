@@ -3,7 +3,7 @@
   if (globalThis.__twoHbcBridge) return;
   globalThis.__twoHbcBridge = true;
   const { PROTOCOL } = TwoHbc;
-  const allowed = new Set(['PING', 'START', 'STATUS', 'CANCEL']);
+  const allowed = new Set(['PING', 'START', 'STATUS', 'CANCEL','PRICE_START','PRICE_STATUS','PRICE_CANCEL']);
   window.addEventListener('message', async event => {
     const m = event.data;
     if (event.source !== window || event.origin !== location.origin || !m ||

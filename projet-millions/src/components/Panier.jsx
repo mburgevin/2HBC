@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { cartCsv, formatPrice, listCart, removeCartItem, safeUrl, updateQuantity } from '../lib/data';
 import { groupCart } from '../lib/supplierTransfer';
+import PersonalPrice from './PersonalPrice';
 import SupplierTransfer from './SupplierTransfer';
 
 function QuantityInput({ item, name, disabled, onSave, onDirty }) {
@@ -84,7 +85,7 @@ export default function Panier() {
       const usable = group.items.filter(i => i.produits_fournisseurs?.produits && i.produits_fournisseurs?.fournisseurs);
       const subtotal = usable.reduce((sum,i) => sum + Number(i.produits_fournisseurs.prix || 0) * i.quantite, 0);
       return <section className="supplier-section" aria-label={'Panier ' + group.name} key={userId + ':' + group.key}>
-        <header className="supplier-heading"><div><h2>{group.name}</h2><p>{group.items.length} article(s)</p></div><strong>{formatPrice(subtotal)} HT<small>Prix connus · indicatif</small></strong></header>
+        <header className="supplier-heading"><div><h2>{group.name}</h2><p>{group.items.length} article(s)</p></div><strong>{usable.some(i => i.produits_fournisseurs.prix != null) ? formatPrice(subtotal) + ' HT' : 'Prix à actualiser'}<small>Prix connus · indicatif</small></strong></header>
         {group.items.map(item => {
           const o = item.produits_fournisseurs;
           if (!o?.produits || !o?.fournisseurs) return <article className="cart-item" key={item.id}><p>Cette offre n’est plus disponible.</p><button disabled={busy != null || loading} onClick={() => mutate(item.id,0)}>Supprimer</button></article>;
@@ -92,6 +93,7 @@ export default function Panier() {
             <div className="cart-info"><h3>{o.produits.nom}</h3><p className="reference">Réf. fabricant : {o.produits.ref_fabricant}</p><p>{formatPrice(o.prix)} HT · {o.conditionnement || 'Conditionnement à confirmer'}</p>
               {o.nature_prix === 'demonstration' && <span className="badge">Prix de démonstration</span>}
               {safeUrl(o.url_produit) && <p><a href={safeUrl(o.url_produit)} target="_blank" rel="noopener noreferrer">Vérifier la fiche fournisseur ↗</a></p>}
+              {group.id && o.reference_verifiee && <PersonalPrice key={userId + ':' + o.id + ':' + item.quantite} userId={userId} quantity={item.quantite} offer={{...o,fournisseur:group.name}}/>}
               {group.id && <label className="supplier-reference">Référence {group.name} pour le transfert
                 <input aria-label={'Référence ' + group.name + ' de ' + o.produits.nom} value={o.ref_fournisseur || ''} maxLength={80} placeholder="Référence fournisseur vérifiée" onChange={e => setReferences(prev => ({ ...prev, [item.id]: e.target.value }))} />
               </label>}
@@ -104,6 +106,6 @@ export default function Panier() {
         <button className="text-button" disabled={!usable.length || loading} onClick={() => download(usable, group.id || 'fournisseur')}>Exporter la sélection {group.name} (CSV générique)</button>
       </section>;
     })}</div>
-    {!!items.length && <aside className="cart-total"><span>{incomplete ? 'Sous-total des prix connus HT' : 'Total indicatif HT'}</span><strong>{formatPrice(total)}</strong><small>Hors livraison · {incomplete ? 'Certaines offres sont sans prix.' : 'À confirmer auprès des fournisseurs.'}</small></aside>}
+    {!!items.length && <aside className="cart-total"><span>{incomplete ? 'Sous-total des prix connus HT' : 'Total indicatif HT'}</span><strong>{valid.some(i => i.produits_fournisseurs.prix != null) ? formatPrice(total) : 'Prix à actualiser'}</strong><small>Hors livraison · {incomplete ? 'Les observations personnelles sont affichées par ligne ; le total final est calculé chez le fournisseur.' : 'À confirmer auprès des fournisseurs.'}</small></aside>}
   </main>;
 }

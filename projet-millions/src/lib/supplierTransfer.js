@@ -94,7 +94,12 @@ export function reconcile(lines, before, after) {
     const actual = Object.prototype.hasOwnProperty.call(after, l.ref) ? after[l.ref] : 0;
     return { ...l, expected, actual, status: actual === expected ? 'verified' : actual < expected ? 'missing' : 'excess' };
   });
-  return { state: checked.every(l => l.status === 'verified') ? 'verified' : 'partial', lines: checked };
+  const requested = new Set(normalized.map(l => l.ref));
+  const otherChangeCount = [...new Set([...Object.keys(before), ...Object.keys(after)])]
+    .filter(ref => !requested.has(ref))
+    .filter(ref => (Object.prototype.hasOwnProperty.call(before, ref) ? before[ref] : 0) !==
+      (Object.prototype.hasOwnProperty.call(after, ref) ? after[ref] : 0)).length;
+  return { state: !otherChangeCount && checked.every(l => l.status === 'verified') ? 'verified' : 'partial', lines: checked, otherChangeCount };
 }
 export function fingerprint(transfer) {
   return transfer.supplier + ':' + JSON.stringify(normalizeLines(transfer.lines).sort((a, b) => a.ref.localeCompare(b.ref)));

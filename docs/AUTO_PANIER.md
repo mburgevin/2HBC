@@ -4,7 +4,7 @@
 
 - Panier React regroupé par fournisseur, sous-totaux et quantités saisissables.
 - Références fournisseur modifiables **pour l’essai uniquement** : elles ne sont pas persistées dans Supabase.
-  Le seed actuel ne remplit pas ref_fournisseur. Aucun identifiant n’est deviné à partir d’une référence fabricant.
+  Le catalogue pilote réel remplit ref_fournisseur ; les anciennes données de démonstration ne le font pas. Aucun identifiant n’est deviné à partir d’une référence fabricant.
 - Bouton de transfert Rexel/Sonepar, protocole validé, contrôle de présence de l’extension, suivi du résultat.
 - WebExtension Manifest V3, moteur partagé avec profils Rexel/Sonepar : lecture du panier initial,
   remplissage en bloc (texte ou fichier CSV en mémoire), analyse native, contrôle du lot reconnu,
@@ -45,7 +45,7 @@ Dans Chrome de bureau :
 
 Le manifeste annonce les deux domaines fournisseurs, les domaines 2HBC connus et localhost.
 Les permissions de prévisualisation Vercel sont optionnelles et demandées pour une origine précise.
-Le bridge refuse les iframes, les origines non enregistrées et les messages autres que PING/START/STATUS/CANCEL.
+Le bridge refuse les iframes, les origines non enregistrées et les actions non prévues par le protocole (panier et lecture de prix).
 Les réglages, le lancement confirmé et la clôture ne sont accessibles qu’aux pages de l’extension.
 Le protocole ne transporte aucun cookie, mot de passe ou jeton fournisseur. Aucun backend d’automatisation.
 
@@ -133,8 +133,7 @@ La clôture n’annule aucun ajout. L’expiration et le redémarrage du navigat
 ils n’annulent pas non plus les effets chez le fournisseur.
 
 Les réglages persistent dans chrome.storage.local ; les lots et leur résultat restent dans
-chrome.storage.session et sont supprimés à expiration/fermeture. Aucun envoi de catalogue, historique,
-tarif privé ou session fournisseur vers 2HBC. Le site reçoit seulement le statut et le contrôle des lignes de son lot.
+chrome.storage.session et sont supprimés à expiration/fermeture. Pour un transfert de panier, le site reçoit le statut et le contrôle des lignes de son lot. Le parcours séparé de lecture de prix transmet une observation privée, selon la procédure dans PRIX_PERSONNELS.md. Aucun secret de session fournisseur n’est transmis.
 
 ## Vérifications automatisées
 

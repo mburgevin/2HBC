@@ -15,15 +15,17 @@ export default function SupplierTransfer({ group, disabled }) {
       .catch(() => { if (active) setExtension(false); });
     return () => { active = false; };
   }, []);
+  const taskId = task?.id;
+  const taskState = task?.state;
   useEffect(() => {
-    if (!task?.id || done.has(task.state)) return undefined;
+    if (!taskId || done.has(taskState)) return undefined;
     let active = true;
     const timer = setInterval(() => {
-      extensionRequest('STATUS', { id: task.id }).then(next => { if (active) setTask(next); })
+      extensionRequest('STATUS', { id: taskId }).then(next => { if (active) setTask(next); })
         .catch(e => { if (active) setError(e.message); });
     }, 2500);
     return () => { active = false; clearInterval(timer); };
-  }, [task?.id, task?.state]);
+  }, [taskId, taskState]);
   if (!group.id) return <p className="muted">Transfert automatique non disponible pour ce fournisseur.</p>;
   let invalid = '';
   try { createTransfer(group.id, group.items, Date.now(), 'validation-2hbc-00000001'); }

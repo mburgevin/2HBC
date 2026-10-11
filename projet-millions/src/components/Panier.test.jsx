@@ -12,7 +12,7 @@ const item=(id,name,ref)=>({id,quantite:1,produits_fournisseurs:{ref_fournisseur
 beforeEach(()=>{
  jest.clearAllMocks();
  extensionRequest.mockResolvedValue({version:'0.1.0',suppliers:{rexel:true,sonepar:true}});
- Object.defineProperty(window.crypto,'randomUUID',{configurable:true,value:()=> 'transfer-test-00000000001'});
+ Object.defineProperty(window,'crypto',{configurable:true,value:{randomUUID:()=> 'transfer-test-00000000001'}});
 });
 test('groups by supplier and enables only references explicitly provided',async()=>{
  listCart.mockResolvedValue([item(1,'Rexel',null),item(2,'Sonepar','00456')]);

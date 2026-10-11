@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { addToCart, formatPrice, listProducts, PAGE_SIZE, safeUrl } from '../lib/data';
+import PersonalPrice from './PersonalPrice';
 const priceLabels = { demonstration: 'Tarif de démonstration', public: 'Tarif public', negocie: 'Tarif négocié' };
 export default function Catalogue({ initialTerm = '', onLoginClick }) {
   const { user, loading: authLoading } = useAuth();
@@ -23,7 +24,8 @@ export default function Catalogue({ initialTerm = '', onLoginClick }) {
     return () => { active = false; };
   }, [term, page, user?.id, authLoading, retry]);
   return <main className="page">
-    <div className="section-heading"><div><p className="eyebrow">Votre matériel, au même endroit</p><h1>Catalogue produits</h1></div></div>
+    <div className="section-heading"><div><p className="eyebrow">Votre matériel, au même endroit</p><h1>Catalogue produits vérifiés</h1></div></div>
+    <p className="notice">Catalogue pilote : références réelles vérifiées. Les prix personnels sont lus à votre demande avec l’extension et enregistrés uniquement dans votre espace. Un changement de compte, d’affaire ou de quantité impose une nouvelle lecture.</p>
     <form className="search-form" onSubmit={e => { e.preventDefault(); setPage(0); setTerm(draft); }}>
       <label className="sr-only" htmlFor="catalog-search">Rechercher par nom ou référence</label>
       <input id="catalog-search" placeholder="Nom du produit, marque ou référence…" value={draft} maxLength={100} onChange={e => setDraft(e.target.value)} />
@@ -44,10 +46,10 @@ export default function Catalogue({ initialTerm = '', onLoginClick }) {
       </article>;
     })}</div>
     {!loading && !error && <div className="pagination"><button className="secondary" disabled={page === 0} onClick={() => setPage(p => p - 1)}>Précédent</button><span>Page {page + 1}</span><button className="secondary" disabled={products.length < PAGE_SIZE} onClick={() => setPage(p => p + 1)}>Suivant</button></div>}
-    {selected && user && <ProductDialog key={selected.id} product={selected} onClose={() => setSelected(null)} />}
+    {selected && user && <ProductDialog key={user.id + ":" + selected.id} userId={user.id} product={selected} onClose={() => setSelected(null)} />}
   </main>;
 }
-function ProductDialog({ product, onClose }) {
+function ProductDialog({ product, userId, onClose }) {
   const dialog = useRef(null);
   const [chosen, setChosen] = useState('');
   const [busy, setBusy] = useState(false);
@@ -71,6 +73,11 @@ function ProductDialog({ product, onClose }) {
       </label>)}
       {!product.offres?.length && <p>Aucune offre disponible pour le moment.</p>}
     </fieldset>
+    {(product.offres || []).map(o => <section key={o.id} aria-label={'Prix personnel ' + o.fournisseur}>
+      <h3>{o.fournisseur}</h3><p className="reference">Référence fournisseur : {o.ref_fournisseur}</p>
+      <PersonalPrice key={userId + ':' + o.id} userId={userId} offer={o}/>
+    </section>)}
+    <p className="muted">La lecture initiale porte sur une quantité de 1. Conditionnements, remises de quantité, écocontributions et livraison se vérifient chez le fournisseur. Ces observations ne constituent pas un devis garanti.</p>
     <p className="muted">Prix HT hors livraison. Les conditions et disponibilités sont à confirmer auprès du fournisseur.</p>
     {message && <p role="status" className="notice">{message}</p>}{error && <p role="alert" className="error">{error}</p>}
     <button disabled={!chosen || busy} onClick={add}>{busy ? 'Ajout en cours…' : 'Ajouter au panier'}</button>

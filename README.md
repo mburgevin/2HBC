@@ -25,3 +25,10 @@ Cette version est un pilote : les tarifs importés sont de démonstration et les
 Le panier est regroupé par fournisseur. Une extension Manifest V3 prépare les transferts par lot vers Rexel ou Sonepar, avec vérification des quantités et sans validation de commande. Les interfaces connectées doivent encore être repérées avant d’activer les profils. Les tests automatisés utilisent des fournisseurs simulés.
 
 Voir [le guide d’installation et de test](docs/AUTO_PANIER.md). Le site fournit l’archive installable sur `/auto-panier.html` après son build. Aucun mot de passe ou cookie fournisseur ne doit être transmis à 2HBC.
+
+### Prix personnels et catalogue réel
+
+Le prototype 0.2 ajoute un catalogue pilote vérifié et une lecture des prix nets du
+compte fournisseur via l’extension. Les observations sont privées, horodatées et
+séparées des tarifs communs. Guide et limites : [docs/PRIX_PERSONNELS.md](docs/PRIX_PERSONNELS.md).
+Les profils connectés nécessitent une qualification avec un compte Rexel/Sonepar.

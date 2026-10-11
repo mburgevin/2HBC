@@ -13,8 +13,14 @@ function profile(id, mode='text', override={}) {
   addSelector:'#add',successSelector:'#success',cartRows:'.cart .line',cartRef:'.ref',cartQty:'.qty',
   emptyCartSelector:'#empty',errorSelector:'#error',...override};
 }
-function fixture(url,{mode='text',login=false,clamp=false}) {
+function fixture(url,{mode='text',login=false,clamp=false,badPrice=false}) {
  const u=new URL(url);
+ if(u.pathname.includes('/p/') || u.pathname.includes('/products/')) return '<h1>Fiche prix simulée</h1>' +
+  '<span id="account">Compte fictif A</span><span id="context">Agence Nantes - aucune affaire</span>' +
+  '<span id="ref">LEG069511L</span><span id="kind">Prix net</span><span id="tax">'+(badPrice?'TTC':'HT')+'</span>' +
+  '<input id="quantity" value="10"><span id="unit">unité</span><span id="currency">EUR</span>' +
+  '<span id="price">1 234,56 €</span><span id="basis">100</span><button id="order" onclick="localStorage.orders=1">Commander</button>';
+
  if(u.pathname==='/login') return '<h1>Connexion simulée</h1><input type="password" aria-label="Mot de passe de test"><button id="login">Se connecter</button><script>document.getElementById("login").onclick=()=>{sessionStorage.logged="1";location.href="/test-cart"};</script>';
  function cartScript(needsLogin) {
   if(needsLogin&&!sessionStorage.logged) location.replace('/login');
@@ -112,11 +118,11 @@ test('Rexel text lot: login resume, existing quantities preserved, no order and 
   await supplierPage.getByRole('button',{name:'Se connecter',exact:true}).click();
   await expect.poll(async()=>(await job.status()).state,{timeout:30000}).toBe('verified');
   expect(await supplierPage.evaluate(()=>JSON.parse(localStorage.cart))).toEqual({'00123':12,'00456':5,OTHER:1});
-  expect(await supplierPage.evaluate(()=>localStorage.adds)).toBe('1');
-  expect(await supplierPage.evaluate(()=>localStorage.orders)).toBeNull();
+  expect(await supplierPage.evaluate(()=>localStorage.getItem('adds'))).toBe('1');
+  expect(await supplierPage.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
   const repeat=await h.request('START',{...job.transfer,id:require('node:crypto').randomUUID()});
   expect(repeat.result.id).toBe(job.transfer.id);
-  expect(await supplierPage.evaluate(()=>localStorage.adds)).toBe('1');
+  expect(await supplierPage.evaluate(()=>localStorage.getItem('adds'))).toBe('1');
  }finally{await h.close();}
 });
 test('Sonepar in-memory CSV follows the same bulk flow without a file picker',async()=>{
@@ -126,8 +132,8 @@ test('Sonepar in-memory CSV follows the same bulk flow without a file picker',as
   await expect.poll(async()=>(await job.status()).state,{timeout:30000}).toBe('verified');
   const supplierPage=h.context.pages().find(p=>p.url().startsWith(suppliers.sonepar));
   expect(await supplierPage.evaluate(()=>JSON.parse(localStorage.cart)['00123'])).toBe(12);
-  expect(await supplierPage.evaluate(()=>localStorage.adds)).toBe('1');
-  expect(await supplierPage.evaluate(()=>localStorage.orders)).toBeNull();
+  expect(await supplierPage.evaluate(()=>localStorage.getItem('adds'))).toBe('1');
+  expect(await supplierPage.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
  }finally{await h.close();}
 });
 test('quantity adjusted by supplier blocks add instead of silently accepting it',async()=>{
@@ -136,7 +142,7 @@ test('quantity adjusted by supplier blocks add instead of silently accepting it'
   const job=await h.run();
   await expect.poll(async()=>(await job.status()).state).toBe('indeterminate');
   const page=h.context.pages().find(p=>p.url().startsWith(suppliers.rexel));
-  expect(await page.evaluate(()=>localStorage.adds)).toBeNull();
+  expect(await page.evaluate(()=>localStorage.getItem('adds'))).toBeNull();
   expect((await job.status()).detail).toContain('diffère');
  }finally{await h.close();}
 });
@@ -146,8 +152,39 @@ test('a configured checkout button is rejected even with an exact preview',async
   const job=await h.run();
   await expect.poll(async()=>(await job.status()).state).toBe('indeterminate');
   const page=h.context.pages().find(p=>p.url().startsWith(suppliers.rexel));
-  expect(await page.evaluate(()=>localStorage.orders)).toBeNull();
-  expect(await page.evaluate(()=>localStorage.adds)).toBeNull();
+  expect(await page.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
+  expect(await page.evaluate(()=>localStorage.getItem('adds'))).toBeNull();
   expect((await job.status()).detail).toContain('engager une commande');
  }finally{await h.close();}
+});
+
+const priceSelectors={enabled:true,accountSelector:'#account',contextSelector:'#context',refSelector:'#ref',kindSelector:'#kind',
+ taxSelector:'#tax',quantitySelector:'#quantity',unitSelector:'#unit',currencySelector:'#currency',priceSelector:'#price',basisSelector:'#basis'};
+function quoteRequest(){return {id:require('node:crypto').randomUUID(),sessionId:require('node:crypto').randomUUID(),
+ userId:'11111111-1111-4111-8111-111111111111',offerId:1,supplier:'rexel',ref:'LEG069511L',quantity:10,
+ url:'https://www.rexel.fr/frx/test-product/p/73224603'};}
+test('personal price: native product page read, decimal and basis preserved, no account secret returned',async()=>{
+ const h=await launch({profileOverride:{price:priceSelectors}});
+ try {
+  const request=quoteRequest();expect((await h.request('PRICE_START',request)).ok).toBe(true);
+  await expect.poll(async()=>(await h.request('PRICE_STATUS',request)).result?.state).toBe('observed');
+  const result=(await h.request('PRICE_STATUS',request)).result.quote;
+  expect(result).toMatchObject({amount:1234.56,basis:100,quantity:10,tax:'HT',unit:'piece'});
+  expect(result.contextKey).toMatch(/^[a-f0-9]{64}$/);
+  expect(JSON.stringify(result)).not.toContain('Compte fictif');
+  expect(JSON.stringify(result)).not.toContain('Agence Nantes');
+  expect((await h.request('PRICE_STATUS',{...request,userId:'22222222-2222-4222-8222-222222222222'})).ok).toBe(false);
+  const page=h.context.pages().find(p=>p.url()===request.url);
+  expect(await page.evaluate(()=>localStorage.getItem('orders'))).toBeNull();
+ } finally {await h.close();}
+});
+test('TTC is never accepted as personal HT; the user can cancel the pending read',async()=>{
+ const h=await launch({badPrice:true,profileOverride:{price:priceSelectors}});
+ try {
+  const request=quoteRequest();expect((await h.request('PRICE_START',request)).ok).toBe(true);
+  const page=h.context.pages().find(p=>p.url()===request.url);
+  await page.waitForTimeout(4000);
+  expect((await h.request('PRICE_STATUS',request)).result).toMatchObject({state:'reading',quote:null});
+  expect((await h.request('PRICE_CANCEL',request)).result.state).toBe('cancelled');
+ } finally {await h.close();}
 });

@@ -13,3 +13,6 @@ coverage/
 .claude/
 supabase/.temp/
 supabase/.branches/
+
+node_modules
+test-results/

@@ -36,5 +36,38 @@ test('Migration, catalogue et isolation des comptes', async t => {
  await t.test('Recherche littérale et zéros initiaux',async()=>{assert.equal((await run(null,"select * from rechercher_catalogue('(',0)",[],{},'anon')).length,0);await db.exec("insert into produits(ref_fabricant,nom) values('00123','Produit test (A)')");assert.equal((await run(null,"select * from rechercher_catalogue('00123',0)",[],{},'anon'))[0].ref_fabricant,'00123');assert.equal((await run(null,"select * from rechercher_catalogue('(',0)",[],{},'anon')).length,1);});
  await t.test('Pas de fonction métier SECURITY DEFINER',async()=>assert.equal((await db.query("select count(*)::int n from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prosecdef")).rows[0].n,0));
  await t.test('Suppression autorisée au propriétaire',async()=>assert.equal((await run(A,'delete from articles_panier where id=$1 returning id',[article])).length,1));
+
+ await db.exec(await readFile(new URL('../supabase/migrations/20261011140316_personal_supplier_prices.sql',import.meta.url),'utf8'));
+ const pilot=await readFile(new URL('../supabase/pilot_catalog.sql',import.meta.url),'utf8');
+ await db.exec(pilot);await db.exec(pilot);
+ const real=(await run(A,'select * from produits_fournisseurs where reference_verifiee order by id'))[0];
+ await t.test('Catalogue réel : trois produits, six correspondances, aucun tarif inventé',async()=>{
+  const products=await run(A,'select * from rechercher_catalogue_personnel()');
+  assert.equal(products.length,3);assert(products.every(p=>p.offres.length===2 && p.offres.every(o=>o.prix===null && o.reference_verifiee)));
+  const publicProducts=await run(null,'select * from rechercher_catalogue_personnel()',[],{},'anon');
+  assert.equal(publicProducts.length,3);assert(publicProducts.every(p=>p.offres.length===0));
+ });
+ const insert=`insert into prix_personnels(id,client_id,offre_id,contexte_empreinte,quantite,montant_ht,base_prix,unite,source_url,observe_le,expire_le)
+ values($1,$2,$3,$4,10,12.34,1,'piece',$5,now(),now()+interval '10 minutes') returning id`;
+ const observation='33333333-3333-4333-8333-333333333333';
+ const params=[observation,A,real.id,'a'.repeat(64),real.url_produit];
+ await t.test('Prix privés : visibilité limitée au propriétaire, y compris pour un admin',async()=>{
+  await run(A,insert,params);
+  assert.equal((await run(A,'select * from prix_personnels')).length,1);
+  assert.equal((await run(B,'select * from prix_personnels')).length,0);
+  assert.equal((await run(B,'select * from prix_personnels',[],{app_metadata:{role:'admin'}})).length,0);
+  await assert.rejects(run(null,'select * from prix_personnels',[],{},'anon'));
+ });
+ await t.test('Prix privés : attribution à autrui, mauvaise source et remplacement interdits',async()=>{
+  await assert.rejects(run(B,insert,['44444444-4444-4444-8444-444444444444',...params.slice(1)]));
+  await assert.rejects(run(A,insert,['44444444-4444-4444-8444-444444444444',A,real.id,'a'.repeat(64),'https://evil.test']));
+  await assert.rejects(run(A,'update prix_personnels set client_id=$1 where id=$2',[B,observation]));
+  assert.equal((await run(B,'delete from prix_personnels returning id')).length,0);
+  assert.equal((await run(A,'delete from prix_personnels returning id')).length,1);
+ });
+ await t.test('Prix périmé ou base nulle refusés à l’enregistrement',async()=>{
+  await assert.rejects(run(A,insert.replace('now(),now()+',"now()-interval '1 hour',now()-interval '1 hour'+"),params));
+  await assert.rejects(run(A,insert.replace("12.34,1,'piece'","12.34,0,'piece'"),params));
+ });
  } finally { await db.close(); }
 });

@@ -18,6 +18,11 @@ for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
   fs.writeFileSync(path.join(out, entry.name), content);
 }
 fs.writeFileSync(path.join(out, 'core.js'), core);
+const priceShared = fs.readFileSync(path.join(app, 'src/lib/supplierPrice.js'), 'utf8');
+const priceNames = [...priceShared.matchAll(/^export (?:const|function) (\w+)/gm)].map(m => m[1]);
+const priceCore = '(function(){\n' + priceShared.replace(/^export /gm, '') + '\nglobalThis.TwoHbcPrice = Object.freeze({' + priceNames.join(',') + '});\n})();\n';
+new vm.Script(priceCore);
+fs.writeFileSync(path.join(out,'prices-core.js'),priceCore);
 const manifest = JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8'));
 if (manifest.manifest_version !== 3) throw new Error('Manifest V3 required.');
 // ZIP STORE archive: no runtime/build dependency, and reproducible entry order.

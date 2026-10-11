@@ -14,3 +14,5 @@
 .transfer-status{padding:14px;margin-top:14px;background:#fff3da;border-radius:8px;font-size:13px}.transfer-status p{margin:8px 0}
 .supplier-transfer details{font-size:12px;margin:14px 0;color:var(--muted)}.supplier-transfer summary{cursor:pointer}
 @media(max-width:520px){.supplier-section{padding:14px}.supplier-heading{align-items:flex-start}.supplier-heading h2{font-size:22px}.cart-page{padding-left:12px;padding-right:12px}.supplier-heading strong{font-size:15px}}
+
+.personal-price{margin:1rem 0;padding:1rem;border:1px solid #d4dce6;border-radius:12px;background:#f7fafc}.personal-price p{margin:.5rem 0}.personal-price small{line-height:1.5}

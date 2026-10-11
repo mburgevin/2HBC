@@ -1,5 +1,5 @@
 /* global chrome, TwoHbc, TwoHbcConnectors */
-importScripts('core.js', 'connectors.js');
+importScripts('core.js', 'prices-core.js', 'connectors.js', 'prices-worker.js');
 const C = TwoHbc;
 const TERMINAL = new Set(['verified','partial','indeterminate','cancelled','expired','interaction_required']);
 const LABELS = {
@@ -21,7 +21,7 @@ function locked(fn) {
 async function settings() {
   const data = await chrome.storage.local.get(['origins','profiles']);
   return { origins: Array.from(new Set([...C.DEFAULT_APP_ORIGINS, ...(data.origins || [])])),
-    profiles: Object.fromEntries(Object.keys(C.SUPPLIERS).map(id => [id, data.profiles?.[id] || TwoHbcConnectors.defaults(id)])) };
+    profiles: Object.fromEntries(Object.keys(C.SUPPLIERS).map(id => [id, TwoHbcConnectors.validateProfile(id, data.profiles?.[id] || TwoHbcConnectors.defaults(id))])) };
 }
 async function tasks() { return (await chrome.storage.session.get('tasks')).tasks || {}; }
 async function save(all) { await chrome.storage.session.set({ tasks: all }); }
@@ -48,6 +48,7 @@ async function cleanup() {
     if (t.expiresAt <= now) { delete all[id]; changed = true; }
   }
   if (changed) await save(all);
+  await chrome.storage.session.set({priceJobs:await priceJobs()});
 }
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.session.setAccessLevel({ accessLevel: 'TRUSTED_CONTEXTS' });
@@ -65,7 +66,8 @@ async function handleApp(m, sender) {
   const conf = await settings();
   const origin = new URL(currentUrl(sender)).origin;
   if (sender.frameId !== 0 || !conf.origins.includes(origin)) throw new Error('Site 2HBC non autorisé dans les réglages de l’extension.');
-  if (m.action === 'PING') return { version: '0.1.0', suppliers: Object.fromEntries(Object.entries(conf.profiles).map(([k,v]) => [k, Boolean(v.enabled)])) };
+  if (m.action?.startsWith('PRICE_')) return priceApp(m,sender,conf);
+  if (m.action === 'PING') return { version: '0.2.0', suppliers: Object.fromEntries(Object.entries(conf.profiles).map(([k,v]) => [k, Boolean(v.enabled)])) };
   await cleanup();
   const all = await tasks();
   if (m.action === 'START') {
@@ -181,7 +183,7 @@ async function handleSupplier(m, sender) {
       t.before = snapshot; setState(t, 'awaiting_quick_order'); await save(all); await go(t, p.quickOrderUrl);
     } else {
       t.result = C.reconcile(t.lines, t.before, snapshot);
-      setState(t, t.result.state); await save(all); await chrome.action.setBadgeText({ text: t.state === 'verified' ? '✓' : '!' });
+      setState(t, t.result.state, t.result.otherChangeCount ? 'Le contenu du panier en dehors de ce lot a changé. Vérifiez l’ensemble du panier.' : ''); await save(all); await chrome.action.setBadgeText({ text: t.state === 'verified' ? '✓' : '!' });
     }
   } else if (m.action === 'CLAIM_PREPARE') {
     t.attempted = true; setState(t, 'preparing'); await save(all);
@@ -201,6 +203,7 @@ chrome.runtime.onMessage.addListener((m, sender, reply) => {
     if (!m || typeof m !== 'object') throw new Error('Message invalide.');
     if (m.kind === 'APP') return handleApp(m, sender);
     if (m.kind === 'CONTROL') return handleControl(m, sender);
+    if (m.kind === 'PRICE_SUPPLIER') return priceSupplier(m,sender);
     if (m.kind === 'SUPPLIER') return handleSupplier(m, sender);
     throw new Error('Canal non autorisé.');
   }).then(result => reply({ ok: true, result }), error => reply({ ok: false, error: error.message || 'Opération refusée.' }));

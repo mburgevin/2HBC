@@ -2,7 +2,7 @@ import { getSupabase } from './supabase';
 export const PAGE_SIZE = 24;
 function checked({ data, error }) { if (error) throw error; return data; }
 export async function listProducts(term = '', page = 0) {
-  return checked(await getSupabase().rpc('rechercher_catalogue', { terme: term.trim().slice(0, 100), page_num: page }));
+  return checked(await getSupabase().rpc('rechercher_catalogue_personnel', { terme: term.trim().slice(0, 100), page_num: page }));
 }
 export async function ensureProfile(user) {
   const client = getSupabase();
@@ -15,7 +15,7 @@ export async function addToCart(offerId) {
 export async function listCart() {
   return checked(await getSupabase().from('articles_panier').select(`
     id, quantite, produits_fournisseurs (
-      id, ref_fournisseur, prix, nature_prix, conditionnement, url_produit,
+      id, ref_fournisseur, reference_verifiee, prix, nature_prix, conditionnement, url_produit,
       fournisseurs (nom), produits (nom, ref_fabricant, image_url)
     )
   `).order('id'));
@@ -53,4 +53,17 @@ export function cartCsv(items) {
     rows.push([o.fournisseurs.nom, o.ref_fournisseur, o.produits.ref_fabricant, o.produits.nom, item.quantite, o.prix, o.nature_prix]);
   }
   return '\uFEFF' + rows.map(row => row.map(csvCell).join(';')).join('\r\n');
+}
+
+export async function savePersonalPrice(quote, request) {
+  // Do not attach a response started by A to a newly authenticated B session.
+  const { data, error } = await getSupabase().auth.getUser();
+  if (error || data?.user?.id !== request.userId) throw new Error('Session 2HBC modifiée.');
+  checked(await getSupabase().from('prix_personnels').insert({
+    id: request.id, client_id: request.userId, offre_id: quote.offerId,
+    contexte_empreinte: quote.contextKey, quantite: quote.quantity,
+    montant_ht: quote.amount, base_prix: quote.basis, unite: quote.unit,
+    source_url: quote.url, observe_le: new Date(quote.observedAt).toISOString(),
+    expire_le: new Date(quote.expiresAt).toISOString()
+  }));
 }
