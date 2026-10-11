@@ -29,7 +29,9 @@
       // Never read login or challenge fields. User completes authentication normally.
       if ([...document.querySelectorAll('input[type="password"],input[autocomplete="one-time-code"],iframe[src*="captcha"]')].some(visible)) {last=null;return;}
       let data;
-      try { data = snapshot(job.profile,job); } catch { last=null;return; }
+      try { data = snapshot(job.profile,job); } catch (e) {
+        last=null;await chrome.runtime.sendMessage({kind:'PRICE_SUPPLIER',action:'WAIT',id:job.id,error:e.message});return;
+      }
       // Two stable DOM observations reduce reads while prices/context are loading.
       const key = JSON.stringify(data);
       if (!last || last.id !== job.id || last.key !== key) {last={id:job.id,key};return;}

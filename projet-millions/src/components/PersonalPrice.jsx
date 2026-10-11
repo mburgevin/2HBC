@@ -35,6 +35,8 @@ export default function PersonalPrice({ offer, userId, quantity = 1 }) {
           setMessage('Prix observé dans votre compte. Vérifiez les frais et le total chez le fournisseur.');
           try { await savePersonalPrice(checked,job); }
           catch { if (active.current) setMessage('Prix lu, mais son enregistrement privé a échoué.'); }
+        } else if (result.state === 'reading' && result.error) {
+          setMessage(result.error + ' Vérifiez la fiche fournisseur et les réglages de l’extension.');
         } else if (result.state !== 'reading') {
           throw new Error(result.error || 'Lecture arrêtée.');
         }

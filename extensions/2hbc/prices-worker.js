@@ -39,6 +39,8 @@ async function priceSupplier(m, sender) {
   if (m.action === 'GET') return job;
   if (m.action === 'RESULT') {
     job.quote = TwoHbcPrice.validatePrice(m.quote,job); job.state = 'observed';
+  } else if (m.action === 'WAIT') {
+    job.error = String(m.error || 'Lecture en attente.').slice(0,240);
   } else if (m.action === 'FAIL') {
     job.state = 'unavailable'; job.error = String(m.error || 'Prix indisponible.').slice(0,240);
   } else throw new Error('Action fournisseur refusée.');

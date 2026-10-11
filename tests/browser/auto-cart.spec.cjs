@@ -73,9 +73,9 @@ async function launch(options={}) {
  // Supplier/app documents are synthetic. No real supplier network request is allowed.
  await context.route('https://**/*',async route=>{
   const url=new URL(route.request().url());
-  if(url.origin===appOrigin) return route.fulfill({contentType:'text/html',body:'<!doctype html><html lang="fr"><title>2HBC fixture</title><h1>2HBC — test isolé</h1></html>'});
+  if(url.origin===appOrigin) return route.fulfill({contentType:'text/html; charset=utf-8',body:'<!doctype html><html lang="fr"><title>2HBC fixture</title><h1>2HBC — test isolé</h1></html>'});
   const supplier=Object.keys(suppliers).find(k=>suppliers[k]===url.origin);
-  if(supplier)return route.fulfill({contentType:'text/html',body:fixture(url.href,{...options,supplier})});
+  if(supplier)return route.fulfill({contentType:'text/html; charset=utf-8',body:fixture(url.href,{...options,supplier})});
   return route.abort();
  });
  let worker=context.serviceWorkers()[0];
@@ -182,6 +182,7 @@ test('TTC is never accepted as personal HT; the user can cancel the pending read
  const h=await launch({badPrice:true,profileOverride:{price:priceSelectors}});
  try {
   const request=quoteRequest();expect((await h.request('PRICE_START',request)).ok).toBe(true);
+  await expect.poll(()=>h.context.pages().some(p=>p.url()===request.url)).toBe(true);
   const page=h.context.pages().find(p=>p.url()===request.url);
   await page.waitForTimeout(4000);
   expect((await h.request('PRICE_STATUS',request)).result).toMatchObject({state:'reading',quote:null});
