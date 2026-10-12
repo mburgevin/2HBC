@@ -95,8 +95,59 @@ Chaque produit porte `review_status: pending`. Avant intégration dans Supabase,
 contrôler les correspondances, les variantes, les conditionnements et les droits
 de réutilisation. **Le collecteur n’exécute aucun SQL et n’écrit pas dans Supabase.**
 Ne pas remplacer directement le fichier pilote déjà validé par ce résultat : son
-importeur marque les lignes comme vérifiées. Après contrôle, les produits retenus
-pourront être intégrés par un import additif adapté.
+importeur historique marque les lignes comme vérifiées. Utiliser le nouvel importeur
+ci-dessous, qui correspond exactement au JSON produit par le collecteur.
+
+## Préparer puis publier dans Supabase
+
+**Prérequis administrateur :** appliquer une seule fois la migration
+`supabase/migrations/20261012163203_catalogue_integrity_import.sql` au projet 2HBC.
+Au 12 octobre 2026, elle est testée mais son application via le connecteur a échoué
+(`Invalid or expired requestState`). Elle n'est pas encore dans la base distante.
+Ce fichier peut être exécuté en entier dans le SQL Editor Supabase par un
+administrateur ; ne pas réexécuter les anciennes migrations ou réinitialiser la base.
+
+Télécharger aussi `scripts/prepare_catalogue_import.py` (Python standard, autonome),
+ou travailler depuis la racine du dépôt. Préparer le SQL sans aucun accès réseau :
+
+```powershell
+py scripts/prepare_catalogue_import.py catalogue-2hbc/products.json --out catalogue-2hbc/preparation.sql
+```
+
+Exécuter ensuite `preparation.sql` dans le SQL Editor du projet 2HBC. Les fiches sont
+stockées dans `collectes_catalogue`, accessible aux seuls administrateurs. Elles ne
+créent encore aucun produit visible sur le site. Le programme n'a besoin d'aucune clé
+Supabase. Ne jamais lui fournir une clé `service_role` ou un mot de passe fournisseur.
+
+Pour publier :
+
+1. Copier les fiches retenues dans `catalogue-2hbc/products-reviewed.json`.
+2. Vérifier sur les sources la marque, la référence fabricant, l'EAN, la variante,
+   la référence fournisseur et le conditionnement. Contrôler les droits de réutilisation.
+3. Passer uniquement les fiches relues à `"review_status": "approved"`.
+4. Générer le SQL de publication puis l'exécuter dans le SQL Editor :
+
+```powershell
+py scripts/prepare_catalogue_import.py catalogue-2hbc/products-reviewed.json --approve --out catalogue-2hbc/publication.sql
+```
+
+Sans `--approve`, le SQL reste en mode préparation, même si les fiches sont marquées
+`approved`. Avec `--approve`, une seule fiche encore `pending` fait refuser tout le
+fichier. La base contrôle aussi le contenu, les sources et les droits de l'appelant.
+
+Les réimports sont idempotents : pas de nouveau produit/offre pour une correspondance
+identique et aucun prix écrasé. Un EAN contradictoire, une référence fournisseur déjà
+liée à un autre produit, ou un changement d'URL déjà associée fait annuler le lot.
+Résoudre le conflit explicitement ; ne pas supprimer les contraintes pour le forcer.
+Une nouvelle date/empreinte de collecte crée une nouvelle trace privée sans dupliquer
+les produits. L'empreinte conserve une trace technique, elle ne certifie pas la véracité
+du contenu. Les dates de collecte et de validation restent distinctes.
+
+Les catégories de découverte sont conservées dans la trace, sans attribution
+automatique à la taxonomie métier. Images, PDF, descriptions et quantités de vente
+normalisées ne sont pas inventés. Les prix des nouvelles offres restent `NULL`.
+
+Voir [l'audit de la base et la correspondance des champs](AUDIT_BDD.md).
 
 Il ne collecte **aucun prix**, aucune photo ni description longue. Les prix propres
 à l’artisan restent le rôle de l’extension dans sa session connectée. Une quantité

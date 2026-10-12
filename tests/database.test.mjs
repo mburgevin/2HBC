@@ -2,12 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { PGlite } from '@electric-sql/pglite';
+import { testCatalogueImport } from './catalogue-import.mjs';
 
 // PostgreSQL embarqué ; claims Auth simulés, sans appel au projet cloud.
 test('Migration, catalogue et isolation des comptes', async t => {
  const db = new PGlite();
  const A='11111111-1111-4111-8111-111111111111', B='22222222-2222-4222-8222-222222222222';
- await db.exec(`create role anon nologin; create role authenticated nologin;
+ await db.exec(`create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
  create schema auth; create table auth.users(id uuid primary key);
  create function auth.uid() returns uuid language sql stable as $$ select (nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'sub')::uuid $$;
  create function auth.jwt() returns jsonb language sql stable as $$ select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb $$;
@@ -69,5 +70,6 @@ test('Migration, catalogue et isolation des comptes', async t => {
   await assert.rejects(run(A,insert.replace('now(),now()+',"now()-interval '1 hour',now()-interval '1 hour'+"),params));
   await assert.rejects(run(A,insert.replace("12.34,1,'piece'","12.34,0,'piece'"),params));
  });
+ await testCatalogueImport(db,t,run,A,B,real);
  } finally { await db.close(); }
 });
