@@ -1,5 +1,11 @@
 # Audit BDD et compatibilité de la collecte — 12 octobre 2026
 
+**Complément du 13 octobre :** photos ajoutées au collecteur pour Rexel et Sonepar,
+six liens média vérifiés sur les trois références pilotes, trois photos renseignées
+dans Supabase via le champ `image_url` existant. Les nouvelles migrations restent
+bloquées par le connecteur. `catalogue_images` ajoute la provenance de l'image et
+étend l'import ; détails et état actuel dans [COLLECTE_CATALOGUE.md](COLLECTE_CATALOGUE.md).
+
 Projet Supabase audité : **2HBC**, `gueuqeqyshhhmxbsiuxg`, PostgreSQL **17.6**.
 Audit du schéma réel via les catalogues PostgreSQL, des contraintes, des index,
 des fonctions et des règles RLS, puis comparaison avec le code du dépôt.
@@ -79,7 +85,8 @@ reste réservé aux trois fiches historiques déjà vérifiées.
 | `review_status` + option `--approve` | Préparation privée ou publication vérifiée | Deux étapes explicites |
 | Source et date de validation | Source issue d'une offre ; date calculée à la publication | Générées côté base |
 | IDs produit/fournisseur/offre | Identités générées/résolues côté base | Pas d'ID à deviner dans le programme |
-| Image, description, PDF, caractéristiques détaillées | Colonnes facultatives laissées vides | Non collectés actuellement |
+| `offers[].image_url` (depuis le 13 octobre) | Photo publique liée à sa source fournisseur ; `produits.image_url` après validation | Collectée si identifiée ; extension d'import en attente de migration |
+| Description, PDF, caractéristiques détaillées | Colonnes facultatives laissées vides | Non collectés actuellement |
 | Prix, stock, minimum/multiple de vente, base et unité de prix | Hors collecte publique | À qualifier dans la session fournisseur |
 
 L'importeur prépare des fichiers SQL sans connexion réseau ni clé secrète. Leur

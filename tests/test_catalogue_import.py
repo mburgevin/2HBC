@@ -15,6 +15,19 @@ spec.loader.exec_module(imp)
 
 
 class ImportTests(unittest.TestCase):
+    def test_images_keep_supplier_provenance_and_reject_wrong_product(self):
+        p = product()
+        p["offers"][0]["image_url"] = "https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE"
+        self.assertIn('image_url', imp.generate_sql([p]))
+        p["offers"][0]["image_url"] = "https://api.rexel.fr/media/api/fr/content/123/EXTRA_LARGE"
+        with self.assertRaises(ValueError):
+            imp.validate([p])
+        p = product("Sonepar")
+        p["offers"][0]["image_url"] = "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069511L-WEB-R.jpg?ts=123"
+        imp.validate([p])
+        p["offers"][0]["image_url"] += "&token=private"
+        with self.assertRaises(ValueError):
+            imp.validate([p])
     def test_actual_collector_output_compatible_for_both_suppliers(self):
         products = [product()]
         c.merge(products, product("Sonepar"))

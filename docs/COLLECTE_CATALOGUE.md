@@ -33,9 +33,12 @@ Le dossier `catalogue-2hbc` contient :
 
 - `products.json` : produits candidats, références fabricant, EAN, marque, nom,
   références distributeur, URL finales, conditionnement lorsqu’il est identifiable,
-  catégorie de découverte, date et empreinte de la source.
+  catégorie de découverte, date et empreinte de la source, **photo principale par
+  fournisseur lorsqu'elle est identifiée** (`offers[].image_url`).
 - `report.json` : nombre réellement obtenu, objectif atteint ou non, nombre de
-  produits présents chez les deux fournisseurs, fiches rejetées et motifs.
+  produits présents chez les deux fournisseurs, couverture photo
+  (`products_with_image`, `products_without_image`, `images_by_supplier`), fiches
+  rejetées et motifs.
 - `state.json` : progression, file de pages restantes et produits déjà collectés.
 
 **Relancer exactement la même commande reprend la collecte.** Ctrl+C conserve aussi
@@ -106,6 +109,10 @@ Au 12 octobre 2026, elle est testée mais son application via le connecteur a é
 (`Invalid or expired requestState`). Elle n'est pas encore dans la base distante.
 Ce fichier peut être exécuté en entier dans le SQL Editor Supabase par un
 administrateur ; ne pas réexécuter les anciennes migrations ou réinitialiser la base.
+Pour les collectes avec photos, appliquer ensuite
+`supabase/migrations/20261013131653_catalogue_images.sql`. La première migration
+étant toujours bloquée au 13 octobre, cette seconde migration reste également
+en attente. L'ordre est nécessaire : la seconde étend la fonction créée par la première.
 
 Télécharger aussi `scripts/prepare_catalogue_import.py` (Python standard, autonome),
 ou travailler depuis la racine du dépôt. Préparer le SQL sans aucun accès réseau :
@@ -144,8 +151,46 @@ les produits. L'empreinte conserve une trace technique, elle ne certifie pas la 
 du contenu. Les dates de collecte et de validation restent distinctes.
 
 Les catégories de découverte sont conservées dans la trace, sans attribution
-automatique à la taxonomie métier. Images, PDF, descriptions et quantités de vente
+automatique à la taxonomie métier. PDF, descriptions et quantités de vente
 normalisées ne sont pas inventés. Les prix des nouvelles offres restent `NULL`.
+
+## Photos Rexel et Sonepar
+
+La collecte recherche désormais les photos **sur les deux fournisseurs** :
+
+- Rexel : image marquée `Main media`, dont l'identifiant média correspond exactement
+  à celui de la fiche produit. Route publique observée : `api.rexel.fr/media/api/fr/content/…`.
+- Sonepar : première image explicitement étiquetée « Vignette Photo produit 1 »,
+  puis sa version pleine taille présente dans la page. CDN observé sur les fiches :
+  `fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/…`.
+
+Les logos, pictogrammes, scènes d'ambiance et produits voisins ne servent pas de
+photos de remplacement. Une image inconnue n'est pas devinée depuis la référence.
+Les routes média et leurs paramètres publics sont contrôlés ; aucun jeton ou
+cookie n'est conservé. Le collecteur stocke des liens, pas les fichiers image.
+
+La photo reste associée à son offre, donc au fournisseur, à sa page source et à sa
+date de collecte. À la publication, la première photo disponible remplit
+`produits.image_url`, avec `image_source_url` et `image_verifiee_le`. Une photo
+existante différente reste conservée. L'absence de photo n'empêche pas l'import
+des références : elle est comptée dans le rapport et le site affiche « Visuel à venir ».
+Les liens externes peuvent changer ; la même présentation est prévue en cas d'erreur.
+
+Pour enrichir une ancienne collecte déjà terminée sans photos, utiliser un **nouveau
+dossier `--out`** : la reprise ne revisite pas les fiches déjà traitées. Vérifier les
+visuels et leurs droits de réutilisation en même temps que les références, avant publication.
+
+Contrôle réel du 13 octobre 2026 : les six fiches officielles des trois références
+pilotes ont été lues avec le collecteur, et les six liens photo répondent en HTTP 200
+avec un fichier image valide. Les images Rexel sont de 300 × 300 pixels ; celles
+de Sonepar de 3000 × 3000 pixels pour ces références. Les trois photos Rexel ont
+été vérifiées visuellement et renseignées dans la base existante avec
+`supabase/pilot_images.sql`, sans dépendre des nouvelles migrations. Les liens et
+sources des deux fournisseurs sont conservés dans `catalog/pilot-images.json`.
+
+Le site utilise les photos dans les cartes catalogue, la comparaison et le panier,
+avec chargement différé, proportions conservées et absence de referrer. La collecte
+de 100 produits avec photos reste à exécuter ; le contrôle réel portait sur ces trois références.
 
 Voir [l'audit de la base et la correspondance des champs](AUDIT_BDD.md).
 

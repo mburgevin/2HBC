@@ -45,3 +45,10 @@ import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la colle
 en SQL de préparation privée ; une publication nécessite des fiches relues et
 `--approve`. La migration correspondante reste à appliquer à Supabase (erreur de
 session du connecteur lors de la tentative du 12 octobre 2026).
+
+Depuis le 13 octobre, le collecteur relève aussi la photo principale sur les fiches
+Rexel et Sonepar, avec sa provenance et un bilan de couverture. Les trois produits
+pilotes ont désormais une photo dans Supabase (`supabase/pilot_images.sql`), vérifiée
+sur les pages réelles. Les cartes, la comparaison et le panier affichent les photos.
+Pour les futurs imports avec images, appliquer ensuite la migration `catalogue_images` ;
+elle dépend de `catalogue_integrity_import`, toujours en attente côté cloud.

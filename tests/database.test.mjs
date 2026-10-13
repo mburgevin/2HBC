@@ -41,6 +41,12 @@ test('Migration, catalogue et isolation des comptes', async t => {
  await db.exec(await readFile(new URL('../supabase/migrations/20261011140316_personal_supplier_prices.sql',import.meta.url),'utf8'));
  const pilot=await readFile(new URL('../supabase/pilot_catalog.sql',import.meta.url),'utf8');
  await db.exec(pilot);await db.exec(pilot);
+ await t.test('Photos du pilote : enrichissement idempotent compatible avec le schéma déjà en ligne',async()=>{
+  const images=await readFile(new URL('../supabase/pilot_images.sql',import.meta.url),'utf8');
+  await db.exec(images);await db.exec(images);
+  const p=await run(null,'select * from rechercher_catalogue_personnel()',[],{},'anon');
+  assert.equal(p.length,3);assert(p.every(x=>x.image_url?.startsWith('https://api.rexel.fr/media/api/fr/content/') && x.offres.length===0));
+ });
  const real=(await run(A,'select * from produits_fournisseurs where reference_verifiee order by id'))[0];
  await t.test('Catalogue réel : trois produits, six correspondances, aucun tarif inventé',async()=>{
   const products=await run(A,'select * from rechercher_catalogue_personnel()');

@@ -6,10 +6,10 @@ import re
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qsl
 
 PRODUCT_KEYS = {"brand", "reference", "ean", "name", "categories", "review_status", "offers"}
-OFFER_KEYS = {"supplier", "reference", "url", "pack", "collected_at", "page_sha256"}
+OFFER_KEYS = {"supplier", "reference", "url", "pack", "collected_at", "page_sha256", "image_url"}
 HOSTS = {"Rexel": "www.rexel.fr", "Sonepar": "www.sonepar.fr"}
 
 
@@ -23,6 +23,29 @@ def valid_gtin(value):
         return False
     return sum(int(n) * (1 if i % 2 == 0 else 3) for i, n in enumerate(reversed(value))) % 10 == 0
 
+
+# Kept standalone so the importer can be downloaded without the collector.
+def image_url_valid(value, supplier):
+    """Only public image routes observed on supplier product pages, no tokens."""
+    if not isinstance(value, str) or len(value) > 2000 or re.search(r"[\s\x00-\x1f]", value):
+        return False
+    try:
+        u = urlsplit(value)
+        if u.scheme != "https" or u.username or u.password or u.port or u.fragment:
+            return False
+        if supplier == "Rexel":
+            return u.netloc == "api.rexel.fr" and not u.query and bool(re.fullmatch(
+                r"/media/api/fr/content/[0-9]+/[A-Z_]+", u.path))
+        if supplier == "Sonepar":
+            pairs = parse_qsl(u.query, keep_blank_values=True, strict_parsing=True)
+            return (u.netloc == "fra-connect.mo.cloudinary.net" and bool(re.fullmatch(
+                r"/PRODUCT/IMAGE/[0-9]+/[A-Za-z0-9_.-]+\.(?:jpg|jpeg|png|webp)", u.path, re.I))
+                and len({k for k, _ in pairs}) == len(pairs)
+                and all((k == "ts" and bool(re.fullmatch(r"[0-9]{1,20}", v))) or
+                        (k == "type" and v in {"xsmall", "small", "medium", "large"}) for k, v in pairs))
+        return False
+    except ValueError:
+        return False
 
 def validate(products, approve=False):
     if not isinstance(products, list) or not 1 <= len(products) <= 1000:
@@ -72,6 +95,10 @@ def validate(products, approve=False):
             if (u.scheme != "https" or u.netloc != HOSTS[supplier] or u.query or u.fragment
                     or not re.fullmatch(path_pattern, u.path)):
                 raise ValueError("URL produit officielle attendue, sans compte, paramètre ni fragment")
+            if o.get("image_url") is not None and not image_url_valid(o["image_url"], supplier):
+                raise ValueError("Photo : URL média officielle Rexel/Sonepar requise, sans jeton")
+            if o.get("image_url") and supplier == "Rexel" and urlsplit(o["image_url"]).path.split("/")[-2] != u.path.split("/")[-1]:
+                raise ValueError("Photo Rexel associée à une autre fiche produit")
             if o.get("pack") is not None:
                 required_text(o["pack"], 1000, "pack")
             if not isinstance(o.get("page_sha256"), str) or not re.fullmatch(r"[a-f0-9]{64}", o["page_sha256"]):

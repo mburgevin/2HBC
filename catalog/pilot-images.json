@@ -1,0 +1,68 @@
+[
+  {
+    "brand": "Legrand",
+    "reference": "069511L",
+    "ean": "3414971877986",
+    "primary_image": "https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE",
+    "images": [
+      {
+        "supplier": "Rexel",
+        "url": "https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE",
+        "source_url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup--IP55/Interrupteur-ou-va-et-vient-10AX-250V-%C3%A9tanche-Plexo-composable-gris/LEG069511L/p/73224603",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      },
+      {
+        "supplier": "Sonepar",
+        "url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069511L-WEB-R.jpg?ts=1781668678896",
+        "source_url": "https://www.sonepar.fr/catalog/fr-fr/products/legrand-interrupteur-ou-va-et-vient-10ax-250v-plexo-composable-gris-00001187798",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069611L",
+    "ean": "3414971880092",
+    "primary_image": "https://api.rexel.fr/media/api/fr/content/73224659/EXTRA_LARGE",
+    "images": [
+      {
+        "supplier": "Rexel",
+        "url": "https://api.rexel.fr/media/api/fr/content/73224659/EXTRA_LARGE",
+        "source_url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/Interrupteur-ou-va-et-vient-10AX-250V-Plexo-composable-blanc/LEG069611L/p/73224659",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      },
+      {
+        "supplier": "Sonepar",
+        "url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069611L-WEB-R.jpg?ts=1781668816492",
+        "source_url": "https://www.sonepar.fr/catalog/fr-fr/products/00001188009",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      }
+    ]
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069711L",
+    "ean": "3414971881778",
+    "primary_image": "https://api.rexel.fr/media/api/fr/content/73224702/EXTRA_LARGE",
+    "images": [
+      {
+        "supplier": "Rexel",
+        "url": "https://api.rexel.fr/media/api/fr/content/73224702/EXTRA_LARGE",
+        "source_url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/Interrupteur-ou-va-et-vient-10AX-250V-%C3%A9tanche-Plexo-complet-saillie-gris/LEG069711L/p/73224702",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      },
+      {
+        "supplier": "Sonepar",
+        "url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069711L-WEB-R.jpg?ts=1781668695270",
+        "source_url": "https://www.sonepar.fr/catalog/fr-fr/products/legrand-legrand-interrupteur-ou-va-et-vient-10ax-250v-plexo-complet-saillie-gris-00001188177",
+        "checked_on": "2026-10-13",
+        "http_status": 200
+      }
+    ]
+  }
+]

@@ -16,3 +16,11 @@
 @media(max-width:520px){.supplier-section{padding:14px}.supplier-heading{align-items:flex-start}.supplier-heading h2{font-size:22px}.cart-page{padding-left:12px;padding-right:12px}.supplier-heading strong{font-size:15px}}
 
 .personal-price{margin:1rem 0;padding:1rem;border:1px solid #d4dce6;border-radius:12px;background:#f7fafc}.personal-price p{margin:.5rem 0}.personal-price small{line-height:1.5}
+/* Photos fournisseur : cadrage entier et espace réservé pendant le chargement. */
+.product-image{height:200px;background:#fff;border:1px solid #edf1f4;overflow:hidden;padding:14px;margin-bottom:10px}
+.product-image img{display:block;width:100%;height:100%;object-fit:contain}
+.product-image-placeholder{display:flex;flex-direction:column;align-items:center;gap:9px;color:#7b8d9c;font-size:12px}
+.product-image--compact{width:82px;height:82px;flex:0 0 82px;padding:7px;margin:0}
+.product-image--compact .product-image-placeholder{font-size:9px;gap:4px}
+.product-image--compact .product-image-placeholder svg{width:26px;height:26px}
+.modal .product-image{height:240px;margin:16px 0}

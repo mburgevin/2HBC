@@ -104,10 +104,11 @@ def page_key(url):
 
 
 class Page(HTMLParser):
-    """Read text/links only; scripts and styles are neither executed nor retained."""
+    """Read visible text, links and image attributes; never execute scripts."""
     def __init__(self, html):
         super().__init__(convert_charrefs=True)
         self.parts, self.links, self.headings, self.title = [], [], [], []
+        self.images = []
         self.skip = 0
         self.in_h1 = self.in_title = False
         self.feed(html)
@@ -123,6 +124,8 @@ class Page(HTMLParser):
             return
         if tag == "a" and attrs.get("href"):
             self.links.append(attrs["href"])
+        if tag == "img":
+            self.images.append({k: attrs.get(k, "") for k in ("src", "data-src", "alt")})
         if tag == "h1":
             self.in_h1 = True
         if tag == "title":
@@ -155,6 +158,45 @@ def unique_match(pattern, text, field):
 
 def ean_valid(value):
     return bool(re.fullmatch(r"\d{13}", value)) and sum(int(n) * (3 if i % 2 else 1) for i, n in enumerate(value)) % 10 == 0
+
+
+def image_url_valid(value, supplier):
+    """Only public image routes observed on supplier product pages, no tokens."""
+    if not isinstance(value, str) or len(value) > 2000 or re.search(r"[\s\x00-\x1f]", value):
+        return False
+    try:
+        u = urlsplit(value)
+        if u.scheme != "https" or u.username or u.password or u.port or u.fragment:
+            return False
+        if supplier == "Rexel":
+            return u.netloc == "api.rexel.fr" and not u.query and bool(re.fullmatch(
+                r"/media/api/fr/content/[0-9]+/[A-Z_]+", u.path))
+        if supplier == "Sonepar":
+            pairs = parse_qsl(u.query, keep_blank_values=True, strict_parsing=True)
+            return (u.netloc == "fra-connect.mo.cloudinary.net" and bool(re.fullmatch(
+                r"/PRODUCT/IMAGE/[0-9]+/[A-Za-z0-9_.-]+\.(?:jpg|jpeg|png|webp)", u.path, re.I))
+                and len({k for k, _ in pairs}) == len(pairs)
+                and all((k == "ts" and bool(re.fullmatch(r"[0-9]{1,20}", v))) or
+                        (k == "type" and v in {"xsmall", "small", "medium", "large"}) for k, v in pairs))
+        return False
+    except ValueError:
+        return False
+
+
+def extract_image(page, url, supplier):
+    images = [(a, urljoin(url, a["data-src"] or a["src"])) for a in page.images]
+    images = [(a, src) for a, src in images if image_url_valid(src, supplier)]
+    if supplier == "Rexel":
+        product_id = re.search(r"/p/([0-9]+)$", urlsplit(url).path)[1]
+        return next((src for a, src in images if a["alt"].strip().lower() == "main media"
+                     and urlsplit(src).path.split("/")[-2] == product_id), None)
+    # Use the explicitly labelled first product photo, never brand logos, scenery,
+    # recommendation cards or the first arbitrary <img>. Prefer its full-size copy.
+    thumb = next((src for a, src in images if re.fullmatch(r"Vignette Photo produit 1", a["alt"], re.I)), None)
+    if thumb:
+        return next((src for _, src in images if urlsplit(src).path == urlsplit(thumb).path
+                     and "type" not in dict(parse_qsl(urlsplit(src).query))), thumb)
+    return None
 
 
 def extract_product(page, url, category, collected_at):
@@ -195,10 +237,14 @@ def extract_product(page, url, category, collected_at):
     if supplier == "Sonepar":
         name = re.sub(r"^" + re.escape(brand) + r"\s*-\s*", "", name, flags=re.I)
         name = re.sub(r"\s*-\s*" + re.escape(reference) + r"$", "", name)
-    return {"brand": brand, "reference": reference, "ean": ean, "name": name,
+    product = {"brand": brand, "reference": reference, "ean": ean, "name": name,
             "categories": [category], "review_status": "pending",
             "offers": [{"supplier": supplier, "reference": sku, "url": url, "pack": pack_text,
                         "collected_at": collected_at, "page_sha256": hashlib.sha256(page.text.encode()).hexdigest()}]}
+    photo = extract_image(page, url, supplier)
+    if photo:
+        product["offers"][0]["image_url"] = photo
+    return product
 
 
 class Robots:
@@ -334,6 +380,8 @@ def merge(products, incoming):
         raise ValueError("Deux références du même fournisseur pour ce produit : contrôle manuel")
     if not old:
         existing["offers"].append(offer)
+    elif not old.get("image_url") and offer.get("image_url") and old["url"] == offer["url"]:
+        old.update(offer)
     existing["categories"] = sorted(set(existing["categories"] + incoming["categories"]))
 
 
@@ -358,8 +406,11 @@ def save(state, output, limit):
     atomic_json(output / "products.json", state["products"])
     count = len(state["products"])
     paired = sum(len(p["offers"]) == 2 for p in state["products"])
+    pictured = sum(any(o.get("image_url") for o in p["offers"]) for p in state["products"])
     atomic_json(output / "report.json", {"updated_at": now(), "target": limit, "products": count,
         "both_suppliers": paired, "single_supplier": count - paired, "complete": count >= limit,
+        "products_with_image": pictured, "products_without_image": count - pictured,
+        "images_by_supplier": {name: sum(any(o["supplier"] == name and o.get("image_url") for o in p["offers"]) for p in state["products"]) for name in ("Rexel", "Sonepar")},
         "pending_pages": len(state["pending"]), "needs_review": True, "prices_collected": False,
         "issues": state["issues"]})
 

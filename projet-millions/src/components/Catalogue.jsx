@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
-import { addToCart, formatPrice, listProducts, PAGE_SIZE, safeUrl } from '../lib/data';
+import { addToCart, formatPrice, listProducts, PAGE_SIZE } from '../lib/data';
 import PersonalPrice from './PersonalPrice';
+import ProductImage from './ProductImage';
 const priceLabels = { demonstration: 'Tarif de démonstration', public: 'Tarif public', negocie: 'Tarif négocié' };
 export default function Catalogue({ initialTerm = '', onLoginClick }) {
   const { user, loading: authLoading } = useAuth();
@@ -39,7 +40,7 @@ export default function Catalogue({ initialTerm = '', onLoginClick }) {
       const prices = offers.filter(o => o.prix != null);
       const best = prices.reduce((a, o) => !a || o.prix < a.prix ? o : a, null);
       return <article className="product-card" key={product.id}>
-        <div className="product-image">{safeUrl(product.image_url) ? <img src={safeUrl(product.image_url)} alt="" loading="lazy" onError={e => { e.currentTarget.hidden = true; }} /> : <span>2HBC</span>}</div>
+        <ProductImage product={product} />
         <p className="reference">Réf. {product.ref_fabricant}</p><h2>{product.nom}</h2>
         {user ? <div className="price-box"><strong>{formatPrice(best?.prix)}</strong>{best && <small>HT · {best.fournisseur} · {priceLabels[best.nature_prix]}<br />Conditionnement : {best.conditionnement || 'à confirmer'}</small>}</div> : <p className="muted">Connectez-vous pour consulter les tarifs.</p>}
         <button className="secondary" onClick={() => user ? setSelected(product) : onLoginClick()}>{user ? 'Comparer et ajouter' : 'Voir les prix'}</button>
@@ -65,6 +66,7 @@ function ProductDialog({ product, userId, onClose }) {
   return <dialog ref={dialog} className="modal" onCancel={onClose} aria-labelledby="product-title">
     <button className="close" aria-label="Fermer" onClick={onClose}>×</button>
     <h2 id="product-title">{product.nom}</h2><p className="reference">Réf. {product.ref_fabricant}</p>
+    <ProductImage product={product} />
     <fieldset className="offer-list"><legend>Choisir une offre fournisseur</legend>
       {(product.offres || []).map(o => <label className="offer" key={o.id}>
         <input type="radio" name="offer" value={o.id} checked={chosen === String(o.id)} onChange={e => setChosen(e.target.value)} />

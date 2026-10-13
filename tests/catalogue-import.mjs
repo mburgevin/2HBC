@@ -18,6 +18,8 @@ export async function testCatalogueImport(db,t,run,A,B,real) {
  const folder=new URL('../supabase/migrations/',import.meta.url);
  const file=(await readdir(folder)).find(n=>n.endsWith('_catalogue_integrity_import.sql'));
  await db.exec(await readFile(new URL(file,folder),'utf8'));
+ const photos=(await readdir(folder)).find(n=>n.endsWith('_catalogue_images.sql'));
+ await db.exec(await readFile(new URL(photos,folder),'utf8'));
  const count=async table=>Number((await db.query(`select count(*) n from ${table}`)).rows[0].n);
  const initial=await count('produits');
  const importAs=(p,approve=false,claims=admin,user=A)=>run(user,sql,[JSON.stringify(p),approve],claims);
@@ -108,5 +110,28 @@ export async function testCatalogueImport(db,t,run,A,B,real) {
   assert.equal((await db.query('select url_produit from produits_fournisseurs where id=$1',[real.id])).rows[0].url_produit,real.url_produit);
   assert.equal((await db.query("select count(*)::int n from pg_tables where schemaname='public' and not rowsecurity")).rows[0].n,0);
   assert.equal((await db.query("select count(*)::int n from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prosecdef")).rows[0].n,0);
+ });
+ await t.test('Photos : préparation privée, publication et provenance ; prix et image existante conservés',async()=>{
+  const p=candidate(1), url='https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/test.jpg?ts=1781668678896';
+  p.offers[0].image_url=url;
+  await importAs(p);
+  assert.equal((await db.query("select image_url from produits where marque='Marque de test' and ref_fabricant='001'")).rows[0].image_url,null);
+  await importAs(approved(p),true);
+  const found=(await run(null,'select * from rechercher_catalogue_personnel($1)',[p.ean],{},'anon'))[0];
+  assert.equal(found.image_url,url);
+  const source=(await db.query('select image_source_url,image_verifiee_le from produits where id=$1',[found.id])).rows[0];
+  assert.equal(source.image_source_url,p.offers[0].url);assert(source.image_verifiee_le);
+  p.offers[0].image_url=url.replace('test.jpg','other.jpg');
+  await importAs(approved(p),true);
+  assert.equal((await db.query('select image_url from produits where id=$1',[found.id])).rows[0].image_url,url);
+  assert.equal(Number((await db.query("select prix from produits_fournisseurs where ref_fournisseur='0001'")).rows[0].prix),23.45);
+ });
+ await t.test('Photos : serveur refuse les faux domaines, SVG, jetons et média Rexel d’un autre produit',async()=>{
+  for(const image_url of ['https://evil.test/x.jpg','https://fra-connect.mo.cloudinary.net.evil.test/PRODUCT/IMAGE/1/x.jpg',
+    'https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.svg','https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.jpg?token=secret',42]) {
+   const p=candidate(1);p.offers[0].image_url=image_url;await assert.rejects(importAs(p));
+  }
+  const p=candidate(1);p.offers[0]={...p.offers[0],supplier:'Rexel',url:'https://www.rexel.fr/frx/p/123',image_url:'https://api.rexel.fr/media/api/fr/content/456/EXTRA_LARGE'};
+  await assert.rejects(importAs(p));
  });
 }

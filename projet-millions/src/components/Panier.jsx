@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 import { cartCsv, formatPrice, listCart, removeCartItem, safeUrl, updateQuantity } from '../lib/data';
+import ProductImage from './ProductImage';
 import { groupCart } from '../lib/supplierTransfer';
 import PersonalPrice from './PersonalPrice';
 import SupplierTransfer from './SupplierTransfer';
@@ -90,6 +91,7 @@ export default function Panier() {
           const o = item.produits_fournisseurs;
           if (!o?.produits || !o?.fournisseurs) return <article className="cart-item" key={item.id}><p>Cette offre n’est plus disponible.</p><button disabled={busy != null || loading} onClick={() => mutate(item.id,0)}>Supprimer</button></article>;
           return <article className="cart-item" key={item.id}>
+            <ProductImage product={o.produits} compact />
             <div className="cart-info"><h3>{o.produits.nom}</h3><p className="reference">Réf. fabricant : {o.produits.ref_fabricant}</p><p>{formatPrice(o.prix)} HT · {o.conditionnement || 'Conditionnement à confirmer'}</p>
               {o.nature_prix === 'demonstration' && <span className="badge">Prix de démonstration</span>}
               {safeUrl(o.url_produit) && <p><a href={safeUrl(o.url_produit)} target="_blank" rel="noopener noreferrer">Vérifier la fiche fournisseur ↗</a></p>}

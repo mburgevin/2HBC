@@ -39,6 +39,32 @@ def state():
 
 
 class CollectorTests(unittest.TestCase):
+    def test_rexel_photo_is_main_media_for_exact_product(self):
+        html = REXEL + '''<img alt="Rexel logo" src="https://api.rexel.fr/media/api/fr/content/123/LARGE">
+        <img alt="Main media" src="https://api.rexel.fr/media/api/fr/content/999/EXTRA_LARGE">
+        <img alt="Main media" src="https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE">'''
+        p = c.extract_product(c.Page(html), R, "Test", DATE)
+        self.assertEqual(p["offers"][0]["image_url"], "https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE")
+
+    def test_sonepar_photo_uses_labelled_product_not_logo_or_recommendation(self):
+        base = "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/"
+        html = SONEPAR + f'''<img src="{base}neighbour.jpg?ts=123">
+        <img src="{base}LG-069511L-WEB-R.jpg?ts=123">
+        <img alt="Vignette Photo produit ambiance 1" src="{base}scenery.jpg?ts=123">
+        <img alt="Vignette Photo produit 1" src="{base}LG-069511L-WEB-R.jpg?ts=123&amp;type=xsmall">'''
+        p = c.extract_product(c.Page(html), S, "Test", DATE)
+        self.assertEqual(p["offers"][0]["image_url"], base + "LG-069511L-WEB-R.jpg?ts=123")
+        self.assertNotIn("image_url", product()["offers"][0])
+
+    def test_unsafe_image_urls_rejected(self):
+        for url in ["https://fra-connect.mo.cloudinary.net.evil.test/PRODUCT/IMAGE/1/x.jpg",
+                    "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.svg",
+                    "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.jpg?token=secret",
+                    "https://user:pass@fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.jpg",
+                    "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/x.jpg?ts=1&ts=2",
+                    "javascript:alert(1)"]:
+            self.assertFalse(c.image_url_valid(url, "Sonepar"), url)
+
     def test_rexel_facts_without_scripts_or_prices(self):
         p = product()
         self.assertEqual((p["brand"], p["reference"], p["ean"]), ("Legrand", "069511L", "3414971877986"))
