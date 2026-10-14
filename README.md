@@ -41,8 +41,9 @@ Il conserve les photos et les codes article Rexel/Sonepar, puis poursuit une rec
 bornée des codes manquants. `catalogue.json` rassemble les références et photos pour
 le contrôle ; `products.json` reste le fichier à importer.
 Le script peut aussi être téléchargé seul. Voir [le guide Windows et les limites](docs/COLLECTE_CATALOGUE.md).
-Les 100 fiches restent à collecter et contrôler ; les vérifications réseau portent
-sur les six fiches officielles des trois produits pilotes.
+Le 15 octobre 2026, une collecte de 100 produits a été importée dans Supabase avec
+113 offres et 99 photos. Le catalogue réel compte désormais 103 produits en incluant
+les trois pilotes. [Trace d'import et limites](catalog/imports/20261015/README.md).
 
 L'[audit de la BDD](docs/AUDIT_BDD.md) décrit les contrôles d'intégrité et le nouvel
 import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la collecte
