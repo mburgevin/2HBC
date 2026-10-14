@@ -35,20 +35,30 @@ Le dossier `catalogue-2hbc` contient :
   références distributeur, URL finales, conditionnement lorsqu’il est identifiable,
   catégorie de découverte, date et empreinte de la source, **photo principale par
   fournisseur lorsqu'elle est identifiée** (`offers[].image_url`).
+- `catalogue.json` : récapitulatif lisible, avec `manufacturer_reference`, `ean`,
+  `rexel_code`, `sonepar_code`, `image_url`, les deux pages sources et les deux photos
+  fournisseur. Un champ inconnu vaut `null` ; `missing_fields` liste ce qui manque.
+  Ce fichier sert au contrôle ; **l'importeur utilise toujours `products.json`**.
 - `report.json` : nombre réellement obtenu, objectif atteint ou non, nombre de
   produits présents chez les deux fournisseurs, couverture photo
-  (`products_with_image`, `products_without_image`, `images_by_supplier`), fiches
-  rejetées et motifs.
+  (`products_with_image`, `products_without_image`, `images_by_supplier`), nombre
+  avec **les deux codes et une photo** (`both_codes_and_image`), codes manquants
+  par fournisseur, fiches rejetées et motifs. `complete` indique seulement que le
+  nombre de produits demandé est atteint, pas que toutes les références sont doublées.
 - `state.json` : progression, file de pages restantes et produits déjà collectés.
 
 **Relancer exactement la même commande reprend la collecte.** Ctrl+C conserve aussi
 la page interrompue. Pour recommencer complètement, choisir un nouveau dossier
 `--out` ; ne pas supprimer une progression utile.
 
-Le budget par lancement est de 300 pages. Pour poursuivre avec un budget supérieur :
+Le budget par lancement est de 300 pages, toutes phases confondues. Après avoir
+atteint le nombre de produits, le mode `both` continue sur les fournisseurs dont
+des codes manquent, dans une limite de **100 pages supplémentaires** incluse dans
+ce budget total. Il s'arrête plus tôt si tous les codes sont trouvés ou si aucune
+page disponible ne reste. Pour poursuivre avec un budget supérieur :
 
 ```powershell
-py collect_catalogue.py --limit 100 --max-pages 500 --out catalogue-2hbc
+py collect_catalogue.py --limit 100 --max-pages 500 --enrich-pages 200 --out catalogue-2hbc
 ```
 
 Un fournisseur qui répond 401/403/429/503 est suspendu pour cette exécution. Il n’y
@@ -57,6 +67,10 @@ Ne pas relancer en boucle après un blocage ; attendre ou utiliser un flux autor
 La sortie vaut 0 si l’objectif est atteint, 2 si le résultat est partiel et 130 après
 interruption. Le rapport fait foi : **le programme ne garantit pas d’atteindre 100**
 si les pages sont bloquées, rendues uniquement en JavaScript ou modifiées.
+`--enrich-pages 0` désactive la phase supplémentaire. En mode fournisseur unique,
+le script s'arrête au nombre de produits demandé. Les autres produits rencontrés
+pendant l'enrichissement sont différés dans `state.json`, sans dépasser l'objectif ;
+ils redeviennent candidats si une exécution ultérieure augmente `--limit`.
 
 ## Sélection de produits
 
@@ -65,6 +79,7 @@ fils et câbles, éclairage et outillage. Elles servent de points de départ ; a
 répartition par catégorie ou marque n’est garantie. Le programme suit uniquement
 les liens de produits et la pagination visible de la même catégorie. Il ne visite
 pas les pages de connexion, les paniers ou les API privées.
+Les visites alternent entre fournisseurs tant qu'une page est disponible pour chacun.
 
 Pour limiter la collecte à Sonepar ou Rexel, utiliser un dossier distinct :
 
@@ -82,6 +97,16 @@ py collect_catalogue.py --urls urls.txt --limit 100 --out catalogue-selection
 Les paramètres autres que `page` sont refusés. Les liens de suivi marketing doivent
 être retirés de la liste. Les URL sans paramètres sont préférables.
 
+Pour tester rapidement les trois références pilotes avec leurs six fiches :
+
+```powershell
+py scripts/collect_catalogue.py --urls catalog/collector-pilot-urls.txt --limit 3 --max-pages 10 --out catalogue-pilote
+```
+
+Avec le script téléchargé seul, télécharger aussi `collector-pilot-urls.txt`, puis
+retirer `scripts/` et `catalog/` de cette commande. Ajouter les URL connues des deux
+fournisseurs à une sélection augmente les chances de retrouver les deux codes.
+
 ## Qualité des données et suite dans 2HBC
 
 Un produit n’est accepté que si marque, référence fabricant, EAN13 valide, titre et
@@ -91,8 +116,25 @@ marque et la même référence fabricant**, sans rapprochement approximatif par 
 Les conflits sont signalés. La ponctuation des marques n’est pas arbitrairement effacée.
 
 100 produits collectés ne signifie pas 100 produits disponibles chez les deux
-fournisseurs. Le programme s’arrête au nombre de produits distincts demandé ; il ne
-continue pas une recherche exhaustive de toutes les correspondances manquantes.
+fournisseurs. La phase supplémentaire parcourt les pages publiques découvertes :
+ce n'est ni un moteur de recherche par EAN, ni une garantie de correspondance.
+Le code manquant n'est jamais déduit du nom, de la référence fabricant ou d'un
+préfixe supposé. Les recherches internes, dont certaines sont exclues par robots.txt,
+ne sont pas utilisées. Une correspondance reste absente si sa fiche n'est pas trouvée.
+
+Exemple vérifié pour un même produit :
+
+| Champ | Valeur |
+| --- | --- |
+| Marque | Legrand |
+| Référence fabricant | `069511L` |
+| EAN | `3414971877986` |
+| Code Rexel | `LEG069511L` |
+| Code Sonepar | `00001187798` |
+
+Les identifiants numériques dans les URL média Rexel sont des identifiants de page,
+pas les codes article à envoyer au panier. `offers[].reference` conserve le code
+article propre au fournisseur ; `reference` à la racine reste la référence fabricant.
 
 Chaque produit porte `review_status: pending`. Avant intégration dans Supabase,
 contrôler les correspondances, les variantes, les conditionnements et les droits
@@ -194,7 +236,7 @@ de 100 produits avec photos reste à exécuter ; le contrôle réel portait sur 
 
 Voir [l'audit de la base et la correspondance des champs](AUDIT_BDD.md).
 
-Il ne collecte **aucun prix**, aucune photo ni description longue. Les prix propres
+Il ne collecte **aucun prix** ni description longue. Les prix propres
 à l’artisan restent le rôle de l’extension dans sa session connectée. Une quantité
 dans « Conditionnement » n’est pas automatiquement le minimum commandable ni la
 base d’un tarif. Une empreinte de page sert à tracer la collecte, pas à certifier
@@ -207,10 +249,17 @@ le 11 octobre 2026. Les tests automatisés emploient du HTML synthétique et des
 HTTP simulées : extraction, EAN, URLs, doublons/conflits, robots.txt, redirections,
 blocages, reprise, interruption et rapport partiel.
 
-Le téléchargement direct depuis l’environnement de développement a été bloqué par
-l’autorisation réseau. **Aucune collecte complète de 100 fiches n’a donc été validée.**
-La première exécution sur le poste de l’utilisateur doit confirmer la disponibilité
-des pages et la compatibilité du HTML réellement servi. Les pages uniquement rendues
+Un premier contrôle réseau a été bloqué le 11 octobre ; les six fiches des trois
+produits pilotes ont ensuite été lues réellement le 13 octobre.
+Le 14 octobre 2026, la commande pilote ci-dessus a collecté les six fiches en six
+lectures de produits : **3 produits, 3 paires de codes, 6 URL photo, aucun rejet**.
+Le code Sonepar du troisième produit a bien été ajouté après avoir atteint `--limit 3`.
+Le JSON obtenu est accepté par `prepare_catalogue_import.py` pour préparer le SQL.
+Les 31 tests Python passent, y compris les limites de pages, la reprise, les conflits
+d'identifiants et la conservation des références sous forme de chaînes.
+**Aucune collecte complète de 100 fiches n'a été validée.**
+La disponibilité des autres pages et la compatibilité du HTML restent à confirmer
+pendant la collecte. Les pages uniquement rendues
 en JavaScript sont écartées avec un motif ; aucun navigateur furtif n’est fourni.
 
 Sources officielles :

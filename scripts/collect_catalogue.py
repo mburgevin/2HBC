@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collecte publique 2HBC, sans dépendance, compte, prix ou écriture en base."""
+"""Collecte 2HBC : photos et codes Rexel/Sonepar publics, sans compte ni prix."""
 import argparse
 import hashlib
 import json
@@ -14,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, quote, unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-AGENT = "2HBCCatalogue/0.1 (+https://github.com/mburgevin/2HBC)"
+AGENT = "2HBCCatalogue/0.2 (+https://github.com/mburgevin/2HBC)"
 HOSTS = {"www.rexel.fr": "Rexel", "www.sonepar.fr": "Sonepar"}
 MAX_BYTES = 8 * 1024 * 1024
 MAX_QUEUE = 5000
@@ -365,12 +365,13 @@ class Fetcher:
         raise ValueError("Trop de redirections")
 
 
-def merge(products, incoming):
+def merge(products, incoming, allow_new=True):
     identity = lambda p: (norm(p["brand"]), norm(p["reference"]))
     matches = [p for p in products if p["ean"] == incoming["ean"] or identity(p) == identity(incoming)]
     if not matches:
-        products.append(incoming)
-        return
+        if allow_new:
+            products.append(incoming)
+        return allow_new
     if len(matches) != 1 or matches[0]["ean"] != incoming["ean"] or identity(matches[0]) != identity(incoming):
         raise ValueError("Conflit EAN / marque / référence : rapprochement refusé")
     existing = matches[0]
@@ -383,6 +384,7 @@ def merge(products, incoming):
     elif not old.get("image_url") and offer.get("image_url") and old["url"] == offer["url"]:
         old.update(offer)
     existing["categories"] = sorted(set(existing["categories"] + incoming["categories"]))
+    return True
 
 
 def enqueue(state, url, category):
@@ -401,31 +403,81 @@ def atomic_json(path, value):
     temp.replace(path)
 
 
+def catalogue_row(product):
+    """Readable projection only; products.json remains the import contract."""
+    offers = {o["supplier"]: o for o in product["offers"]}
+    row = {"name": product["name"], "brand": product["brand"],
+           "manufacturer_reference": product["reference"], "ean": product["ean"],
+           "image_url": next((o["image_url"] for o in product["offers"] if o.get("image_url")), None)}
+    for supplier in ("Rexel", "Sonepar"):
+        offer = offers.get(supplier, {})
+        prefix = supplier.lower()
+        row[prefix + "_code"] = offer.get("reference")
+        row[prefix + "_url"] = offer.get("url")
+        row[prefix + "_image_url"] = offer.get("image_url")
+    row["missing_fields"] = [key for key in ("rexel_code", "sonepar_code", "image_url") if not row[key]]
+    return row
+
+
 def save(state, output, limit):
     atomic_json(output / "state.json", state)
     atomic_json(output / "products.json", state["products"])
+    overview = [catalogue_row(p) for p in state["products"]]
+    atomic_json(output / "catalogue.json", overview)
     count = len(state["products"])
     paired = sum(len(p["offers"]) == 2 for p in state["products"])
     pictured = sum(any(o.get("image_url") for o in p["offers"]) for p in state["products"])
     atomic_json(output / "report.json", {"updated_at": now(), "target": limit, "products": count,
         "both_suppliers": paired, "single_supplier": count - paired, "complete": count >= limit,
         "products_with_image": pictured, "products_without_image": count - pictured,
+        "both_codes_and_image": sum(not row["missing_fields"] for row in overview),
+        "missing_codes": {name: sum(not row[name.lower() + "_code"] for row in overview) for name in ("Rexel", "Sonepar")},
         "images_by_supplier": {name: sum(any(o["supplier"] == name and o.get("image_url") for o in p["offers"]) for p in state["products"]) for name in ("Rexel", "Sonepar")},
+        "last_run": state.get("last_run"),
         "pending_pages": len(state["pending"]), "needs_review": True, "prices_collected": False,
         "issues": state["issues"]})
 
 
-def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=print):
-    blocked, attempted = set(), 0
-    while len(state["products"]) < limit and attempted < max_pages:
-        index = next((i for i, x in enumerate(state["pending"]) if urlsplit(x["url"]).hostname not in blocked), None)
+def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=print, enrich_pages=100):
+    blocked, attempted, enriched, last_host = set(), 0, 0, None
+    # Product pages unrelated to the selected catalogue are deferred, not lost.
+    # They remain available if a later run raises --limit, without being fetched
+    # repeatedly while looking for the same missing supplier codes.
+    deferred = state.setdefault("deferred", [])
+    if len(state["products"]) < limit and deferred:
+        state["pending"] = deferred + state["pending"]
+        state["deferred"] = deferred = []
+    deferred_keys = {page_key(item["url"]) for item in deferred}
+    run = state["last_run"] = {"pages_attempted": 0, "enrichment_pages": 0,
+                               "deferred_products": 0, "stop_reason": "page_budget"}
+    while attempted < max_pages:
+        enriching = len(state["products"]) >= limit
+        wanted = set(HOSTS)
+        if enriching:
+            if state["supplier"] != "both" or enriched >= enrich_pages:
+                run["stop_reason"] = "target_reached" if state["supplier"] != "both" else "enrichment_budget"
+                break
+            wanted = {host for host, supplier in HOSTS.items()
+                      if any(not any(o["supplier"] == supplier for o in p["offers"]) for p in state["products"])}
+            if not wanted:
+                run["stop_reason"] = "both_codes_found"
+                break
+        candidates = [(i, urlsplit(x["url"]).hostname) for i, x in enumerate(state["pending"])
+                      if urlsplit(x["url"]).hostname in wanted - blocked]
+        # Avoid exhausting a large Rexel category before visiting Sonepar.
+        index = next((i for i, host in candidates if host != last_host), candidates[0][0] if candidates else None)
         if index is None:
+            run["stop_reason"] = "no_available_pages"
             break
         item = state["pending"].pop(index)
         url, category = item["url"], item["category"]
-        key, attempted = page_key(url), attempted + 1
-        if key in state["seen"]:
+        key = page_key(url)
+        if key in state["seen"] or key in deferred_keys:
             continue
+        attempted += 1
+        enriched += int(enriching)
+        last_host = urlsplit(url).hostname
+        run.update(pages_attempted=attempted, enrichment_pages=enriched)
         try:
             final_url, html = fetcher.get(url)
             page = Page(html)
@@ -437,10 +489,18 @@ def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=prin
                     is_product_path(urlsplit(candidate).path) or
                     urlsplit(candidate).path == urlsplit(final_url).path):
                     enqueue(state, candidate, category)
+            retained = True
             if is_product_path(urlsplit(final_url).path):
-                merge(state["products"], extract_product(page, final_url, category, now()))
-            state["seen"].extend(set([key, page_key(final_url)]) - set(state["seen"]))
-            emit(f"{len(state['products'])}/{limit} produits — {HOSTS[urlsplit(url).hostname]} — {category}")
+                retained = merge(state["products"], extract_product(page, final_url, category, now()), allow_new=not enriching)
+            keys = {key, page_key(final_url)}
+            if retained:
+                state["seen"].extend(keys - set(state["seen"]))
+            else:
+                deferred.append({"url": final_url, "category": category})
+                deferred_keys.update(keys)
+                run["deferred_products"] += 1
+            paired = sum(len(p["offers"]) == 2 for p in state["products"])
+            emit(f"{len(state['products'])}/{limit} produits — {paired} avec les deux codes — {HOSTS[urlsplit(url).hostname]} — {category}")
         except StopHost as error:
             blocked.add(urlsplit(url).hostname)
             state["pending"].append(item)
@@ -470,10 +530,12 @@ def main(argv=None):
     parser.add_argument("--out", type=Path, default=Path.cwd() / "catalogue-2hbc", help="Dossier de résultats et de reprise")
     parser.add_argument("--delay", type=float, default=3, help="Délai minimum par domaine, en secondes (>= 2)")
     parser.add_argument("--max-pages", type=int, default=300, help="Budget de pages par exécution")
+    parser.add_argument("--enrich-pages", type=int, default=100,
+                        help="Après --limit, pages pour chercher les codes manquants (défaut : 100, incluses dans --max-pages ; 0 pour désactiver)")
     parser.add_argument("--urls", type=Path, help="Liste d’URL publiques (une par ligne), à la place des catégories par défaut")
     args = parser.parse_args(argv)
-    if not 1 <= args.limit <= 1000 or not 1 <= args.max_pages <= 2000 or not 2 <= args.delay <= 120:
-        parser.error("Limites : 1–1000 produits, 1–2000 pages, délai 2–120 secondes.")
+    if not 1 <= args.limit <= 1000 or not 1 <= args.max_pages <= 2000 or not 2 <= args.delay <= 120 or not 0 <= args.enrich_pages <= 2000:
+        parser.error("Limites : 1–1000 produits, 1–2000 pages, 0–2000 pages d’enrichissement, délai 2–120 secondes.")
     state_path = args.out / "state.json"
     if state_path.exists():
         state = json.loads(state_path.read_text(encoding="utf-8"))
@@ -495,13 +557,15 @@ def main(argv=None):
     snapshot = lambda: save(state, args.out, args.limit)
     snapshot()
     try:
-        complete = collect(state, Fetcher(args.delay), args.limit, args.max_pages, snapshot)
+        complete = collect(state, Fetcher(args.delay), args.limit, args.max_pages, snapshot, enrich_pages=args.enrich_pages)
     except KeyboardInterrupt:
         snapshot()
         print("\nInterrompu. Relancez la même commande pour reprendre.")
         return 130
     snapshot()
     print(f"Résultat : {len(state['products'])}/{args.limit} produits. Fichier : {args.out / 'products.json'}")
+    overview = [catalogue_row(p) for p in state["products"]]
+    print(f"Deux codes + photo : {sum(not row['missing_fields'] for row in overview)}/{len(overview)}. Récapitulatif : {args.out / 'catalogue.json'}")
     print("À contrôler avant import ; aucun changement dans Supabase.")
     if not complete:
         print("Objectif non atteint : voir report.json (blocage, champs absents ou budget épuisé).")

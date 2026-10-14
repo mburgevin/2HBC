@@ -213,6 +213,92 @@ Disallow: /
         self.assertEqual(data["pending"][0]["url"], R)
         checkpoint.assert_called_once()
 
+    def test_limit_does_not_prevent_second_supplier_code_and_photo(self):
+        data = state()
+        c.enqueue(data, R, "test")
+        c.enqueue(data, S, "test")
+        photo = "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069511L-WEB-R.jpg?ts=123"
+        fake = unittest.mock.Mock()
+        fake.get.side_effect = [(R, REXEL), (S, SONEPAR + f'<img alt="Vignette Photo produit 1" src="{photo}">')]
+        self.assertTrue(c.collect(data, fake, 1, 10, emit=lambda _: None))
+        self.assertEqual(fake.get.call_count, 2)
+        row = c.catalogue_row(data["products"][0])
+        self.assertEqual((row["manufacturer_reference"], row["rexel_code"], row["sonepar_code"]),
+                         ("069511L", "LEG069511L", "00001187798"))
+        self.assertEqual(row["image_url"], photo)
+        self.assertEqual(row["missing_fields"], [])
+        self.assertEqual(data["last_run"]["stop_reason"], "both_codes_found")
+
+    def test_enrichment_skips_other_products_and_can_resume_with_larger_limit(self):
+        data = state()
+        data["products"] = [product()]
+        other_url = S.replace("00001187798", "00001188009")
+        other_html = SONEPAR.replace("00001187798", "00001188009").replace("069511L", "069611L").replace("3414971877986", "3414971880092")
+        c.enqueue(data, other_url, "test")
+        c.enqueue(data, S, "test")
+        fake = unittest.mock.Mock()
+        fake.get.side_effect = [(other_url, other_html), (S, SONEPAR)]
+        c.collect(data, fake, 1, 10, emit=lambda _: None)
+        self.assertEqual(len(data["products"]), 1)
+        self.assertEqual(len(data["products"][0]["offers"]), 2)
+        self.assertEqual(data["deferred"], [{"url": other_url, "category": "test"}])
+        fake.get.side_effect = [(other_url, other_html)]
+        c.collect(data, fake, 2, 1, emit=lambda _: None)
+        self.assertEqual(len(data["products"]), 2)
+        self.assertEqual(data["deferred"], [])
+
+    def test_enrichment_conflict_is_not_merged_and_reports_reason(self):
+        data = state()
+        data["products"] = [product()]
+        c.enqueue(data, S, "test")
+        fake = unittest.mock.Mock()
+        fake.get.return_value = S, SONEPAR.replace("069511L", "069611L")
+        c.collect(data, fake, 1, 10, emit=lambda _: None)
+        self.assertEqual(len(data["products"][0]["offers"]), 1)
+        self.assertIn("Conflit EAN", data["issues"][0]["reason"])
+
+    def test_enrichment_budget_and_total_budget_preserve_pending_pages(self):
+        for max_pages, enrich_pages, calls in [(20, 0, 0), (1, 100, 1), (20, 1, 1)]:
+            with self.subTest(max_pages=max_pages, enrich_pages=enrich_pages):
+                data = state()
+                data["products"] = [product()]
+                category = "https://www.sonepar.fr/catalog/fr-fr/category/test-SCC03"
+                c.enqueue(data, category, "test")
+                c.enqueue(data, S, "test")
+                fake = unittest.mock.Mock()
+                fake.get.return_value = category, "<h1>Catalogue</h1>"
+                c.collect(data, fake, 1, max_pages, emit=lambda _: None, enrich_pages=enrich_pages)
+                self.assertEqual(fake.get.call_count, calls)
+                self.assertIn(S, [p["url"] for p in data["pending"]])
+
+    def test_discovery_alternates_suppliers_and_single_supplier_stops_at_limit(self):
+        data = state()
+        category = "https://www.rexel.fr/frx/c/LEG"
+        for url in (category, R, S):
+            c.enqueue(data, url, "test")
+        fake = unittest.mock.Mock()
+        fake.get.side_effect = [(category, "<h1>Catalogue</h1>"), (S, SONEPAR)]
+        c.collect(data, fake, 1, 2, emit=lambda _: None)
+        self.assertEqual([x.args[0] for x in fake.get.call_args_list], [category, S])
+        data["supplier"] = "sonepar"
+        fake.reset_mock()
+        c.collect(data, fake, 1, 20, emit=lambda _: None)
+        fake.get.assert_not_called()
+
+    def test_readable_catalogue_preserves_missing_codes_and_image_provenance(self):
+        data = state()
+        data["products"] = [product("Sonepar")]
+        with tempfile.TemporaryDirectory() as temp:
+            c.save(data, Path(temp), 1)
+            row = json.loads((Path(temp) / "catalogue.json").read_text())[0]
+            report = json.loads((Path(temp) / "report.json").read_text())
+            self.assertEqual(row["sonepar_code"], "00001187798")
+            self.assertIsNone(row["rexel_code"])
+            self.assertIsNone(row["image_url"])
+            self.assertEqual(row["missing_fields"], ["rexel_code", "image_url"])
+            self.assertEqual(report["missing_codes"], {"Rexel": 1, "Sonepar": 0})
+            self.assertEqual(report["both_codes_and_image"], 0)
+
     def test_report_never_claims_target_when_only_partial(self):
         data = state()
         data["products"] = [product()]

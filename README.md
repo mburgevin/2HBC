@@ -37,8 +37,12 @@ Les profils connectés nécessitent une qualification avec un compte Rexel/Sonep
 
 `python3 scripts/collect_catalogue.py --limit 100` prépare un fichier de produits
 publics, sans prix ni écriture en base, avec dédoublonnage et reprise automatique.
+Il conserve les photos et les codes article Rexel/Sonepar, puis poursuit une recherche
+bornée des codes manquants. `catalogue.json` rassemble les références et photos pour
+le contrôle ; `products.json` reste le fichier à importer.
 Le script peut aussi être téléchargé seul. Voir [le guide Windows et les limites](docs/COLLECTE_CATALOGUE.md).
-Les 100 fiches restent à collecter et contrôler : seuls les tests hors réseau ont été exécutés.
+Les 100 fiches restent à collecter et contrôler ; les vérifications réseau portent
+sur les six fiches officielles des trois produits pilotes.
 
 L'[audit de la BDD](docs/AUDIT_BDD.md) décrit les contrôles d'intégrité et le nouvel
 import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la collecte
