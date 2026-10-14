@@ -5,6 +5,28 @@ Le programme autonome `scripts/collect_catalogue.py` vise 100 **produits distinc
 récent suffit ; aucune bibliothèque à installer, aucune clé et aucun compte requis.
 Il fonctionne aussi téléchargé seul, en dehors du dépôt.
 
+### Vérifier le fichier téléchargé
+
+Depuis la version 0.3.0, la commande suivante affiche la version sans contacter les
+fournisseurs ni lancer une collecte :
+
+```powershell
+py collect_catalogue.py --version
+```
+
+Résultat attendu : `2HBC Catalogue 0.3.0 - photos + codes Rexel/Sonepar`.
+La version figure aussi au début de chaque collecte et dans `report.json`
+(`collector_version`). Le chemin du fichier Python exécuté est affiché au démarrage.
+Si `--version` est refusé, la copie utilisée est plus ancienne. Le fichier autonome
+peut être renommé, par exemple `collect_catalogue_photos_v0_3_0.py` : adapter alors
+le nom dans les commandes. Vérifier le nom réellement enregistré par le navigateur.
+
+Le fichier 0.1 transmis lors du diagnostic du 14 octobre au soir ne contient ni
+extraction d'image ni compteurs photo. Les deux collectes associées comportent bien
+100 produits et 113 offres, mais aucune photo. Leurs références peuvent être conservées ;
+pour obtenir des photos avec cette version du collecteur, choisir un nouveau dossier
+de sortie afin que les fiches soient relues.
+
 ## Lancer sous Windows
 
 1. Télécharger le fichier `collect_catalogue.py` depuis la branche

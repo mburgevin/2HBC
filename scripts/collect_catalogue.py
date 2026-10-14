@@ -14,7 +14,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, quote, unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-AGENT = "2HBCCatalogue/0.2 (+https://github.com/mburgevin/2HBC)"
+COLLECTOR_VERSION = "0.3.0"
+AGENT = f"2HBCCatalogue/{COLLECTOR_VERSION} (+https://github.com/mburgevin/2HBC)"
 HOSTS = {"www.rexel.fr": "Rexel", "www.sonepar.fr": "Sonepar"}
 MAX_BYTES = 8 * 1024 * 1024
 MAX_QUEUE = 5000
@@ -427,7 +428,8 @@ def save(state, output, limit):
     count = len(state["products"])
     paired = sum(len(p["offers"]) == 2 for p in state["products"])
     pictured = sum(any(o.get("image_url") for o in p["offers"]) for p in state["products"])
-    atomic_json(output / "report.json", {"updated_at": now(), "target": limit, "products": count,
+    atomic_json(output / "report.json", {"collector_version": COLLECTOR_VERSION,
+        "updated_at": now(), "target": limit, "products": count,
         "both_suppliers": paired, "single_supplier": count - paired, "complete": count >= limit,
         "products_with_image": pictured, "products_without_image": count - pictured,
         "both_codes_and_image": sum(not row["missing_fields"] for row in overview),
@@ -525,6 +527,8 @@ def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=prin
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--version", action="version",
+                        version=f"2HBC Catalogue {COLLECTOR_VERSION} - photos + codes Rexel/Sonepar")
     parser.add_argument("--limit", type=int, default=100, help="Nombre de produits distincts visé (défaut : 100)")
     parser.add_argument("--supplier", choices=["both", "rexel", "sonepar"], default="both")
     parser.add_argument("--out", type=Path, default=Path.cwd() / "catalogue-2hbc", help="Dossier de résultats et de reprise")
@@ -553,6 +557,8 @@ def main(argv=None):
         supplier = HOSTS[urlsplit(seed["url"]).hostname].lower()
         if args.supplier in {"both", supplier}:
             enqueue(state, seed["url"], seed["category"])
+    print(f"2HBC Catalogue {COLLECTOR_VERSION} - photos + codes Rexel/Sonepar")
+    print("Script exécuté :", Path(__file__).resolve())
     print("Collecte publique, sans connexion ni prix. Reprise automatique dans", args.out)
     snapshot = lambda: save(state, args.out, args.limit)
     snapshot()

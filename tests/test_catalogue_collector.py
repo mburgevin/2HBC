@@ -3,6 +3,8 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import subprocess
+import sys
 from email.message import Message
 from pathlib import Path
 from urllib.error import HTTPError
@@ -39,6 +41,15 @@ def state():
 
 
 class CollectorTests(unittest.TestCase):
+    def test_version_is_identifiable_without_network_or_output_files(self):
+        with tempfile.TemporaryDirectory() as folder:
+            result = subprocess.run([sys.executable, str(ROOT / "scripts/collect_catalogue.py"), "--version"],
+                                    cwd=folder, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn(c.COLLECTOR_VERSION, result.stdout)
+            self.assertIn("photos + codes Rexel/Sonepar", result.stdout)
+            self.assertEqual(list(Path(folder).iterdir()), [])
+
     def test_rexel_photo_is_main_media_for_exact_product(self):
         html = REXEL + '''<img alt="Rexel logo" src="https://api.rexel.fr/media/api/fr/content/123/LARGE">
         <img alt="Main media" src="https://api.rexel.fr/media/api/fr/content/999/EXTRA_LARGE">
@@ -306,6 +317,7 @@ Disallow: /
             c.save(data, Path(temp), 100)
             report = json.loads((Path(temp) / "report.json").read_text())
             self.assertFalse(report["complete"])
+            self.assertEqual(report["collector_version"], c.COLLECTOR_VERSION)
             self.assertEqual(report["products"], 1)
             self.assertEqual(report["single_supplier"], 1)
             self.assertFalse(report["prices_collected"])
