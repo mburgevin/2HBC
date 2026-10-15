@@ -1,0 +1,67 @@
+{
+  "runtime": "PGlite 0.5.8",
+  "scope": "isolated local database; remote database unchanged",
+  "checks": 15,
+  "results": [
+    {
+      "name": "Fixture identique au volume distant : 114 produits, 148 offres",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : cycle de deux catégories accepté",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : doublons de catégories racines acceptés",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : longueur GTIN invalide et mauvaise clé acceptées",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : EAN existant réutilisable sur une autre identité",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : doublon marque/référence avec casse ou espaces accepté",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : code fournisseur réutilisable pour un autre produit",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : publication sans preuve de vérification acceptée",
+      "passed": true
+    },
+    {
+      "name": "Lacune actuelle : ajout RPC d’une offre de démonstration accepté",
+      "passed": true
+    },
+    {
+      "name": "Contrôle : rôle admin fourni dans user_metadata sans effet",
+      "passed": true
+    },
+    {
+      "name": "Contrôle : panier et observation privés invisibles à un autre client et à un admin tiers",
+      "passed": true
+    },
+    {
+      "name": "Migrations en attente applicables localement aux 100 produits importés",
+      "passed": true
+    },
+    {
+      "name": "Après migrations : EAN invalide, doublon et publication sans preuve refusés",
+      "passed": true
+    },
+    {
+      "name": "Après migrations : la protection contre les cycles reste à ajouter",
+      "passed": true
+    },
+    {
+      "name": "Après migrations : les démos restent accessibles et ajoutables",
+      "passed": true
+    }
+  ]
+}

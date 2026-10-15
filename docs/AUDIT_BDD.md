@@ -1,5 +1,7 @@
 # Audit BDD et compatibilité de la collecte — 12 octobre 2026
 
+**Audit actualisé du 15 octobre :** voir [structure, catégories, filtres et recherche](audits/2026-10-15/Audit_BDD_2HBC.md), avec les contrôles du schéma distant après l'import des 100 produits. Le présent document conserve le bilan historique du 12 octobre.
+
 **Complément du 13 octobre :** photos ajoutées au collecteur pour Rexel et Sonepar,
 six liens média vérifiés sur les trois références pilotes, trois photos renseignées
 dans Supabase via le champ `image_url` existant. Les nouvelles migrations restent

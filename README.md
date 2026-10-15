@@ -45,8 +45,10 @@ Le 15 octobre 2026, une collecte de 100 produits a été importée dans Supabase
 113 offres et 99 photos. Le catalogue réel compte désormais 103 produits en incluant
 les trois pilotes. [Trace d'import et limites](catalog/imports/20261015/README.md).
 
-L'[audit de la BDD](docs/AUDIT_BDD.md) décrit les contrôles d'intégrité et le nouvel
-import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la collecte
+L'[audit du 15 octobre sur les catégories et la recherche](docs/audits/2026-10-15/Audit_BDD_2HBC.md)
+précise les évolutions nécessaires après l'import des 100 produits.
+L'[audit initial de la BDD](docs/AUDIT_BDD.md) décrit les contrôles d'intégrité et
+l'import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la collecte
 en SQL de préparation privée ; une publication nécessite des fiches relues et
 `--approve`. La migration correspondante reste à appliquer à Supabase (erreur de
 session du connecteur lors de la tentative du 12 octobre 2026).
