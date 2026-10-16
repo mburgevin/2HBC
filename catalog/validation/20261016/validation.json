@@ -1,0 +1,116 @@
+{
+  "collector_version": "0.4.0",
+  "products": 3,
+  "offers": 4,
+  "attribute_conflicts": {
+    "A9P22610": [],
+    "S920042": [],
+    "S920052": []
+  },
+  "pages": [
+    {
+      "supplier": "Rexel",
+      "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/Disjoncteur-modulaire-4%2C5kA-et-6kA/Acti9-iDT40T---Disjoncteur-modulaire---1P%2BN---10A---Courbe-C---4500A-6kA/SCHA9P22610/p/71941447",
+      "reference": "A9P22610",
+      "collected_at": "2026-10-16T12:17:51+00:00",
+      "raw_attributes": 28,
+      "canonical_attributes": 10,
+      "category_path": [
+        {
+          "label": "Distribution et gestion de l'énergie",
+          "code": "M2_03",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/c/M2_03"
+        },
+        {
+          "label": "Distribution et protection AC",
+          "code": "M2_0302",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/c/M2_0302"
+        },
+        {
+          "label": "Disjoncteur modulaire 4,5kA et 6kA",
+          "code": "M2_030204",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/Disjoncteur-modulaire-4%2C5kA-et-6kA/c/M2_030204"
+        }
+      ],
+      "image": true
+    },
+    {
+      "supplier": "Sonepar",
+      "url": "https://www.sonepar.fr/catalog/fr-fr/products/schneider-electric-acti9-idt40t-disjoncteur-modulaire-1p-n-10a-courbe-c-4500a-6ka-01887138132",
+      "reference": "A9P22610",
+      "collected_at": "2026-10-16T12:18:01+00:00",
+      "raw_attributes": 25,
+      "canonical_attributes": 9,
+      "category_path": [
+        {
+          "label": "Distribution d'énergie",
+          "code": "SCC04",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/distribution-denergie-SCC04"
+        },
+        {
+          "label": "Tableau tertiaire et armoire de puissance",
+          "code": "SCC0402",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/tableau-tertiaire-et-armoire-de-puissance-SCC0402"
+        },
+        {
+          "label": "Disjoncteur et inter puissance modulaire",
+          "code": "SCC040204",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/disjoncteur-et-inter-puissance-modulaire-SCC040204"
+        }
+      ],
+      "image": true
+    },
+    {
+      "supplier": "Rexel",
+      "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-composable-milieu-de-gamme/Odace---prise-2P%2BT-affleurante-%2B-chargeur-USB-C-18W-Power-Delivery---blanc-craie/SCHS920042/p/74910335",
+      "reference": "S920042",
+      "collected_at": "2026-10-16T12:18:06+00:00",
+      "raw_attributes": 59,
+      "canonical_attributes": 10,
+      "category_path": [
+        {
+          "label": "Appareillage et contrôle du bâtiment",
+          "code": "M2_01",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/c/M2_01"
+        },
+        {
+          "label": "Appareillage mural",
+          "code": "M2_0107",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/c/M2_0107"
+        },
+        {
+          "label": "Appareillage composable milieu de gamme",
+          "code": "M2_010706",
+          "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-composable-milieu-de-gamme/c/M2_010706"
+        }
+      ],
+      "image": true
+    },
+    {
+      "supplier": "Sonepar",
+      "url": "https://www.sonepar.fr/catalog/fr-fr/products/schneider-electric-odace-prise-2p-t-affleurante-bornes-automatiques-blanc-craie-01887721271",
+      "reference": "S920052",
+      "collected_at": "2026-10-16T12:18:11+00:00",
+      "raw_attributes": 54,
+      "canonical_attributes": 10,
+      "category_path": [
+        {
+          "label": "Interrupteur - prise - boîte d encastrement",
+          "code": "SCC03",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-prise-boite-d-encastrement-SCC03"
+        },
+        {
+          "label": "Interrupteur et prise",
+          "code": "SCC0301",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-SCC0301"
+        },
+        {
+          "label": "Interrupteur et prise encastré",
+          "code": "SCC030106",
+          "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-encastre-SCC030106"
+        }
+      ],
+      "image": true
+    }
+  ]
+}

@@ -16,6 +16,10 @@ jobs:
             package-lock.json
             projet-millions/package-lock.json
       - run: npm ci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p 'test_catalogue_*.py' -v
       - run: npm run test:db
       - run: npm ci
         working-directory: projet-millions

@@ -1,0 +1,2067 @@
+{
+  "audited_at_utc": "2026-10-15T09:56:00.305Z",
+  "project_id": "gueuqeqyshhhmxbsiuxg",
+  "repository_commit": "b3c337689e56f3123099d281a052226cad7922ed",
+  "scope": "Read-only remote schema and aggregate data. No user records or credentials retrieved.",
+  "structure": {
+    "tables": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "anon=r/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "segments_clients",
+        "bytes": 24576,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=arw/postgres"
+        ],
+        "rls": true,
+        "name": "clients",
+        "bytes": 49152,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "anon=r/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "categories",
+        "bytes": 24576,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "anon=r/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "fournisseurs",
+        "bytes": 49152,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=ar/postgres"
+        ],
+        "rls": true,
+        "name": "paniers",
+        "bytes": 40960,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "articles_panier",
+        "bytes": 57344,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "besoins_clients",
+        "bytes": 32768,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "authenticated=ard/postgres"
+        ],
+        "rls": true,
+        "name": "prix_personnels",
+        "bytes": 32768,
+        "force_rls": false,
+        "approx_rows": -1
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "anon=r/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "produits",
+        "bytes": 172032,
+        "force_rls": false,
+        "approx_rows": 114
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres",
+          "anon=r/postgres",
+          "authenticated=arwd/postgres"
+        ],
+        "rls": true,
+        "name": "produits_fournisseurs",
+        "bytes": 131072,
+        "force_rls": false,
+        "approx_rows": 148
+      }
+    ],
+    "columns": [
+      {
+        "type": "bigint",
+        "table": "articles_panier",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "articles_panier",
+        "column": "panier_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "articles_panier",
+        "column": "offre_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "integer",
+        "table": "articles_panier",
+        "column": "quantite",
+        "default": "1",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "besoins_clients",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "uuid",
+        "table": "besoins_clients",
+        "column": "client_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "besoins_clients",
+        "column": "categorie_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "besoins_clients",
+        "column": "marque",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "besoins_clients",
+        "column": "produit",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "integer",
+        "table": "besoins_clients",
+        "column": "quantite_annuelle",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "besoins_clients",
+        "column": "unite",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "numeric",
+        "table": "besoins_clients",
+        "column": "budget_estime",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "besoins_clients",
+        "column": "date_saisie",
+        "default": "now()",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "categories",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "categories",
+        "column": "nom",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "categories",
+        "column": "parent_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "uuid",
+        "table": "clients",
+        "column": "id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "clients",
+        "column": "nom_complet",
+        "default": "''::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "clients",
+        "column": "telephone",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "clients",
+        "column": "adresse",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "bigint",
+        "table": "clients",
+        "column": "segment_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "clients",
+        "column": "date_creation",
+        "default": "now()",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "fournisseurs",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "fournisseurs",
+        "column": "nom",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "fournisseurs",
+        "column": "site_web",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "bigint",
+        "table": "paniers",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "uuid",
+        "table": "paniers",
+        "column": "client_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "paniers",
+        "column": "date_creation",
+        "default": "now()",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "uuid",
+        "table": "prix_personnels",
+        "column": "id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "uuid",
+        "table": "prix_personnels",
+        "column": "client_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "prix_personnels",
+        "column": "offre_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "prix_personnels",
+        "column": "contexte_empreinte",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "integer",
+        "table": "prix_personnels",
+        "column": "quantite",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "numeric",
+        "table": "prix_personnels",
+        "column": "montant_ht",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "numeric",
+        "table": "prix_personnels",
+        "column": "base_prix",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "prix_personnels",
+        "column": "unite",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "prix_personnels",
+        "column": "devise",
+        "default": "'EUR'::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "prix_personnels",
+        "column": "nature",
+        "default": "'net_compte_observe'::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "prix_personnels",
+        "column": "source_url",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "prix_personnels",
+        "column": "observe_le",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "prix_personnels",
+        "column": "expire_le",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "produits",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "ref_fabricant",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "code_ean",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "nom",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "marque",
+        "default": "''::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "produits",
+        "column": "categorie_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "description",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "specificite",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "emballage_condition",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "image_url",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "pdf_url",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "produits",
+        "column": "date_creation",
+        "default": "now()",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "boolean",
+        "table": "produits",
+        "column": "catalogue_verifie",
+        "default": "false",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits",
+        "column": "source_catalogue",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "produits",
+        "column": "catalogue_verifie_le",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "bigint",
+        "table": "produits_fournisseurs",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "produits_fournisseurs",
+        "column": "produit_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "bigint",
+        "table": "produits_fournisseurs",
+        "column": "fournisseur_id",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits_fournisseurs",
+        "column": "ref_fournisseur",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "numeric",
+        "table": "produits_fournisseurs",
+        "column": "prix",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits_fournisseurs",
+        "column": "devise",
+        "default": "'EUR'::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits_fournisseurs",
+        "column": "nature_prix",
+        "default": "'demonstration'::text",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "produits_fournisseurs",
+        "column": "conditionnement",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "text",
+        "table": "produits_fournisseurs",
+        "column": "url_produit",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "produits_fournisseurs",
+        "column": "date_verification",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "produits_fournisseurs",
+        "column": "date_creation",
+        "default": "now()",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "boolean",
+        "table": "produits_fournisseurs",
+        "column": "reference_verifiee",
+        "default": "false",
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "timestamp with time zone",
+        "table": "produits_fournisseurs",
+        "column": "reference_verifiee_le",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      },
+      {
+        "type": "bigint",
+        "table": "segments_clients",
+        "column": "id",
+        "default": null,
+        "identity": "YES",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "segments_clients",
+        "column": "nom",
+        "default": null,
+        "identity": "NO",
+        "nullable": "NO"
+      },
+      {
+        "type": "text",
+        "table": "segments_clients",
+        "column": "description",
+        "default": null,
+        "identity": "NO",
+        "nullable": "YES"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "segments_clients_pkey",
+        "table": "segments_clients",
+        "definition": "CREATE UNIQUE INDEX segments_clients_pkey ON public.segments_clients USING btree (id)"
+      },
+      {
+        "name": "segments_clients_nom_key",
+        "table": "segments_clients",
+        "definition": "CREATE UNIQUE INDEX segments_clients_nom_key ON public.segments_clients USING btree (nom)"
+      },
+      {
+        "name": "clients_pkey",
+        "table": "clients",
+        "definition": "CREATE UNIQUE INDEX clients_pkey ON public.clients USING btree (id)"
+      },
+      {
+        "name": "clients_segment_id_idx",
+        "table": "clients",
+        "definition": "CREATE INDEX clients_segment_id_idx ON public.clients USING btree (segment_id)"
+      },
+      {
+        "name": "categories_pkey",
+        "table": "categories",
+        "definition": "CREATE UNIQUE INDEX categories_pkey ON public.categories USING btree (id)"
+      },
+      {
+        "name": "categories_parent_id_idx",
+        "table": "categories",
+        "definition": "CREATE INDEX categories_parent_id_idx ON public.categories USING btree (parent_id)"
+      },
+      {
+        "name": "fournisseurs_pkey",
+        "table": "fournisseurs",
+        "definition": "CREATE UNIQUE INDEX fournisseurs_pkey ON public.fournisseurs USING btree (id)"
+      },
+      {
+        "name": "fournisseurs_nom_key",
+        "table": "fournisseurs",
+        "definition": "CREATE UNIQUE INDEX fournisseurs_nom_key ON public.fournisseurs USING btree (nom)"
+      },
+      {
+        "name": "paniers_pkey",
+        "table": "paniers",
+        "definition": "CREATE UNIQUE INDEX paniers_pkey ON public.paniers USING btree (id)"
+      },
+      {
+        "name": "paniers_client_id_key",
+        "table": "paniers",
+        "definition": "CREATE UNIQUE INDEX paniers_client_id_key ON public.paniers USING btree (client_id)"
+      },
+      {
+        "name": "articles_panier_pkey",
+        "table": "articles_panier",
+        "definition": "CREATE UNIQUE INDEX articles_panier_pkey ON public.articles_panier USING btree (id)"
+      },
+      {
+        "name": "articles_panier_panier_id_offre_id_key",
+        "table": "articles_panier",
+        "definition": "CREATE UNIQUE INDEX articles_panier_panier_id_offre_id_key ON public.articles_panier USING btree (panier_id, offre_id)"
+      },
+      {
+        "name": "articles_panier_offre_id_idx",
+        "table": "articles_panier",
+        "definition": "CREATE INDEX articles_panier_offre_id_idx ON public.articles_panier USING btree (offre_id)"
+      },
+      {
+        "name": "besoins_clients_pkey",
+        "table": "besoins_clients",
+        "definition": "CREATE UNIQUE INDEX besoins_clients_pkey ON public.besoins_clients USING btree (id)"
+      },
+      {
+        "name": "besoins_clients_client_id_idx",
+        "table": "besoins_clients",
+        "definition": "CREATE INDEX besoins_clients_client_id_idx ON public.besoins_clients USING btree (client_id)"
+      },
+      {
+        "name": "besoins_clients_categorie_id_idx",
+        "table": "besoins_clients",
+        "definition": "CREATE INDEX besoins_clients_categorie_id_idx ON public.besoins_clients USING btree (categorie_id)"
+      },
+      {
+        "name": "prix_personnels_pkey",
+        "table": "prix_personnels",
+        "definition": "CREATE UNIQUE INDEX prix_personnels_pkey ON public.prix_personnels USING btree (id)"
+      },
+      {
+        "name": "prix_personnels_client_offre",
+        "table": "prix_personnels",
+        "definition": "CREATE INDEX prix_personnels_client_offre ON public.prix_personnels USING btree (client_id, offre_id, observe_le DESC)"
+      },
+      {
+        "name": "prix_personnels_offre",
+        "table": "prix_personnels",
+        "definition": "CREATE INDEX prix_personnels_offre ON public.prix_personnels USING btree (offre_id)"
+      },
+      {
+        "name": "produits_pkey",
+        "table": "produits",
+        "definition": "CREATE UNIQUE INDEX produits_pkey ON public.produits USING btree (id)"
+      },
+      {
+        "name": "produits_marque_ref_fabricant_key",
+        "table": "produits",
+        "definition": "CREATE UNIQUE INDEX produits_marque_ref_fabricant_key ON public.produits USING btree (marque, ref_fabricant)"
+      },
+      {
+        "name": "produits_categorie_id_idx",
+        "table": "produits",
+        "definition": "CREATE INDEX produits_categorie_id_idx ON public.produits USING btree (categorie_id)"
+      },
+      {
+        "name": "produits_nom_id_idx",
+        "table": "produits",
+        "definition": "CREATE INDEX produits_nom_id_idx ON public.produits USING btree (nom, id)"
+      },
+      {
+        "name": "produits_fournisseurs_pkey",
+        "table": "produits_fournisseurs",
+        "definition": "CREATE UNIQUE INDEX produits_fournisseurs_pkey ON public.produits_fournisseurs USING btree (id)"
+      },
+      {
+        "name": "produits_fournisseurs_produit_id_fournisseur_id_key",
+        "table": "produits_fournisseurs",
+        "definition": "CREATE UNIQUE INDEX produits_fournisseurs_produit_id_fournisseur_id_key ON public.produits_fournisseurs USING btree (produit_id, fournisseur_id)"
+      },
+      {
+        "name": "produits_fournisseurs_fournisseur_id_idx",
+        "table": "produits_fournisseurs",
+        "definition": "CREATE INDEX produits_fournisseurs_fournisseur_id_idx ON public.produits_fournisseurs USING btree (fournisseur_id)"
+      }
+    ],
+    "extensions": [
+      {
+        "name": "plpgsql",
+        "version": "1.0"
+      },
+      {
+        "name": "pg_stat_statements",
+        "version": "1.11"
+      },
+      {
+        "name": "uuid-ossp",
+        "version": "1.1"
+      },
+      {
+        "name": "pgcrypto",
+        "version": "1.3"
+      },
+      {
+        "name": "supabase_vault",
+        "version": "0.3.1"
+      }
+    ],
+    "constraints": [
+      {
+        "name": "segments_clients_nom_key",
+        "type": "u",
+        "table": "segments_clients",
+        "validated": true,
+        "definition": "UNIQUE (nom)"
+      },
+      {
+        "name": "segments_clients_pkey",
+        "type": "p",
+        "table": "segments_clients",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "clients_id_fkey",
+        "type": "f",
+        "table": "clients",
+        "validated": true,
+        "definition": "FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "clients_nom_complet_check",
+        "type": "c",
+        "table": "clients",
+        "validated": true,
+        "definition": "CHECK ((length(nom_complet) <= 120))"
+      },
+      {
+        "name": "clients_pkey",
+        "type": "p",
+        "table": "clients",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "clients_segment_id_fkey",
+        "type": "f",
+        "table": "clients",
+        "validated": true,
+        "definition": "FOREIGN KEY (segment_id) REFERENCES segments_clients(id)"
+      },
+      {
+        "name": "categories_check",
+        "type": "c",
+        "table": "categories",
+        "validated": true,
+        "definition": "CHECK ((parent_id IS DISTINCT FROM id))"
+      },
+      {
+        "name": "categories_parent_id_fkey",
+        "type": "f",
+        "table": "categories",
+        "validated": true,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES categories(id)"
+      },
+      {
+        "name": "categories_pkey",
+        "type": "p",
+        "table": "categories",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "fournisseurs_nom_key",
+        "type": "u",
+        "table": "fournisseurs",
+        "validated": true,
+        "definition": "UNIQUE (nom)"
+      },
+      {
+        "name": "fournisseurs_pkey",
+        "type": "p",
+        "table": "fournisseurs",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "fournisseurs_site_web_check",
+        "type": "c",
+        "table": "fournisseurs",
+        "validated": true,
+        "definition": "CHECK (((site_web IS NULL) OR (site_web ~ '^https://'::text)))"
+      },
+      {
+        "name": "paniers_client_id_fkey",
+        "type": "f",
+        "table": "paniers",
+        "validated": true,
+        "definition": "FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "paniers_client_id_key",
+        "type": "u",
+        "table": "paniers",
+        "validated": true,
+        "definition": "UNIQUE (client_id)"
+      },
+      {
+        "name": "paniers_pkey",
+        "type": "p",
+        "table": "paniers",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "articles_panier_offre_id_fkey",
+        "type": "f",
+        "table": "articles_panier",
+        "validated": true,
+        "definition": "FOREIGN KEY (offre_id) REFERENCES produits_fournisseurs(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "articles_panier_panier_id_fkey",
+        "type": "f",
+        "table": "articles_panier",
+        "validated": true,
+        "definition": "FOREIGN KEY (panier_id) REFERENCES paniers(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "articles_panier_panier_id_offre_id_key",
+        "type": "u",
+        "table": "articles_panier",
+        "validated": true,
+        "definition": "UNIQUE (panier_id, offre_id)"
+      },
+      {
+        "name": "articles_panier_pkey",
+        "type": "p",
+        "table": "articles_panier",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "articles_panier_quantite_check",
+        "type": "c",
+        "table": "articles_panier",
+        "validated": true,
+        "definition": "CHECK (((quantite >= 1) AND (quantite <= 9999)))"
+      },
+      {
+        "name": "besoins_clients_budget_estime_check",
+        "type": "c",
+        "table": "besoins_clients",
+        "validated": true,
+        "definition": "CHECK ((budget_estime >= (0)::numeric))"
+      },
+      {
+        "name": "besoins_clients_categorie_id_fkey",
+        "type": "f",
+        "table": "besoins_clients",
+        "validated": true,
+        "definition": "FOREIGN KEY (categorie_id) REFERENCES categories(id)"
+      },
+      {
+        "name": "besoins_clients_client_id_fkey",
+        "type": "f",
+        "table": "besoins_clients",
+        "validated": true,
+        "definition": "FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "besoins_clients_pkey",
+        "type": "p",
+        "table": "besoins_clients",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "besoins_clients_quantite_annuelle_check",
+        "type": "c",
+        "table": "besoins_clients",
+        "validated": true,
+        "definition": "CHECK ((quantite_annuelle >= 0))"
+      },
+      {
+        "name": "prix_personnels_base_prix_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK (((base_prix > (0)::numeric) AND (base_prix <= (1000000)::numeric)))"
+      },
+      {
+        "name": "prix_personnels_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK ((expire_le = (observe_le + '00:10:00'::interval)))"
+      },
+      {
+        "name": "prix_personnels_client_id_fkey",
+        "type": "f",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "prix_personnels_contexte_empreinte_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK ((contexte_empreinte ~ '^[a-f0-9]{64}$'::text))"
+      },
+      {
+        "name": "prix_personnels_devise_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK ((devise = 'EUR'::text))"
+      },
+      {
+        "name": "prix_personnels_montant_ht_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK (((montant_ht > (0)::numeric) AND (montant_ht <= (1000000)::numeric)))"
+      },
+      {
+        "name": "prix_personnels_nature_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK ((nature = 'net_compte_observe'::text))"
+      },
+      {
+        "name": "prix_personnels_offre_id_fkey",
+        "type": "f",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "FOREIGN KEY (offre_id) REFERENCES produits_fournisseurs(id) ON DELETE CASCADE"
+      },
+      {
+        "name": "prix_personnels_pkey",
+        "type": "p",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "prix_personnels_quantite_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK (((quantite >= 1) AND (quantite <= 9999)))"
+      },
+      {
+        "name": "prix_personnels_unite_check",
+        "type": "c",
+        "table": "prix_personnels",
+        "validated": true,
+        "definition": "CHECK ((unite = ANY (ARRAY['piece'::text, 'm'::text, 'kg'::text])))"
+      },
+      {
+        "name": "produits_categorie_id_fkey",
+        "type": "f",
+        "table": "produits",
+        "validated": true,
+        "definition": "FOREIGN KEY (categorie_id) REFERENCES categories(id)"
+      },
+      {
+        "name": "produits_code_ean_check",
+        "type": "c",
+        "table": "produits",
+        "validated": true,
+        "definition": "CHECK (((code_ean IS NULL) OR (code_ean ~ '^[0-9]{8,14}$'::text)))"
+      },
+      {
+        "name": "produits_image_url_check",
+        "type": "c",
+        "table": "produits",
+        "validated": true,
+        "definition": "CHECK (((image_url IS NULL) OR (image_url ~ '^https://'::text)))"
+      },
+      {
+        "name": "produits_marque_ref_fabricant_key",
+        "type": "u",
+        "table": "produits",
+        "validated": true,
+        "definition": "UNIQUE (marque, ref_fabricant)"
+      },
+      {
+        "name": "produits_pdf_url_check",
+        "type": "c",
+        "table": "produits",
+        "validated": true,
+        "definition": "CHECK (((pdf_url IS NULL) OR (pdf_url ~ '^https://'::text)))"
+      },
+      {
+        "name": "produits_pkey",
+        "type": "p",
+        "table": "produits",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "produits_ref_fabricant_check",
+        "type": "c",
+        "table": "produits",
+        "validated": true,
+        "definition": "CHECK (((length(ref_fabricant) >= 1) AND (length(ref_fabricant) <= 100)))"
+      },
+      {
+        "name": "produits_source_catalogue_check",
+        "type": "c",
+        "table": "produits",
+        "validated": true,
+        "definition": "CHECK (((source_catalogue IS NULL) OR (source_catalogue ~ '^https://'::text)))"
+      },
+      {
+        "name": "produits_fournisseurs_devise_check",
+        "type": "c",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "CHECK ((devise = 'EUR'::text))"
+      },
+      {
+        "name": "produits_fournisseurs_fournisseur_id_fkey",
+        "type": "f",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "FOREIGN KEY (fournisseur_id) REFERENCES fournisseurs(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "produits_fournisseurs_nature_prix_check",
+        "type": "c",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "CHECK ((nature_prix = ANY (ARRAY['demonstration'::text, 'public'::text, 'negocie'::text])))"
+      },
+      {
+        "name": "produits_fournisseurs_pkey",
+        "type": "p",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "name": "produits_fournisseurs_prix_check",
+        "type": "c",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "CHECK ((prix >= (0)::numeric))"
+      },
+      {
+        "name": "produits_fournisseurs_produit_id_fkey",
+        "type": "f",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "FOREIGN KEY (produit_id) REFERENCES produits(id) ON DELETE RESTRICT"
+      },
+      {
+        "name": "produits_fournisseurs_produit_id_fournisseur_id_key",
+        "type": "u",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "UNIQUE (produit_id, fournisseur_id)"
+      },
+      {
+        "name": "produits_fournisseurs_url_produit_check",
+        "type": "c",
+        "table": "produits_fournisseurs",
+        "validated": true,
+        "definition": "CHECK (((url_produit IS NULL) OR (url_produit ~ '^https://'::text)))"
+      }
+    ],
+    "server_version": "17.6"
+  },
+  "access": {
+    "views": null,
+    "policies": [
+      {
+        "cmd": "ALL",
+        "qual": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "segments_clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "segments_admin",
+        "schemaname": "public",
+        "with_check": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "segments_clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "segments_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "profil_creation",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "profil_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "profil_modification",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = id)"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "categories",
+        "permissive": "PERMISSIVE",
+        "policyname": "categories_admin",
+        "schemaname": "public",
+        "with_check": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "categories",
+        "permissive": "PERMISSIVE",
+        "policyname": "categories_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "fournisseurs",
+        "permissive": "PERMISSIVE",
+        "policyname": "fournisseurs_admin",
+        "schemaname": "public",
+        "with_check": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "fournisseurs",
+        "permissive": "PERMISSIVE",
+        "policyname": "fournisseurs_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "paniers",
+        "permissive": "PERMISSIVE",
+        "policyname": "panier_creation",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = client_id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = client_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "paniers",
+        "permissive": "PERMISSIVE",
+        "policyname": "panier_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(EXISTS ( SELECT 1\n   FROM paniers p\n  WHERE ((p.id = articles_panier.panier_id) AND (p.client_id = ( SELECT auth.uid() AS uid)))))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "articles_panier",
+        "permissive": "PERMISSIVE",
+        "policyname": "articles_proprietaire",
+        "schemaname": "public",
+        "with_check": "(EXISTS ( SELECT 1\n   FROM paniers p\n  WHERE ((p.id = articles_panier.panier_id) AND (p.client_id = ( SELECT auth.uid() AS uid)))))"
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(( SELECT auth.uid() AS uid) = client_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "besoins_clients",
+        "permissive": "PERMISSIVE",
+        "policyname": "besoins_proprietaire",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = client_id)"
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "prix_personnels",
+        "permissive": "PERMISSIVE",
+        "policyname": "prix_personnels_creation",
+        "schemaname": "public",
+        "with_check": "((client_id = ( SELECT auth.uid() AS uid)) AND (COALESCE((( SELECT auth.jwt() AS jwt) ->> 'is_anonymous'::text), 'false'::text) <> 'true'::text) AND (observe_le <= (now() + '00:01:00'::interval)) AND (observe_le > (now() - '00:10:00'::interval)) AND (EXISTS ( SELECT 1\n   FROM produits_fournisseurs pf\n  WHERE ((pf.id = prix_personnels.offre_id) AND pf.reference_verifiee AND (pf.url_produit = prix_personnels.source_url)))))"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(client_id = ( SELECT auth.uid() AS uid))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "prix_personnels",
+        "permissive": "PERMISSIVE",
+        "policyname": "prix_personnels_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(client_id = ( SELECT auth.uid() AS uid))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "prix_personnels",
+        "permissive": "PERMISSIVE",
+        "policyname": "prix_personnels_suppression",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "produits",
+        "permissive": "PERMISSIVE",
+        "policyname": "produits_admin",
+        "schemaname": "public",
+        "with_check": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "true",
+        "roles": [
+          "anon",
+          "authenticated"
+        ],
+        "tablename": "produits",
+        "permissive": "PERMISSIVE",
+        "policyname": "produits_lecture",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "ALL",
+        "qual": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "produits_fournisseurs",
+        "permissive": "PERMISSIVE",
+        "policyname": "offres_admin",
+        "schemaname": "public",
+        "with_check": "(((( SELECT auth.jwt() AS jwt) -> 'app_metadata'::text) ->> 'role'::text) = 'admin'::text)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "((( SELECT auth.uid() AS uid) IS NOT NULL) AND (COALESCE((( SELECT auth.jwt() AS jwt) ->> 'is_anonymous'::text), 'false'::text) <> 'true'::text))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "produits_fournisseurs",
+        "permissive": "PERMISSIVE",
+        "policyname": "offres_lecture",
+        "schemaname": "public",
+        "with_check": null
+      }
+    ],
+    "triggers": null,
+    "functions": [
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "name": "rechercher_catalogue",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": false,
+        "signature": "terme text, page_num integer",
+        "definition": "CREATE OR REPLACE FUNCTION public.rechercher_catalogue(terme text DEFAULT ''::text, page_num integer DEFAULT 0)\n RETURNS TABLE(id bigint, ref_fabricant text, nom text, marque text, image_url text, offres jsonb)\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select p.id, p.ref_fabricant, p.nom, p.marque, p.image_url,\n coalesce((select jsonb_agg(jsonb_build_object(\n   'id',pf.id,'fournisseur',f.nom,'prix',pf.prix,'nature_prix',pf.nature_prix,\n   'conditionnement',pf.conditionnement,'date_verification',pf.date_verification,\n   'url_produit',pf.url_produit) order by f.nom)\n   from public.produits_fournisseurs pf join public.fournisseurs f on f.id=pf.fournisseur_id\n   where pf.produit_id=p.id), '[]'::jsonb)\n from public.produits p\n where position(lower(left(coalesce(terme,''),100)) in lower(p.nom || ' ' || p.ref_fabricant || ' ' || p.marque)) > 0\n order by p.nom,p.id limit 24 offset (greatest(0,least(coalesce(page_num,0),100000)) * 24);\n$function$\n"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "name": "ajouter_au_panier",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": false,
+        "signature": "offre_id bigint, qte integer",
+        "definition": "CREATE OR REPLACE FUNCTION public.ajouter_au_panier(offre_id bigint, qte integer DEFAULT 1)\n RETURNS bigint\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare owner_id uuid := auth.uid(); cart_id bigint; item_id bigint;\nbegin\n if owner_id is null then raise exception 'Connexion requise' using errcode='42501'; end if;\n if qte is null or qte < 1 or qte > 9999 then raise exception 'Quantité invalide' using errcode='22023'; end if;\n if not exists(select 1 from public.produits_fournisseurs pf where pf.id=offre_id) then\n  raise exception 'Offre indisponible' using errcode='22023';\n end if;\n insert into public.paniers(client_id) values(owner_id) on conflict(client_id) do nothing;\n select p.id into cart_id from public.paniers p where p.client_id=owner_id;\n insert into public.articles_panier(panier_id,offre_id,quantite) values(cart_id,offre_id,qte)\n on conflict on constraint articles_panier_panier_id_offre_id_key do update\n set quantite=public.articles_panier.quantite + excluded.quantite\n returning id into item_id;\n return item_id;\nend; $function$\n"
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "name": "rechercher_catalogue_personnel",
+        "config": [
+          "search_path=\"\""
+        ],
+        "definer": false,
+        "signature": "terme text, page_num integer",
+        "definition": "CREATE OR REPLACE FUNCTION public.rechercher_catalogue_personnel(terme text DEFAULT ''::text, page_num integer DEFAULT 0)\n RETURNS TABLE(id bigint, ref_fabricant text, nom text, marque text, image_url text, offres jsonb)\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select p.id,p.ref_fabricant,p.nom,p.marque,p.image_url,\n coalesce((select jsonb_agg(jsonb_build_object(\n  'id',pf.id,'fournisseur',f.nom,'prix',pf.prix,'nature_prix',pf.nature_prix,\n  'ref_fournisseur',pf.ref_fournisseur,'reference_verifiee',pf.reference_verifiee,\n  'conditionnement',pf.conditionnement,'date_verification',pf.date_verification,'url_produit',pf.url_produit)\n  order by f.nom) from public.produits_fournisseurs pf join public.fournisseurs f on f.id=pf.fournisseur_id\n  where pf.produit_id=p.id and pf.reference_verifiee),'[]'::jsonb)\n from public.produits p where p.catalogue_verifie\n and position(lower(left(coalesce(terme,''),100)) in lower(p.nom || ' ' || p.ref_fabricant || ' ' || p.marque))>0\n order by p.nom,p.id limit 24 offset (greatest(0,least(coalesce(page_num,0),100000))*24);\n$function$\n"
+      }
+    ]
+  },
+  "quality": {
+    "counts": {
+      "offers": 148,
+      "tables": 10,
+      "products": 114,
+      "published": 103,
+      "suppliers": 3,
+      "categories": 0,
+      "unverified": 11,
+      "verified_offers": 119
+    },
+    "conflicts": {
+      "normalized_gtin": 0,
+      "invalid_gtin_all": 0,
+      "normalized_identity": 0,
+      "blank_names_refs_all": 0,
+      "normalized_supplier_sku": 0,
+      "incomplete_verified_offer": 0
+    },
+    "shared_prices": [
+      {
+        "offers": 29,
+        "with_price": 18,
+        "nature_prix": "demonstration"
+      },
+      {
+        "offers": 119,
+        "with_price": 0,
+        "nature_prix": "public"
+      }
+    ],
+    "verified_by_supplier": [
+      {
+        "nom": "Sonepar",
+        "verified_offers": 50
+      },
+      {
+        "nom": "Rexel",
+        "verified_offers": 69
+      }
+    ],
+    "published_completeness": {
+      "pdf": 0,
+      "images": 102,
+      "valid_gtin": 103,
+      "categorized": 0,
+      "description": 0,
+      "specificite": 0,
+      "identity_and_provenance": 103
+    },
+    "fk_without_leading_index": null
+  },
+  "anonymous": {
+    "role": "anon",
+    "direct_offers": 0,
+    "direct_products": 114,
+    "direct_unverified": 11,
+    "legacy_rpc_products": 114,
+    "current_rpc_products": 103,
+    "private_prices_select_grant": false
+  },
+  "authenticated": {
+    "role": "authenticated",
+    "searches": [
+      {
+        "query": "600335",
+        "first_page_count": 1
+      },
+      {
+        "query": "LEG600335",
+        "first_page_count": 0
+      },
+      {
+        "query": "3414971006102",
+        "first_page_count": 0
+      },
+      {
+        "query": "prise Legrand",
+        "first_page_count": 0
+      },
+      {
+        "query": "prise",
+        "first_page_count": 24
+      }
+    ],
+    "all_offers": 148,
+    "catalogue_offers": 119,
+    "unverified_offers": 29
+  },
+  "rpc_plan": [
+    {
+      "Plan": {
+        "Node Type": "Function Scan",
+        "Parallel Aware": false,
+        "Async Capable": false,
+        "Function Name": "rechercher_catalogue_personnel",
+        "Alias": "rechercher_catalogue_personnel",
+        "Startup Cost": 0.25,
+        "Total Cost": 10.25,
+        "Plan Rows": 1000,
+        "Plan Width": 168,
+        "Actual Startup Time": 3.13,
+        "Actual Total Time": 3.132,
+        "Actual Rows": 24,
+        "Actual Loops": 1,
+        "Shared Hit Blocks": 773,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0
+      },
+      "Planning": {
+        "Shared Hit Blocks": 0,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0
+      },
+      "Planning Time": 0.12,
+      "Triggers": [],
+      "Execution Time": 3.235
+    }
+  ],
+  "expanded_plan": [
+    {
+      "Plan": {
+        "Node Type": "Limit",
+        "Parallel Aware": false,
+        "Async Capable": false,
+        "Startup Cost": 10,
+        "Total Cost": 10.96,
+        "Plan Rows": 24,
+        "Plan Width": 194,
+        "Actual Startup Time": 0.336,
+        "Actual Total Time": 0.378,
+        "Actual Rows": 24,
+        "Actual Loops": 1,
+        "Shared Hit Blocks": 12,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0,
+        "Plans": [
+          {
+            "Node Type": "Result",
+            "Parent Relationship": "Outer",
+            "Parallel Aware": false,
+            "Async Capable": false,
+            "Startup Cost": 10,
+            "Total Cost": 11.36,
+            "Plan Rows": 34,
+            "Plan Width": 194,
+            "Actual Startup Time": 0.335,
+            "Actual Total Time": 0.374,
+            "Actual Rows": 24,
+            "Actual Loops": 1,
+            "Shared Hit Blocks": 12,
+            "Shared Read Blocks": 0,
+            "Shared Dirtied Blocks": 0,
+            "Shared Written Blocks": 0,
+            "Local Hit Blocks": 0,
+            "Local Read Blocks": 0,
+            "Local Dirtied Blocks": 0,
+            "Local Written Blocks": 0,
+            "Temp Read Blocks": 0,
+            "Temp Written Blocks": 0,
+            "Plans": [
+              {
+                "Node Type": "Sort",
+                "Parent Relationship": "Outer",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 10,
+                "Total Cost": 10.08,
+                "Plan Rows": 34,
+                "Plan Width": 162,
+                "Actual Startup Time": 0.317,
+                "Actual Total Time": 0.319,
+                "Actual Rows": 24,
+                "Actual Loops": 1,
+                "Sort Key": [
+                  "p.nom",
+                  "p.id"
+                ],
+                "Sort Method": "quicksort",
+                "Sort Space Used": 31,
+                "Sort Space Type": "Memory",
+                "Shared Hit Blocks": 12,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Seq Scan",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Relation Name": "produits",
+                    "Alias": "p",
+                    "Startup Cost": 0,
+                    "Total Cost": 9.13,
+                    "Plan Rows": 34,
+                    "Plan Width": 162,
+                    "Actual Startup Time": 0.033,
+                    "Actual Total Time": 0.251,
+                    "Actual Rows": 26,
+                    "Actual Loops": 1,
+                    "Filter": "(catalogue_verifie AND (POSITION(('prise'::text) IN (lower(((((nom || ' '::text) || ref_fabricant) || ' '::text) || marque)))) > 0))",
+                    "Rows Removed by Filter": 88,
+                    "Shared Hit Blocks": 6,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0
+                  }
+                ]
+              },
+              {
+                "Node Type": "Aggregate",
+                "Strategy": "Plain",
+                "Partial Mode": "Simple",
+                "Parent Relationship": "SubPlan",
+                "Subplan Name": "SubPlan 1",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0.02,
+                "Total Cost": 0.03,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 0.001,
+                "Actual Total Time": 0.001,
+                "Actual Rows": 1,
+                "Actual Loops": 24,
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0,
+                "Plans": [
+                  {
+                    "Node Type": "Sort",
+                    "Parent Relationship": "Outer",
+                    "Parallel Aware": false,
+                    "Async Capable": false,
+                    "Startup Cost": 0.01,
+                    "Total Cost": 0.02,
+                    "Plan Rows": 0,
+                    "Plan Width": 193,
+                    "Actual Startup Time": 0.001,
+                    "Actual Total Time": 0.001,
+                    "Actual Rows": 0,
+                    "Actual Loops": 24,
+                    "Sort Key": [
+                      "nom"
+                    ],
+                    "Sort Method": "quicksort",
+                    "Sort Space Used": 25,
+                    "Sort Space Type": "Memory",
+                    "Shared Hit Blocks": 0,
+                    "Shared Read Blocks": 0,
+                    "Shared Dirtied Blocks": 0,
+                    "Shared Written Blocks": 0,
+                    "Local Hit Blocks": 0,
+                    "Local Read Blocks": 0,
+                    "Local Dirtied Blocks": 0,
+                    "Local Written Blocks": 0,
+                    "Temp Read Blocks": 0,
+                    "Temp Written Blocks": 0,
+                    "Plans": [
+                      {
+                        "Node Type": "Result",
+                        "Parent Relationship": "Outer",
+                        "Parallel Aware": false,
+                        "Async Capable": false,
+                        "Startup Cost": 0,
+                        "Total Cost": 0,
+                        "Plan Rows": 0,
+                        "Plan Width": 193,
+                        "Actual Startup Time": 0,
+                        "Actual Total Time": 0,
+                        "Actual Rows": 0,
+                        "Actual Loops": 24,
+                        "One-Time Filter": "false",
+                        "Shared Hit Blocks": 0,
+                        "Shared Read Blocks": 0,
+                        "Shared Dirtied Blocks": 0,
+                        "Shared Written Blocks": 0,
+                        "Local Hit Blocks": 0,
+                        "Local Read Blocks": 0,
+                        "Local Dirtied Blocks": 0,
+                        "Local Written Blocks": 0,
+                        "Temp Read Blocks": 0,
+                        "Temp Written Blocks": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "Planning": {
+        "Shared Hit Blocks": 294,
+        "Shared Read Blocks": 0,
+        "Shared Dirtied Blocks": 0,
+        "Shared Written Blocks": 0,
+        "Local Hit Blocks": 0,
+        "Local Read Blocks": 0,
+        "Local Dirtied Blocks": 0,
+        "Local Written Blocks": 0,
+        "Temp Read Blocks": 0,
+        "Temp Written Blocks": 0
+      },
+      "Planning Time": 2.01,
+      "Triggers": [],
+      "Execution Time": 0.478
+    }
+  ],
+  "migrations": [
+    {
+      "version": "20260913161414",
+      "name": "initial_mvp"
+    },
+    {
+      "version": "20261011140316",
+      "name": "personal_supplier_prices"
+    }
+  ],
+  "advisors": {
+    "security": {
+      "lints": [
+        {
+          "name": "auth_leaked_password_protection",
+          "title": "Leaked Password Protection Disabled",
+          "level": "WARN",
+          "facing": "EXTERNAL",
+          "categories": [
+            "SECURITY"
+          ],
+          "description": "Leaked password protection is currently disabled.",
+          "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection",
+          "count": 1,
+          "findings": [
+            {
+              "detail": "Supabase Auth prevents the use of compromised passwords by checking against HaveIBeenPwned.org. Enable this feature to enhance security.",
+              "metadata": {
+                "type": "auth",
+                "entity": "Auth"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "performance": {
+      "lints": [
+        {
+          "name": "unused_index",
+          "title": "Unused Index",
+          "level": "INFO",
+          "facing": "EXTERNAL",
+          "categories": [
+            "PERFORMANCE"
+          ],
+          "description": "Detects if an index has never been used and may be a candidate for removal.",
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index",
+          "count": 8,
+          "findings": [
+            {
+              "detail": "Index \\`clients_segment_id_idx\\` on table \\`public.clients\\` has not been used",
+              "metadata": {
+                "name": "clients",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`categories_parent_id_idx\\` on table \\`public.categories\\` has not been used",
+              "metadata": {
+                "name": "categories",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`produits_categorie_id_idx\\` on table \\`public.produits\\` has not been used",
+              "metadata": {
+                "name": "produits",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`articles_panier_offre_id_idx\\` on table \\`public.articles_panier\\` has not been used",
+              "metadata": {
+                "name": "articles_panier",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`besoins_clients_client_id_idx\\` on table \\`public.besoins_clients\\` has not been used",
+              "metadata": {
+                "name": "besoins_clients",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`besoins_clients_categorie_id_idx\\` on table \\`public.besoins_clients\\` has not been used",
+              "metadata": {
+                "name": "besoins_clients",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`prix_personnels_client_offre\\` on table \\`public.prix_personnels\\` has not been used",
+              "metadata": {
+                "name": "prix_personnels",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Index \\`prix_personnels_offre\\` on table \\`public.prix_personnels\\` has not been used",
+              "metadata": {
+                "name": "prix_personnels",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            }
+          ]
+        },
+        {
+          "name": "multiple_permissive_policies",
+          "title": "Multiple Permissive Policies",
+          "level": "WARN",
+          "facing": "EXTERNAL",
+          "categories": [
+            "PERFORMANCE"
+          ],
+          "description": "Detects if multiple permissive row level security policies are present on a table for the same \\`role\\` and \\`action\\` (e.g. insert). Multiple permissive policies are suboptimal for performance as each policy must be executed for every relevant query.",
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0006_multiple_permissive_policies",
+          "count": 5,
+          "findings": [
+            {
+              "detail": "Table \\`public.categories\\` has multiple permissive policies for role \\`authenticated\\` for action \\`SELECT\\`. Policies include \\`{categories_admin,categories_lecture}\\`",
+              "metadata": {
+                "name": "categories",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Table \\`public.fournisseurs\\` has multiple permissive policies for role \\`authenticated\\` for action \\`SELECT\\`. Policies include \\`{fournisseurs_admin,fournisseurs_lecture}\\`",
+              "metadata": {
+                "name": "fournisseurs",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Table \\`public.produits\\` has multiple permissive policies for role \\`authenticated\\` for action \\`SELECT\\`. Policies include \\`{produits_admin,produits_lecture}\\`",
+              "metadata": {
+                "name": "produits",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Table \\`public.produits_fournisseurs\\` has multiple permissive policies for role \\`authenticated\\` for action \\`SELECT\\`. Policies include \\`{offres_admin,offres_lecture}\\`",
+              "metadata": {
+                "name": "produits_fournisseurs",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            },
+            {
+              "detail": "Table \\`public.segments_clients\\` has multiple permissive policies for role \\`authenticated\\` for action \\`SELECT\\`. Policies include \\`{segments_admin,segments_lecture}\\`",
+              "metadata": {
+                "name": "segments_clients",
+                "type": "table",
+                "schema": "public"
+              },
+              "observed_at": "2026-10-15T09:54:17.613Z"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
