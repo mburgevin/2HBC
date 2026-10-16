@@ -1,3 +1,7 @@
+# 2HBC — catalogue v2
+
+Le chantier catégories, attributs et recherche filtrée est documenté dans [CATALOGUE_V2.md](docs/CATALOGUE_V2.md). Collecteur actuel : **0.4.0**. Le nettoyage et les migrations Supabase restent à appliquer ; le connecteur refuse les écritures au 16 octobre 2026. [Script atomique prêt pour le SQL Editor](supabase/operations/20261016_reset_catalogue.sql).
+
 # 2HBC — pilote Supabase et Vercel
 
 Plateforme de préparation des achats de matériel pour les artisans électriciens.

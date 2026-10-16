@@ -4,6 +4,17 @@ function checked({ data, error }) { if (error) throw error; return data; }
 export async function listProducts(term = '', page = 0) {
   return checked(await getSupabase().rpc('rechercher_catalogue_personnel', { terme: term.trim().slice(0, 100), page_num: page }));
 }
+export async function searchCatalogue(term = '', filters = {}, page = 0) {
+  const response = await getSupabase().rpc('rechercher_catalogue_v2', {
+    terme: term.trim().slice(0, 100), filtres: filters, page_num: page
+  });
+  // Deploy safely while the database migration is pending. Only a missing RPC
+  // permits fallback; permissions, validation and network errors remain visible.
+  if (response.error?.code === 'PGRST202' && Object.keys(filters).length === 0) {
+    return { items: await listProducts(term, page), total: null, facets: [], categories: [], legacy: true };
+  }
+  return checked(response);
+}
 export async function ensureProfile(user) {
   const client = getSupabase();
   const existing = checked(await client.from('clients').select('id').eq('id', user.id).maybeSingle());

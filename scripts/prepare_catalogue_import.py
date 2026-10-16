@@ -4,13 +4,85 @@ import argparse
 import json
 import re
 import sys
+import math
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qsl
 
 PRODUCT_KEYS = {"brand", "reference", "ean", "name", "categories", "review_status", "offers"}
 OFFER_KEYS = {"supplier", "reference", "url", "pack", "collected_at", "page_sha256", "image_url"}
+PRODUCT_V2_KEYS = PRODUCT_KEYS | {"schema_version", "category_code", "range", "attributes", "attribute_conflicts"}
+OFFER_V2_KEYS = OFFER_KEYS | {"raw_attributes", "category_path", "description", "range"}
 HOSTS = {"Rexel": "www.rexel.fr", "Sonepar": "www.sonepar.fr"}
+
+
+def validate_details(p, approve):
+    if type(p.get("schema_version")) is not int or p["schema_version"] != 2:
+        raise ValueError("schema_version doit être 2")
+    category = p.get("category_code")
+    if category is not None and (not isinstance(category, str) or not re.fullmatch(r"[a-z][a-z0-9-]{0,79}", category)):
+        raise ValueError("Code catégorie invalide")
+    if approve and not category:
+        raise ValueError("Attribuer une catégorie 2HBC vérifiée avant publication")
+    if p.get("range") is not None:
+        required_text(p["range"], 200, "range")
+        if p["range"] not in {o.get("range") for o in p["offers"]}:
+            raise ValueError("Gamme sans source fournisseur")
+    conflicts = p.get("attribute_conflicts")
+    if not isinstance(conflicts, list) or len(conflicts) > 100 or any(not isinstance(c, str) or not re.fullmatch(r"[a-z][a-z0-9_]{0,59}", c) for c in conflicts):
+        raise ValueError("Liste de conflits invalide")
+    if approve and conflicts:
+        raise ValueError("Résoudre les conflits d’attributs avant publication")
+    attributes = p.get("attributes")
+    if not isinstance(attributes, list) or len(attributes) > 100:
+        raise ValueError("Liste d’attributs attendue (100 maximum)")
+    seen = set()
+    offers = {o["supplier"]: o for o in p["offers"]}
+    for o in p["offers"]:
+        for key, limit in (("description", 4000), ("range", 200)):
+            if o.get(key) is not None and o[key] != "":
+                required_text(o[key], limit, key)
+        raw = o.get("raw_attributes")
+        if not isinstance(raw, list) or len(raw) > 150:
+            raise ValueError("Attributs sources attendus (150 maximum)")
+        for r in raw:
+            if not isinstance(r, dict) or set(r) != {"label", "value"}:
+                raise ValueError("Attribut source invalide")
+            required_text(r["label"], 200, "label")
+            required_text(r["value"], 1000, "value")
+        path = o.get("category_path")
+        if not isinstance(path, list) or len(path) > 10:
+            raise ValueError("Chemin de catégories attendu (10 maximum)")
+        for c in path:
+            if not isinstance(c, dict) or set(c) != {"code", "label", "url"}:
+                raise ValueError("Catégorie source invalide")
+            for k, n in (("code", 80), ("label", 200), ("url", 2000)):
+                required_text(c[k], n, k)
+            pattern = (r"https://www\.rexel\.fr/frx/(?:[^?#\s]+/)?c/" if o["supplier"] == "Rexel"
+                       else r"https://www\.sonepar\.fr/catalog/fr-fr/category/[^/?#\s]*-") + re.escape(c["code"])
+            if not re.fullmatch(pattern, c["url"]):
+                raise ValueError("URL/catégorie source incohérente")
+    for a in attributes:
+        if not isinstance(a, dict) or set(a) != {"code", "type", "value", "unit", "supplier", "raw_label", "raw_value"}:
+            raise ValueError("Attribut normalisé invalide")
+        if not isinstance(a["code"], str) or not re.fullmatch(r"[a-z][a-z0-9_]{0,59}", a["code"]) or a["code"] in seen:
+            raise ValueError("Attribut inconnu ou répété")
+        seen.add(a["code"])
+        if a["type"] == "number":
+            if type(a["value"]) not in (int, float) or not math.isfinite(a["value"]) or not 0 <= a["value"] <= 1000000000:
+                raise ValueError("Valeur numérique invalide")
+        elif a["type"] == "boolean":
+            if type(a["value"]) is not bool:
+                raise ValueError("Valeur booléenne invalide")
+        elif a["type"] == "text":
+            required_text(a["value"], 1000, "value")
+        else:
+            raise ValueError("Type d’attribut invalide")
+        if not isinstance(a["unit"], str) or len(a["unit"]) > 20:
+            raise ValueError("Unité invalide")
+        o = offers.get(a["supplier"])
+        if not o or {"label": a["raw_label"], "value": a["raw_value"]} not in o["raw_attributes"]:
+            raise ValueError("Attribut normalisé sans provenance")
 
 
 def required_text(value, limit, label):
@@ -52,7 +124,7 @@ def validate(products, approve=False):
         raise ValueError("Attendu : une liste de 1 à 1000 produits")
     identities, gtins, supplier_refs = set(), set(), set()
     for p in products:
-        if not isinstance(p, dict) or set(p) - PRODUCT_KEYS:
+        if not isinstance(p, dict) or set(p) - (PRODUCT_V2_KEYS if p.get("schema_version") == 2 else PRODUCT_KEYS):
             raise ValueError("Champs produit inconnus : aucun prix, secret ou HTML accepté")
         for key, limit in (("brand", 200), ("reference", 100), ("name", 1000)):
             required_text(p.get(key), limit, key)
@@ -78,7 +150,7 @@ def validate(products, approve=False):
             raise ValueError("Chaque produit nécessite 1 ou 2 offres")
         suppliers = set()
         for o in offers:
-            if not isinstance(o, dict) or set(o) - OFFER_KEYS:
+            if not isinstance(o, dict) or set(o) - (OFFER_V2_KEYS if p.get("schema_version") == 2 else OFFER_KEYS):
                 raise ValueError("Champs offre inconnus")
             supplier = o.get("supplier")
             if supplier not in HOSTS or supplier in suppliers:
@@ -109,6 +181,8 @@ def validate(products, approve=False):
             observed = datetime.fromisoformat(o["collected_at"].replace("Z", "+00:00"))
             if observed > datetime.now(timezone.utc) + timedelta(minutes=5):
                 raise ValueError("Date de collecte dans le futur")
+        if "schema_version" in p:
+            validate_details(p, approve)
         if len(json.dumps(p, ensure_ascii=False).encode("utf-8")) > 64000:
             raise ValueError("Fiche trop volumineuse")
     return products
@@ -122,7 +196,8 @@ def generate_sql(products, approve=False):
     for p in products:
         # JSON as a SQL string literal, not executable identifiers or interpolated SQL.
         payload = json.dumps(p, ensure_ascii=False, separators=(",", ":")).replace("'", "''")
-        lines.append(f"select public.importer_produit_collecte('{payload}'::jsonb, {'true' if approve else 'false'});")
+        function = "importer_catalogue_v2" if p.get("schema_version") == 2 else "importer_produit_collecte"
+        lines.append(f"select public.{function}('{payload}'::jsonb, {'true' if approve else 'false'});")
     lines.append("commit;")
     return "\n".join(lines) + "\n"
 

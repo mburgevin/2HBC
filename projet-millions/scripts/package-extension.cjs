@@ -54,3 +54,10 @@ end.writeUInt32LE(0x06054b50,0); end.writeUInt16LE(entries.length,8); end.writeU
 end.writeUInt32LE(directory.length,12); end.writeUInt32LE(offset,16);
 fs.writeFileSync(path.join(app,'public/extension-2hbc.zip'),Buffer.concat([...chunks,directory,end]));
 console.log('Extension packaged and JavaScript syntax checked (' + entries.length + ' files).');
+// Administrative tools, packaged from their single canonical source.
+const downloads=path.join(app,'public/downloads');
+fs.mkdirSync(downloads,{recursive:true});
+for (const [source,target] of [
+ ['scripts/collect_catalogue.py','collect_catalogue_attributs_v0_4_0.py'],
+ ['scripts/prepare_catalogue_import.py','prepare_catalogue_import.py']
+]) fs.copyFileSync(path.resolve(app,'..',source),path.join(downloads,target));

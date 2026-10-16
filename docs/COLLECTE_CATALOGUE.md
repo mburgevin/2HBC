@@ -1,3 +1,5 @@
+> **Version actuelle : 0.4.0.** Utiliser [le guide catalogue v2](CATALOGUE_V2.md) pour les attributs, catégories et nouveaux imports. Le document ci-dessous décrit principalement la version photos 0.3.0 et reste un historique technique. Les anciens états de reprise ne sont plus compatibles.
+
 # Collecter 100 produits pour le pilote 2HBC
 
 Le programme autonome `scripts/collect_catalogue.py` vise 100 **produits distincts**

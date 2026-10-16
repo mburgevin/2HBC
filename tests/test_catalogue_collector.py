@@ -41,6 +41,50 @@ def state():
 
 
 class CollectorTests(unittest.TestCase):
+    def test_structured_rexel_attributes_and_breadcrumb_ignore_global_menu(self):
+        html = REXEL + '''<nav><a href="/frx/c/M2_999">Menu non pertinent</a></nav>
+        <div class="breadcrumb"><a href="/frx/c/M2_010706">Appareillage composable</a></div>
+        <mf-pdp-technical-attributes><div>
+          <div><p class="w-50">Intensité</p><div><h4>16</h4><span>A</span></div></div>
+          <div><p class="w-50">Gamme</p><div><h4>Odace</h4></div></div>
+          <div><p class="w-50">Sans halogène</p><div><h4>Non</h4></div></div>
+        </div></mf-pdp-technical-attributes>'''
+        p = c.extract_product(c.Page(html), R, "Découverte", DATE)
+        self.assertEqual(p["schema_version"], 2)
+        self.assertEqual(p["range"], "Odace")
+        self.assertIsNone(p["category_code"])
+        self.assertEqual([x["code"] for x in p["offers"][0]["category_path"]], ["M2_010706"])
+        values = {a["code"]: a["value"] for a in p["attributes"]}
+        self.assertEqual(values, {"courant": 16, "sans_halogene": False})
+
+    def test_sonepar_attributes_decimal_units_and_unknown_values_preserved(self):
+        html = SONEPAR + '''<div data-testid="tech-spec-panel"><p>section nominale du conducteur:</p><p>2,5 mm²</p></div>
+        <div data-testid="tech-spec-panel"><p>fréquence:</p><p>50...60 Hz</p></div>
+        <div data-testid="tech-spec-panel"><p>couleur:</p><p>blanc</p></div>'''
+        p = c.extract_product(c.Page(html), S, "Découverte", DATE)
+        self.assertEqual(len(p["offers"][0]["raw_attributes"]), 3)
+        self.assertEqual(next(a for a in p["attributes"] if a["code"] == "section")["value"], 2.5)
+        self.assertIsNone(c.canonical_attribute("Intensité", "10...16 A"))
+        self.assertIsNone(c.canonical_attribute("Intensité", "16 mA"))
+        self.assertIsNone(c.canonical_attribute("Nombre de pôles", "1P+N"))
+
+    def test_matching_products_with_conflicting_specs_are_flagged_not_overwritten(self):
+        one, two = product(), product("Sonepar")
+        one["offers"][0]["raw_attributes"] = [{"label": "Couleur", "value": "blanc"}]
+        two["offers"][0]["raw_attributes"] = [{"label": "couleur", "value": "noir"}]
+        products = [one]
+        c.merge(products, two)
+        self.assertEqual(products[0]["attribute_conflicts"], ["couleur"])
+        self.assertEqual(products[0]["attributes"], [])
+        self.assertEqual(len(products[0]["offers"]), 2)
+
+    def test_old_resume_folder_requires_fresh_collection(self):
+        with tempfile.TemporaryDirectory() as folder:
+            Path(folder, "state.json").write_text(json.dumps(state()))
+            with self.assertRaises(SystemExit), patch.object(c.Fetcher, "get") as fetch:
+                c.main(["--out", folder])
+            fetch.assert_not_called()
+
     def test_version_is_identifiable_without_network_or_output_files(self):
         with tempfile.TemporaryDirectory() as folder:
             result = subprocess.run([sys.executable, str(ROOT / "scripts/collect_catalogue.py"), "--version"],

@@ -24,3 +24,13 @@
 .product-image--compact .product-image-placeholder{font-size:9px;gap:4px}
 .product-image--compact .product-image-placeholder svg{width:26px;height:26px}
 .modal .product-image{height:240px;margin:16px 0}
+
+/* Category hierarchy and typed, server-counted facets. */
+.catalogue-layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:24px;align-items:start}
+.catalogue-filters{background:white;border:1px solid var(--line);border-radius:12px;padding:18px}
+.catalogue-filters fieldset{border:0;padding:0;margin:0;min-width:0}.filter-heading h2{font-size:17px;margin:0 0 6px}.filter-heading{margin-bottom:16px}
+.catalogue-filters>fieldset>label{font-weight:600;font-size:14px;margin-bottom:8px}.filter-group{padding:15px 0;border-bottom:1px solid var(--line)}.filter-group summary{cursor:pointer;font-weight:600;font-size:14px}
+.facet-values{display:grid;gap:10px;max-height:210px;overflow:auto;margin-top:12px}.facet-values label{display:flex;align-items:center;gap:9px;font-size:13px}.facet-values input{width:17px;height:17px;flex-shrink:0;accent-color:var(--teal)}.facet-values label span{flex:1}.facet-values small{color:var(--muted)}
+.facet-range{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.facet-range label{font-size:11px}.facet-range input{padding:7px}.facet-range button{grid-column:1/-1;padding:7px;font-size:12px}
+.catalogue-results{min-width:0}.result-count{margin-top:0;font-weight:600;font-size:14px}.product-specs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);font-size:13px;margin:14px 0 20px;gap:0}.product-specs dt,.product-specs dd{margin:0;padding:8px 5px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.product-specs dt{color:var(--muted)}.product-specs dd{text-align:right;font-weight:600}.product-specs.compact{font-size:11px}.product-specs.compact dt,.product-specs.compact dd{padding:5px 0}
+@media(max-width:760px){.catalogue-layout{grid-template-columns:1fr}.catalogue-filters{padding:14px}.catalogue-filters fieldset{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.catalogue-filters>fieldset>label,.catalogue-filters select{grid-column:1/-1}.facet-values{max-height:150px}}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collecte 2HBC : photos et codes Rexel/Sonepar publics, sans compte ni prix."""
+"""Collecte 2HBC : attributs, catégories, photos et codes publics Rexel/Sonepar."""
 import argparse
 import hashlib
 import json
@@ -14,7 +14,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, quote, unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-COLLECTOR_VERSION = "0.3.0"
+COLLECTOR_VERSION = "0.4.0"
 AGENT = f"2HBCCatalogue/{COLLECTOR_VERSION} (+https://github.com/mburgevin/2HBC)"
 HOSTS = {"www.rexel.fr": "Rexel", "www.sonepar.fr": "Sonepar"}
 MAX_BYTES = 8 * 1024 * 1024
@@ -108,6 +108,7 @@ class Page(HTMLParser):
     """Read visible text, links and image attributes; never execute scripts."""
     def __init__(self, html):
         super().__init__(convert_charrefs=True)
+        self.html = html
         self.parts, self.links, self.headings, self.title = [], [], [], []
         self.images = []
         self.skip = 0
@@ -245,7 +246,194 @@ def extract_product(page, url, category, collected_at):
     photo = extract_image(page, url, supplier)
     if photo:
         product["offers"][0]["image_url"] = photo
+    product["schema_version"] = 2
+    product["offers"][0].update(extract_details(page.html, url, supplier))
+    enrich_product(product)
     return product
+
+
+class Element:
+    def __init__(self, tag="root", attrs=None, parent=None):
+        self.tag, self.attrs, self.parent = tag, {k: v or "" for k, v in (attrs or [])}, parent
+        self.children = []
+
+    def nodes(self, tag=None):
+        for child in self.children:
+            if isinstance(child, Element):
+                if tag is None or child.tag == tag:
+                    yield child
+                yield from child.nodes(tag)
+
+    def text(self):
+        return tidy(" ".join(c.text() if isinstance(c, Element) else c for c in self.children))
+
+
+class Structure(HTMLParser):
+    """Small non-executing HTML tree; the downloadable script has no dependencies."""
+    VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
+
+    def __init__(self, html):
+        super().__init__(convert_charrefs=True)
+        self.root = self.current = Element()
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        node = Element(tag, attrs, self.current)
+        self.current.children.append(node)
+        if tag not in self.VOID:
+            self.current = node
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in self.VOID:
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        node = self.current
+        while node.parent:
+            if node.tag == tag:
+                self.current = node.parent
+                return
+            node = node.parent
+
+    def handle_data(self, data):
+        if self.current.tag not in {"script", "style", "noscript", "template"}:
+            self.current.children.append(data)
+
+
+def label_key(value):
+    return tidy("".join(c for c in unicodedata.normalize("NFKD", value.casefold())
+                        if not unicodedata.combining(c))).rstrip(" :")
+
+
+# Deliberately exact supplier labels: never infer specifications from product names.
+# Unit omitted by supplier is accepted only for a label whose physical unit is unambiguous.
+ATTRIBUTE_LABELS = {
+    "couleur": ("couleur", "text", ""),
+    "materiau": ("materiau", "text", ""),
+    "mode de pose": ("pose", "text", ""), "type de pose": ("pose", "text", ""),
+    "type de fixation": ("fixation", "text", ""),
+    "type de connexion": ("connexion", "text", ""),
+    "courant nominal": ("courant", "number", "A"), "intensite": ("courant", "number", "A"),
+    "calibre": ("courant", "number", "A"),
+    "calibre/courant nominal assigne (in)": ("courant", "number", "A"),
+    "tension nominale": ("tension", "number", "V"),
+    "tension": ("tension", "number", "V"), "tension assignee (ue)": ("tension", "number", "V"),
+    "nombre de poles": ("poles", "number", ""),
+    "nombre de poles (total)": ("poles", "number", ""),
+    "nombre de poles proteges": ("poles_proteges", "number", ""),
+    "caracteristique de declenchement": ("courbe", "text", ""),
+    "courbe de declenchement": ("courbe", "text", ""),
+    "courbe": ("courbe", "text", ""),
+    "caracteristique de declenchement (type/courbe)": ("courbe", "text", ""),
+    "type de tension": ("type_tension", "text", ""),
+    "pouvoir de coupure assigne icn selon en 60898 a 230 v": ("icn_230", "number", "kA"),
+    "pouvoir de coupure assigne selon en 60898 a 230 v (icn)": ("icn_230", "number", "kA"),
+    "pouvoir de coupure assigne icu selon iec 60947-2 a 230 v": ("icu_230", "number", "kA"),
+    "pouvoir de coupure assigne selon iec 60947-2 a 230 v (icu)": ("icu_230", "number", "kA"),
+    "section nominale du conducteur": ("section", "number", "mm²"),
+    "nombre de conducteurs": ("conducteurs", "number", ""),
+    "longueur": ("longueur", "number", "m"),
+    "puissance nominale": ("puissance", "number", "W"),
+    "flux lumineux": ("flux", "number", "lm"),
+    "temperature de couleur": ("temperature", "number", "K"),
+    "adapte a l'indice de protection (ip)": ("ip", "text", ""),
+    "adapte a la classe de protection (ip)": ("ip", "text", ""),
+    "indice de protection (ip)": ("ip", "text", ""),
+    "classe de protection (ip)": ("ip", "text", ""),
+    "sans halogene": ("sans_halogene", "boolean", ""),
+    "nombre de modules (construction modulaire)": ("modules", "number", ""),
+    "largeur en nombre de modules": ("modules", "number", ""),
+}
+
+
+def canonical_attribute(label, value):
+    spec = ATTRIBUTE_LABELS.get(label_key(label))
+    if not spec:
+        return None
+    code, kind, unit = spec
+    if kind == "number":
+        # Ranges such as 50...60 and inequalities are not single-valued facets.
+        match = re.fullmatch(r"([0-9]+(?:[.,][0-9]+)?)\s*([A-Za-z²2]*)", tidy(value))
+        if not match or (match[2] and match[2] != unit):
+            return None
+        number = float(match[1].replace(",", "."))
+        if number > 1000000000:
+            return None
+        value = int(number) if number.is_integer() else number
+    elif kind == "boolean":
+        if label_key(value) not in {"oui", "non"}:
+            return None
+        value = label_key(value) == "oui"
+    else:
+        value = norm(value)
+        if code in {"courbe", "ip", "type_tension"}:
+            value = value.upper()
+    return {"code": code, "type": kind, "value": value, "unit": unit}
+
+
+def extract_details(html, url, supplier):
+    tree = Structure(html).root
+    nodes = list(tree.nodes())
+    rows = []
+    if supplier == "Rexel":
+        section = next((n for n in nodes if n.tag == "mf-pdp-technical-attributes"), None)
+        if section:
+            for label in section.nodes("p"):
+                if "w-50" in label.attrs.get("class", "").split():
+                    values = list(label.parent.nodes("h4"))
+                    if len(values) == 1:
+                        rows.append((label.text(), values[0].parent.text()))
+    else:
+        for row in nodes:
+            if row.attrs.get("data-testid") == "tech-spec-panel":
+                cells = list(row.nodes("p"))
+                if len(cells) == 2:
+                    rows.append((cells[0].text().rstrip(" :"), cells[1].text()))
+    raw, seen = [], set()
+    for label, value in rows:
+        label, value = tidy(label), tidy(value)
+        if label and value and len(label) <= 200 and len(value) <= 1000 and (label, value) not in seen:
+            raw.append({"label": label, "value": value})
+            seen.add((label, value))
+    crumbs, seen = [], set()
+    for node in nodes:
+        # Only breadcrumb containers; global menus are not product classification.
+        marker = (node.tag + " " + node.attrs.get("class", "") + " " + node.attrs.get("data-testid", "")).lower()
+        if "breadcrumb" not in marker:
+            continue
+        for link in node.nodes("a"):
+            target = public_url(link.attrs.get("href", ""), url)
+            if target and not is_product_path(urlsplit(target).path) and target not in seen:
+                code = re.search(r"/c/([^/]+)$|-((?:SCC)[A-Za-z0-9]+)$", urlsplit(target).path)
+                if code:
+                    crumbs.append({"label": link.text(), "code": code[1] or code[2], "url": target})
+                    seen.add(target)
+    description = next((n.attrs.get("content", "") for n in nodes if n.tag == "meta" and n.attrs.get("name") == "description"), "")
+    ranges = {r["value"] for r in raw if label_key(r["label"]) == "gamme"}
+    return {"raw_attributes": raw[:150], "category_path": crumbs[:10],
+            "description": Page(description).text[:4000], "range": next(iter(ranges)) if len(ranges) == 1 else None}
+
+
+def enrich_product(product):
+    candidates = {}
+    for offer in product["offers"]:
+        for raw in offer.get("raw_attributes", []):
+            item = canonical_attribute(raw["label"], raw["value"])
+            if item:
+                item.update(supplier=offer["supplier"], raw_label=raw["label"], raw_value=raw["value"])
+                candidates.setdefault(item["code"], []).append(item)
+    product["attributes"], product["attribute_conflicts"] = [], []
+    for code, values in sorted(candidates.items()):
+        if len({json.dumps(v["value"], ensure_ascii=False) for v in values}) == 1:
+            product["attributes"].append(values[0])
+        else:
+            product["attribute_conflicts"].append(code)
+    # Classification is explicitly reviewed. A discovery category or product name
+    # must never silently become an approved canonical category.
+    product.setdefault("category_code", None)
+    ranges = {o["range"] for o in product["offers"] if o.get("range")}
+    product["range"] = next(iter(ranges)) if len(ranges) == 1 else None
 
 
 class Robots:
@@ -382,9 +570,12 @@ def merge(products, incoming, allow_new=True):
         raise ValueError("Deux références du même fournisseur pour ce produit : contrôle manuel")
     if not old:
         existing["offers"].append(offer)
-    elif not old.get("image_url") and offer.get("image_url") and old["url"] == offer["url"]:
+    elif old["url"] == offer["url"]:
         old.update(offer)
     existing["categories"] = sorted(set(existing["categories"] + incoming["categories"]))
+    if incoming.get("schema_version") == 2:
+        existing["schema_version"] = 2
+        enrich_product(existing)
     return True
 
 
@@ -417,6 +608,9 @@ def catalogue_row(product):
         row[prefix + "_url"] = offer.get("url")
         row[prefix + "_image_url"] = offer.get("image_url")
     row["missing_fields"] = [key for key in ("rexel_code", "sonepar_code", "image_url") if not row[key]]
+    row.update(category_code=product.get("category_code"), attributes=product.get("attributes", []),
+               attribute_conflicts=product.get("attribute_conflicts", []),
+               supplier_categories={o["supplier"]: o.get("category_path", []) for o in product["offers"]})
     return row
 
 
@@ -432,6 +626,10 @@ def save(state, output, limit):
         "updated_at": now(), "target": limit, "products": count,
         "both_suppliers": paired, "single_supplier": count - paired, "complete": count >= limit,
         "products_with_image": pictured, "products_without_image": count - pictured,
+        "products_with_attributes": sum(bool(p.get("attributes")) for p in state["products"]),
+        "products_with_raw_attributes": sum(any(o.get("raw_attributes") for o in p["offers"]) for p in state["products"]),
+        "products_with_attribute_conflicts": sum(bool(p.get("attribute_conflicts")) for p in state["products"]),
+        "products_needing_classification": sum(not p.get("category_code") for p in state["products"]),
         "both_codes_and_image": sum(not row["missing_fields"] for row in overview),
         "missing_codes": {name: sum(not row[name.lower() + "_code"] for row in overview) for name in ("Rexel", "Sonepar")},
         "images_by_supplier": {name: sum(any(o["supplier"] == name and o.get("image_url") for o in p["offers"]) for p in state["products"]) for name in ("Rexel", "Sonepar")},
@@ -528,7 +726,7 @@ def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=prin
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--version", action="version",
-                        version=f"2HBC Catalogue {COLLECTOR_VERSION} - photos + codes Rexel/Sonepar")
+                        version=f"2HBC Catalogue {COLLECTOR_VERSION} - attributs + catégories + photos + codes Rexel/Sonepar")
     parser.add_argument("--limit", type=int, default=100, help="Nombre de produits distincts visé (défaut : 100)")
     parser.add_argument("--supplier", choices=["both", "rexel", "sonepar"], default="both")
     parser.add_argument("--out", type=Path, default=Path.cwd() / "catalogue-2hbc", help="Dossier de résultats et de reprise")
@@ -543,10 +741,10 @@ def main(argv=None):
     state_path = args.out / "state.json"
     if state_path.exists():
         state = json.loads(state_path.read_text(encoding="utf-8"))
-        if state.get("version") != 1 or state.get("supplier") != args.supplier:
-            parser.error("Dossier de reprise incompatible ; utilisez un autre --out.")
+        if state.get("version") != 2 or state.get("supplier") != args.supplier:
+            parser.error("Ancien dossier incompatible avec les attributs ; utilisez --out catalogue-attributs-v040 pour une nouvelle collecte.")
     else:
-        state = {"version": 1, "supplier": args.supplier, "products": [], "pending": [], "seen": [], "issues": []}
+        state = {"version": 2, "supplier": args.supplier, "products": [], "pending": [], "seen": [], "issues": []}
     seeds = DEFAULT_SEEDS
     if args.urls:
         seeds = [{"url": line.strip(), "category": "Sélection personnalisée"}
@@ -557,7 +755,7 @@ def main(argv=None):
         supplier = HOSTS[urlsplit(seed["url"]).hostname].lower()
         if args.supplier in {"both", supplier}:
             enqueue(state, seed["url"], seed["category"])
-    print(f"2HBC Catalogue {COLLECTOR_VERSION} - photos + codes Rexel/Sonepar")
+    print(f"2HBC Catalogue {COLLECTOR_VERSION} - attributs + catégories + photos + codes Rexel/Sonepar")
     print("Script exécuté :", Path(__file__).resolve())
     print("Collecte publique, sans connexion ni prix. Reprise automatique dans", args.out)
     snapshot = lambda: save(state, args.out, args.limit)

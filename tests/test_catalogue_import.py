@@ -32,7 +32,7 @@ class ImportTests(unittest.TestCase):
         products = [product()]
         c.merge(products, product("Sonepar"))
         sql = imp.generate_sql(products)
-        self.assertIn("importer_produit_collecte", sql)
+        self.assertIn("importer_catalogue_v2", sql)
         self.assertIn("'::jsonb, false)", sql)
         self.assertIn("00001187798", sql)
         products[0]["offers"][0]["url"] = "https://www.rexel.fr/frx/p/73224603"
@@ -43,6 +43,7 @@ class ImportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             imp.generate_sql([p], True)
         p["review_status"] = "approved"
+        p["category_code"] = "interrupteurs"
         self.assertIn("'::jsonb, false)", imp.generate_sql([p]))
         self.assertIn("'::jsonb, true)", imp.generate_sql([p], True))
 
