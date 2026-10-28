@@ -1,5 +1,17 @@
 begin;
 
+-- Existing objects also inherited broad Supabase default privileges.
+-- Keep nextval for authenticated inserts, but forbid setval and anonymous access.
+revoke all on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ from public,anon,authenticated;
+grant usage,select on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ to authenticated,service_role;
+revoke execute on function public.ajouter_au_panier(bigint,integer) from public,anon;
+
 -- GTIN-8/12/13/14 : longueur ET clé de contrôle, références conservées en texte.
 create function public.gtin_valide(code text) returns boolean
 language sql immutable strict parallel safe security invoker set search_path='' as $$
@@ -9,7 +21,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
     from generate_series(1,length(code)) i)
  else false end;
 $$;
-revoke all on function public.gtin_valide(text) from public;
+revoke all on function public.gtin_valide(text) from public,anon,authenticated;
 grant execute on function public.gtin_valide(text) to anon,authenticated,service_role;
 
 alter table public.produits
@@ -56,7 +68,7 @@ create table public.collectes_catalogue (
 );
 create index collectes_catalogue_produit on public.collectes_catalogue(produit_id);
 alter table public.collectes_catalogue enable row level security;
-revoke all on public.collectes_catalogue from anon,authenticated;
+revoke all on public.collectes_catalogue from public,anon,authenticated;
 grant select,insert,update,delete on public.collectes_catalogue to authenticated;
 grant all on public.collectes_catalogue to service_role;
 create policy collectes_admin on public.collectes_catalogue for all to authenticated
@@ -169,7 +181,7 @@ begin
  return jsonb_build_object('empreinte',digest,'statut','imported','produit_id',produit.id);
 end;
 $$;
-revoke all on function public.importer_produit_collecte(jsonb,boolean) from public;
+revoke all on function public.importer_produit_collecte(jsonb,boolean) from public,anon,authenticated;
 grant execute on function public.importer_produit_collecte(jsonb,boolean) to authenticated,service_role;
 
 -- Même contrat pour le site ; l'EAN devient aussi une clé de recherche.

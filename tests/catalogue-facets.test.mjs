@@ -28,6 +28,10 @@ test('Catalogue v2 : migrations, import, recherche, facettes et RLS',async t=>{
  const search=async(q='',filters={},page=0,role='anon')=>(await as(role,'select rechercher_catalogue_v2($1,$2,$3) result',[q,JSON.stringify(filters),page]))[0].result;
  const publish=async(p,approve=true)=>(await as('authenticated','select importer_catalogue_v2($1,$2) result',[JSON.stringify(p),approve],A,true))[0].result;
  try {
+  // Reproduce the actual project's broad defaults, not bare PostgreSQL defaults.
+  await db.exec(`alter default privileges in schema public grant all on tables to anon,authenticated,service_role;
+   alter default privileges in schema public grant all on sequences to anon,authenticated,service_role;
+   alter default privileges in schema public grant execute on functions to anon,authenticated,service_role;`);
   for(const file of (await readdir('supabase/migrations')).sort()){
    await db.exec(await readFile('supabase/migrations/'+file,'utf8'));
    if(file.endsWith('_initial_mvp.sql'))await db.exec(await readFile('supabase/seed.sql','utf8'));
@@ -40,6 +44,7 @@ test('Catalogue v2 : migrations, import, recherche, facettes et RLS',async t=>{
    assert.equal((await as('anon','select * from produits')).length,3);
    assert.equal((await as('anon','select * from produits_fournisseurs')).length,0);
    assert.equal((await as('authenticated','select * from produits_fournisseurs')).length,6);
+   assert((await search('LEG069511L')).items.some(p=>p.sources.some(s=>s.reference==='LEG069511L')));
   });
   await t.test('Arbre : cycle indirect et doublon racine refusés',async()=>{
    await assert.rejects(db.exec("update categories set parent_id=(select id from categories where code='prises') where code='appareillage'"),/Cycle/);
@@ -114,6 +119,21 @@ test('Catalogue v2 : migrations, import, recherche, facettes et RLS',async t=>{
    assert.equal((await db.query("select count(*)::int n from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prosecdef")).rows[0].n,0);
    assert.equal((await as('authenticated','select * from collectes_catalogue',[],B)).length,0);
    assert(!(await search()).facets.some(f=>/prix|price/.test(f.key)));
+  });
+  await t.test('Droits hérités retirés : TRUNCATE, séquences et imports anonymes',async()=>{
+   for(const role of ['anon','authenticated']) {
+    const rights=(await db.query(`select c.relname from pg_class c where c.relnamespace='public'::regnamespace
+     and c.relkind='r' and (has_table_privilege($1,c.oid,'TRUNCATE') or has_table_privilege($1,c.oid,'TRIGGER') or has_table_privilege($1,c.oid,'REFERENCES'))`,[role])).rows;
+    assert.deepEqual(rights,[],role);
+    await assert.rejects(as(role,'truncate marques cascade'),/permission denied/);
+    const sequences=(await db.query(`select c.relname from pg_class c where c.relnamespace='public'::regnamespace
+     and case when c.relkind='S' then has_sequence_privilege($1,c.oid,$2) else false end`,[role,role==='anon'?'USAGE,SELECT,UPDATE':'UPDATE'])).rows;
+    assert.deepEqual(sequences,[],role);
+   }
+   for(const signature of ['importer_produit_collecte(jsonb,boolean)','importer_catalogue_v2(jsonb,boolean)','ajouter_au_panier(bigint,integer)'])
+    assert.equal((await db.query("select has_function_privilege('anon',$1,'EXECUTE') allowed",[signature])).rows[0].allowed,false,signature);
+   await assert.rejects(as('anon','select importer_catalogue_v2($1,true)',[JSON.stringify(candidate(99))]),/permission denied/);
+   await assert.rejects(as('authenticated','insert into marques(nom) values($1)',['Sans droit admin'],B),/row-level security/);
   });
  } finally {await db.close();}
 });

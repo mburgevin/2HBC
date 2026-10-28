@@ -11,7 +11,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
   when 'Sonepar' then lien ~ '^https://fra-connect[.]mo[.]cloudinary[.]net/PRODUCT/IMAGE/[0-9]+/[A-Za-z0-9_.-]+[.](jpg|jpeg|png|webp|JPG|JPEG|PNG|WEBP)([?](ts=[0-9]{1,20}(&type=(xsmall|small|medium|large))?|type=(xsmall|small|medium|large)(&ts=[0-9]{1,20})?))?$'
   else false end;
 $$;
-revoke all on function public.image_catalogue_valide(text,text) from public;
+revoke all on function public.image_catalogue_valide(text,text) from public,anon,authenticated;
 grant execute on function public.image_catalogue_valide(text,text) to anon,authenticated,service_role;
 
 -- Extension additive du contrat : les anciennes collectes sans image restent valides.

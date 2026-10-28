@@ -1,3 +1,4 @@
+-- Révision de sécurité du 28 octobre 2026 : RLS explicite, permissions minimales, UPDATE ciblés.
 -- Projet 2HBC (gueuqeqyshhhmxbsiuxg), SQL Editor Supabase.
 -- NETTOYAGE AUTORISÉ : 114 produits, 148 offres, 7 lignes de panier de démonstration.
 -- Sauvegarde : Sauvegarde_catalogue_2HBC_2026-10-16.zip.
@@ -22,6 +23,18 @@ delete from public.produits_fournisseurs;
 delete from public.produits;
 
 -- 20261012163203_catalogue_integrity_import.sql
+-- Existing objects also inherited broad Supabase default privileges.
+-- Keep nextval for authenticated inserts, but forbid setval and anonymous access.
+revoke all on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ from public,anon,authenticated;
+grant usage,select on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ to authenticated,service_role;
+revoke execute on function public.ajouter_au_panier(bigint,integer) from public,anon;
+
 -- GTIN-8/12/13/14 : longueur ET clé de contrôle, références conservées en texte.
 create function public.gtin_valide(code text) returns boolean
 language sql immutable strict parallel safe security invoker set search_path='' as $$
@@ -31,7 +44,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
     from generate_series(1,length(code)) i)
  else false end;
 $$;
-revoke all on function public.gtin_valide(text) from public;
+revoke all on function public.gtin_valide(text) from public,anon,authenticated;
 grant execute on function public.gtin_valide(text) to anon,authenticated,service_role;
 
 alter table public.produits
@@ -78,7 +91,7 @@ create table public.collectes_catalogue (
 );
 create index collectes_catalogue_produit on public.collectes_catalogue(produit_id);
 alter table public.collectes_catalogue enable row level security;
-revoke all on public.collectes_catalogue from anon,authenticated;
+revoke all on public.collectes_catalogue from public,anon,authenticated;
 grant select,insert,update,delete on public.collectes_catalogue to authenticated;
 grant all on public.collectes_catalogue to service_role;
 create policy collectes_admin on public.collectes_catalogue for all to authenticated
@@ -191,7 +204,7 @@ begin
  return jsonb_build_object('empreinte',digest,'statut','imported','produit_id',produit.id);
 end;
 $$;
-revoke all on function public.importer_produit_collecte(jsonb,boolean) from public;
+revoke all on function public.importer_produit_collecte(jsonb,boolean) from public,anon,authenticated;
 grant execute on function public.importer_produit_collecte(jsonb,boolean) to authenticated,service_role;
 
 -- Même contrat pour le site ; l'EAN devient aussi une clé de recherche.
@@ -210,8 +223,19 @@ language sql stable security invoker set search_path='' as $$
  order by p.nom,p.id limit 24 offset (greatest(0,least(coalesce(page_num,0),100000))*24);
 $$;
 
-
 insert into supabase_migrations.schema_migrations(version,name,statements) values('20261012163203','catalogue_integrity_import',array[$migration_20261012163203$begin;
+
+-- Existing objects also inherited broad Supabase default privileges.
+-- Keep nextval for authenticated inserts, but forbid setval and anonymous access.
+revoke all on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ from public,anon,authenticated;
+grant usage,select on sequence public.segments_clients_id_seq,public.categories_id_seq,
+ public.fournisseurs_id_seq,public.produits_id_seq,public.produits_fournisseurs_id_seq,
+ public.paniers_id_seq,public.articles_panier_id_seq,public.besoins_clients_id_seq
+ to authenticated,service_role;
+revoke execute on function public.ajouter_au_panier(bigint,integer) from public,anon;
 
 -- GTIN-8/12/13/14 : longueur ET clé de contrôle, références conservées en texte.
 create function public.gtin_valide(code text) returns boolean
@@ -222,7 +246,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
     from generate_series(1,length(code)) i)
  else false end;
 $$;
-revoke all on function public.gtin_valide(text) from public;
+revoke all on function public.gtin_valide(text) from public,anon,authenticated;
 grant execute on function public.gtin_valide(text) to anon,authenticated,service_role;
 
 alter table public.produits
@@ -269,7 +293,7 @@ create table public.collectes_catalogue (
 );
 create index collectes_catalogue_produit on public.collectes_catalogue(produit_id);
 alter table public.collectes_catalogue enable row level security;
-revoke all on public.collectes_catalogue from anon,authenticated;
+revoke all on public.collectes_catalogue from public,anon,authenticated;
 grant select,insert,update,delete on public.collectes_catalogue to authenticated;
 grant all on public.collectes_catalogue to service_role;
 create policy collectes_admin on public.collectes_catalogue for all to authenticated
@@ -382,7 +406,7 @@ begin
  return jsonb_build_object('empreinte',digest,'statut','imported','produit_id',produit.id);
 end;
 $$;
-revoke all on function public.importer_produit_collecte(jsonb,boolean) from public;
+revoke all on function public.importer_produit_collecte(jsonb,boolean) from public,anon,authenticated;
 grant execute on function public.importer_produit_collecte(jsonb,boolean) to authenticated,service_role;
 
 -- Même contrat pour le site ; l'EAN devient aussi une clé de recherche.
@@ -417,7 +441,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
   when 'Sonepar' then lien ~ '^https://fra-connect[.]mo[.]cloudinary[.]net/PRODUCT/IMAGE/[0-9]+/[A-Za-z0-9_.-]+[.](jpg|jpeg|png|webp|JPG|JPEG|PNG|WEBP)([?](ts=[0-9]{1,20}(&type=(xsmall|small|medium|large))?|type=(xsmall|small|medium|large)(&ts=[0-9]{1,20})?))?$'
   else false end;
 $$;
-revoke all on function public.image_catalogue_valide(text,text) from public;
+revoke all on function public.image_catalogue_valide(text,text) from public,anon,authenticated;
 grant execute on function public.image_catalogue_valide(text,text) to anon,authenticated,service_role;
 
 -- Extension additive du contrat : les anciennes collectes sans image restent valides.
@@ -539,7 +563,6 @@ begin
 end;
 $$;
 
-
 insert into supabase_migrations.schema_migrations(version,name,statements) values('20261013131653','catalogue_images',array[$migration_20261013131653$begin;
 alter table public.produits add column image_source_url text
  check(image_source_url is null or image_source_url ~ '^https://www[.](rexel|sonepar)[.]fr/');
@@ -553,7 +576,7 @@ language sql immutable strict parallel safe security invoker set search_path='' 
   when 'Sonepar' then lien ~ '^https://fra-connect[.]mo[.]cloudinary[.]net/PRODUCT/IMAGE/[0-9]+/[A-Za-z0-9_.-]+[.](jpg|jpeg|png|webp|JPG|JPEG|PNG|WEBP)([?](ts=[0-9]{1,20}(&type=(xsmall|small|medium|large))?|type=(xsmall|small|medium|large)(&ts=[0-9]{1,20})?))?$'
   else false end;
 $$;
-revoke all on function public.image_catalogue_valide(text,text) from public;
+revoke all on function public.image_catalogue_valide(text,text) from public,anon,authenticated;
 grant execute on function public.image_catalogue_valide(text,text) to anon,authenticated,service_role;
 
 -- Extension additive du contrat : les anciennes collectes sans image restent valides.
@@ -708,9 +731,11 @@ create constraint trigger categories_sans_cycle after insert or update on public
  deferrable initially immediate for each row execute function public.verifier_arbre_categories();
 
 create table public.marques(id bigint generated by default as identity primary key, nom text not null check(length(btrim(nom)) between 1 and 200));
+alter table public.marques enable row level security;
 create unique index marques_nom on public.marques(lower(btrim(nom)));
 create table public.gammes(id bigint generated by default as identity primary key,
  marque_id bigint not null references public.marques(id), nom text not null check(length(btrim(nom)) between 1 and 200), unique(id,marque_id));
+alter table public.gammes enable row level security;
 create unique index gammes_marque_nom on public.gammes(marque_id,lower(btrim(nom)));
 alter table public.produits add column marque_id bigint references public.marques(id),
  add column gamme_id bigint, add column gamme_nom text,
@@ -729,12 +754,14 @@ create table public.attributs(
  unite text not null default '', ordre integer not null default 0,
  unique(code,type), check(type='number' or unite='')
 );
+alter table public.attributs enable row level security;
 create table public.categorie_attributs(
  categorie_id bigint not null references public.categories(id) on delete cascade,
  attribut_code text not null references public.attributs(code),
  filtrable boolean not null default true, ordre integer not null default 0,
  primary key(categorie_id,attribut_code)
 );
+alter table public.categorie_attributs enable row level security;
 create index categorie_attribut_code on public.categorie_attributs(attribut_code);
 create table public.produit_attributs(
  produit_id bigint not null references public.produits(id) on delete cascade,
@@ -748,6 +775,7 @@ create table public.produit_attributs(
     or (type='number' and valeur_texte is null and valeur_nombre is not null and valeur_nombre between 0 and 1000000000 and valeur_booleen is null)
     or (type='boolean' and valeur_texte is null and valeur_nombre is null and valeur_booleen is not null))
 );
+alter table public.produit_attributs enable row level security;
 create index produit_attribut_texte on public.produit_attributs(attribut_code,valeur_texte,produit_id) where type='text';
 create index produit_attribut_nombre on public.produit_attributs(attribut_code,valeur_nombre,produit_id) where type='number';
 create index produit_attribut_booleen on public.produit_attributs(attribut_code,valeur_booleen,produit_id) where type='boolean';
@@ -757,6 +785,7 @@ create table public.categories_fournisseurs(
  correspondance_verifiee boolean not null default false,
  primary key(fournisseur_id,code), check(not correspondance_verifiee or categorie_id is not null)
 );
+alter table public.categories_fournisseurs enable row level security;
 create index categories_fournisseurs_categorie on public.categories_fournisseurs(categorie_id);
 
 -- Explicit selling rules; NULL means unknown. They are not inferred from a pack label.
@@ -792,7 +821,8 @@ begin
 end $$;
 create trigger produit_marque before insert or update of marque,marque_id,gamme_id on public.produits
  for each row execute function public.synchroniser_marque_produit();
-update public.produits set marque=marque;
+-- Backfill only products with a brand to normalize; no global UPDATE.
+update public.produits set marque=marque where nullif(btrim(marque),'') is not null;
 create function public.actualiser_identites_catalogue() returns trigger language plpgsql security invoker set search_path='' as $$
 begin
  if tg_table_name='marques' then update public.produits set marque=new.nom where marque_id=new.id;
@@ -819,7 +849,8 @@ begin
 end $$;
 create trigger sources_produit after insert or update or delete on public.produits_fournisseurs
  for each row execute function public.actualiser_sources_produit();
-update public.produits_fournisseurs set reference_verifiee=reference_verifiee;
+-- Only verified references belong in the new public projection.
+update public.produits_fournisseurs set reference_verifiee=reference_verifiee where reference_verifiee;
 
 -- Same publication boundary for direct table reads and every catalogue RPC.
 drop policy produits_lecture on public.produits;
@@ -866,13 +897,14 @@ begin
 end $$;
 create trigger applicabilite_catalogue after delete or update on public.categorie_attributs
  for each statement execute function public.verifier_applicabilite_catalogue();
-revoke all on function public.verifier_applicabilite_catalogue() from public;
+revoke all on function public.verifier_applicabilite_catalogue() from public,anon,authenticated;
 create index produit_attribut_definition on public.produit_attributs(attribut_code,type);
 
 -- Public reference tables, administrative writes only.
 do $$ declare t text; begin
  foreach t in array array['marques','gammes','attributs','categorie_attributs','categories_fournisseurs','produit_attributs'] loop
-  execute format('alter table public.%I enable row level security',t);
+  -- Remove inherited Supabase defaults, including TRUNCATE (not covered by RLS).
+  execute format('revoke all on public.%I from public,anon,authenticated',t);
   execute format('grant select on public.%I to anon,authenticated',t);
   execute format('grant insert,update,delete on public.%I to authenticated',t);
   execute format('grant all on public.%I to service_role',t);
@@ -884,6 +916,7 @@ do $$ declare t text; begin
   execute format('create policy suppression_admin on public.%I for delete to authenticated using((select auth.jwt())->''app_metadata''->>''role''=''admin'')',t);
  end loop;
 end $$;
+revoke all on sequence public.marques_id_seq,public.gammes_id_seq from public,anon,authenticated;
 grant usage,select on sequence public.marques_id_seq,public.gammes_id_seq to authenticated,service_role;
 
 -- Initial family vocabulary, editable by administrators; no synthetic products.
@@ -1028,7 +1061,7 @@ begin
  update public.collectes_catalogue cc set statut='imported',produit_id=pid,valide_le=now() where cc.empreinte=v2.empreinte;
  return jsonb_build_object('empreinte',empreinte,'statut','imported','produit_id',pid);
 end $$;
-revoke all on function public.importer_catalogue_v2(jsonb,boolean) from public;
+revoke all on function public.importer_catalogue_v2(jsonb,boolean) from public,anon,authenticated;
 grant execute on function public.importer_catalogue_v2(jsonb,boolean) to authenticated,service_role;
 
 -- OR within a facet, AND across facets. Numeric ranges use canonical units.
@@ -1051,7 +1084,7 @@ begin
  end loop;
  return true;
 end $$;
-revoke all on function public.filtres_correspondent(jsonb,jsonb,text) from public;
+revoke all on function public.filtres_correspondent(jsonb,jsonb,text) from public,anon,authenticated;
 grant execute on function public.filtres_correspondent(jsonb,jsonb,text) to anon,authenticated,service_role;
 
 create function public.rechercher_catalogue_v2(terme text default '', filtres jsonb default '{}', page_num integer default 0)
@@ -1132,14 +1165,14 @@ begin
  ) into resultat;
  return resultat;
 end $$;
-revoke all on function public.rechercher_catalogue_v2(text,jsonb,integer) from public;
+revoke all on function public.rechercher_catalogue_v2(text,jsonb,integer) from public,anon,authenticated;
 grant execute on function public.rechercher_catalogue_v2(text,jsonb,integer) to anon,authenticated,service_role;
-revoke all on function public.texte_catalogue(text) from public;
+revoke all on function public.texte_catalogue(text) from public,anon,authenticated;
 grant execute on function public.texte_catalogue(text) to anon,authenticated,service_role;
 -- Trigger functions cannot be called as RPCs; no direct execution grants needed.
 revoke all on function public.verrouiller_categories(),public.verifier_arbre_categories(),
  public.synchroniser_marque_produit(),public.actualiser_identites_catalogue(),public.actualiser_sources_produit(),
- public.verifier_offre_panier(),public.verifier_attribut_produit(),public.verifier_reclassement_produit() from public;
+ public.verifier_offre_panier(),public.verifier_attribut_produit(),public.verifier_reclassement_produit() from public,anon,authenticated;
 
 insert into supabase_migrations.schema_migrations(version,name,statements) values('20261015130122','catalogue_facets',array[$migration_20261015130122$begin;
 
@@ -1172,9 +1205,11 @@ create constraint trigger categories_sans_cycle after insert or update on public
  deferrable initially immediate for each row execute function public.verifier_arbre_categories();
 
 create table public.marques(id bigint generated by default as identity primary key, nom text not null check(length(btrim(nom)) between 1 and 200));
+alter table public.marques enable row level security;
 create unique index marques_nom on public.marques(lower(btrim(nom)));
 create table public.gammes(id bigint generated by default as identity primary key,
  marque_id bigint not null references public.marques(id), nom text not null check(length(btrim(nom)) between 1 and 200), unique(id,marque_id));
+alter table public.gammes enable row level security;
 create unique index gammes_marque_nom on public.gammes(marque_id,lower(btrim(nom)));
 alter table public.produits add column marque_id bigint references public.marques(id),
  add column gamme_id bigint, add column gamme_nom text,
@@ -1193,12 +1228,14 @@ create table public.attributs(
  unite text not null default '', ordre integer not null default 0,
  unique(code,type), check(type='number' or unite='')
 );
+alter table public.attributs enable row level security;
 create table public.categorie_attributs(
  categorie_id bigint not null references public.categories(id) on delete cascade,
  attribut_code text not null references public.attributs(code),
  filtrable boolean not null default true, ordre integer not null default 0,
  primary key(categorie_id,attribut_code)
 );
+alter table public.categorie_attributs enable row level security;
 create index categorie_attribut_code on public.categorie_attributs(attribut_code);
 create table public.produit_attributs(
  produit_id bigint not null references public.produits(id) on delete cascade,
@@ -1212,6 +1249,7 @@ create table public.produit_attributs(
     or (type='number' and valeur_texte is null and valeur_nombre is not null and valeur_nombre between 0 and 1000000000 and valeur_booleen is null)
     or (type='boolean' and valeur_texte is null and valeur_nombre is null and valeur_booleen is not null))
 );
+alter table public.produit_attributs enable row level security;
 create index produit_attribut_texte on public.produit_attributs(attribut_code,valeur_texte,produit_id) where type='text';
 create index produit_attribut_nombre on public.produit_attributs(attribut_code,valeur_nombre,produit_id) where type='number';
 create index produit_attribut_booleen on public.produit_attributs(attribut_code,valeur_booleen,produit_id) where type='boolean';
@@ -1221,6 +1259,7 @@ create table public.categories_fournisseurs(
  correspondance_verifiee boolean not null default false,
  primary key(fournisseur_id,code), check(not correspondance_verifiee or categorie_id is not null)
 );
+alter table public.categories_fournisseurs enable row level security;
 create index categories_fournisseurs_categorie on public.categories_fournisseurs(categorie_id);
 
 -- Explicit selling rules; NULL means unknown. They are not inferred from a pack label.
@@ -1256,7 +1295,8 @@ begin
 end $$;
 create trigger produit_marque before insert or update of marque,marque_id,gamme_id on public.produits
  for each row execute function public.synchroniser_marque_produit();
-update public.produits set marque=marque;
+-- Backfill only products with a brand to normalize; no global UPDATE.
+update public.produits set marque=marque where nullif(btrim(marque),'') is not null;
 create function public.actualiser_identites_catalogue() returns trigger language plpgsql security invoker set search_path='' as $$
 begin
  if tg_table_name='marques' then update public.produits set marque=new.nom where marque_id=new.id;
@@ -1283,7 +1323,8 @@ begin
 end $$;
 create trigger sources_produit after insert or update or delete on public.produits_fournisseurs
  for each row execute function public.actualiser_sources_produit();
-update public.produits_fournisseurs set reference_verifiee=reference_verifiee;
+-- Only verified references belong in the new public projection.
+update public.produits_fournisseurs set reference_verifiee=reference_verifiee where reference_verifiee;
 
 -- Same publication boundary for direct table reads and every catalogue RPC.
 drop policy produits_lecture on public.produits;
@@ -1330,13 +1371,14 @@ begin
 end $$;
 create trigger applicabilite_catalogue after delete or update on public.categorie_attributs
  for each statement execute function public.verifier_applicabilite_catalogue();
-revoke all on function public.verifier_applicabilite_catalogue() from public;
+revoke all on function public.verifier_applicabilite_catalogue() from public,anon,authenticated;
 create index produit_attribut_definition on public.produit_attributs(attribut_code,type);
 
 -- Public reference tables, administrative writes only.
 do $$ declare t text; begin
  foreach t in array array['marques','gammes','attributs','categorie_attributs','categories_fournisseurs','produit_attributs'] loop
-  execute format('alter table public.%I enable row level security',t);
+  -- Remove inherited Supabase defaults, including TRUNCATE (not covered by RLS).
+  execute format('revoke all on public.%I from public,anon,authenticated',t);
   execute format('grant select on public.%I to anon,authenticated',t);
   execute format('grant insert,update,delete on public.%I to authenticated',t);
   execute format('grant all on public.%I to service_role',t);
@@ -1348,6 +1390,7 @@ do $$ declare t text; begin
   execute format('create policy suppression_admin on public.%I for delete to authenticated using((select auth.jwt())->''app_metadata''->>''role''=''admin'')',t);
  end loop;
 end $$;
+revoke all on sequence public.marques_id_seq,public.gammes_id_seq from public,anon,authenticated;
 grant usage,select on sequence public.marques_id_seq,public.gammes_id_seq to authenticated,service_role;
 
 -- Initial family vocabulary, editable by administrators; no synthetic products.
@@ -1492,7 +1535,7 @@ begin
  update public.collectes_catalogue cc set statut='imported',produit_id=pid,valide_le=now() where cc.empreinte=v2.empreinte;
  return jsonb_build_object('empreinte',empreinte,'statut','imported','produit_id',pid);
 end $$;
-revoke all on function public.importer_catalogue_v2(jsonb,boolean) from public;
+revoke all on function public.importer_catalogue_v2(jsonb,boolean) from public,anon,authenticated;
 grant execute on function public.importer_catalogue_v2(jsonb,boolean) to authenticated,service_role;
 
 -- OR within a facet, AND across facets. Numeric ranges use canonical units.
@@ -1515,7 +1558,7 @@ begin
  end loop;
  return true;
 end $$;
-revoke all on function public.filtres_correspondent(jsonb,jsonb,text) from public;
+revoke all on function public.filtres_correspondent(jsonb,jsonb,text) from public,anon,authenticated;
 grant execute on function public.filtres_correspondent(jsonb,jsonb,text) to anon,authenticated,service_role;
 
 create function public.rechercher_catalogue_v2(terme text default '', filtres jsonb default '{}', page_num integer default 0)
@@ -1596,18 +1639,31 @@ begin
  ) into resultat;
  return resultat;
 end $$;
-revoke all on function public.rechercher_catalogue_v2(text,jsonb,integer) from public;
+revoke all on function public.rechercher_catalogue_v2(text,jsonb,integer) from public,anon,authenticated;
 grant execute on function public.rechercher_catalogue_v2(text,jsonb,integer) to anon,authenticated,service_role;
-revoke all on function public.texte_catalogue(text) from public;
+revoke all on function public.texte_catalogue(text) from public,anon,authenticated;
 grant execute on function public.texte_catalogue(text) to anon,authenticated,service_role;
 -- Trigger functions cannot be called as RPCs; no direct execution grants needed.
 revoke all on function public.verrouiller_categories(),public.verifier_arbre_categories(),
  public.synchroniser_marque_produit(),public.actualiser_identites_catalogue(),public.actualiser_sources_produit(),
- public.verifier_offre_panier(),public.verifier_attribut_produit(),public.verifier_reclassement_produit() from public;
+ public.verifier_offre_panier(),public.verifier_attribut_produit(),public.verifier_reclassement_produit() from public,anon,authenticated;
 commit;
 $migration_20261015130122$]);
 
+-- Refuse to commit if a public table lacks RLS/policies or inherited privileges remain.
+do $security_check$
+begin
+ if exists(select 1 from pg_class c where c.relnamespace='public'::regnamespace
+   and c.relkind in ('r','p') and (not c.relrowsecurity or not exists(select 1 from pg_policy p where p.polrelid=c.oid)))
+ then raise exception 'Table publique sans RLS ou sans politique : annulation'; end if;
+ if exists(select 1 from pg_class c cross join (values ('anon'),('authenticated')) roles(role_name)
+   where c.relnamespace='public'::regnamespace and c.relkind in ('r','p')
+   and (has_table_privilege(roles.role_name,c.oid,'TRUNCATE') or has_table_privilege(roles.role_name,c.oid,'TRIGGER') or has_table_privilege(roles.role_name,c.oid,'REFERENCES')))
+ then raise exception 'Privilèges de table trop larges : annulation'; end if;
+ if exists(select 1 from pg_class c where c.relnamespace='public'::regnamespace
+   and case when c.relkind='S' then (has_sequence_privilege('anon',c.oid,'USAGE,SELECT,UPDATE') or has_sequence_privilege('authenticated',c.oid,'UPDATE')) else false end)
+ then raise exception 'Privilèges de séquence trop larges : annulation'; end if;
+end $security_check$;
 notify pgrst, 'reload schema';
 commit;
 select (select count(*) from public.produits) produits,(select count(*) from public.produits_fournisseurs) offres,(select count(*) from public.clients) comptes,(select count(*) from public.paniers) paniers,(select count(*) from public.categories) categories,(select count(*) from public.attributs) attributs;
-

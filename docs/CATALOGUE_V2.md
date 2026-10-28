@@ -1,10 +1,12 @@
 # Catalogue 2HBC — catégories, attributs et recherche
 
-État du 16 octobre 2026 : implémentation et tests locaux terminés ; les écritures du connecteur Supabase échouent avec `Invalid or expired requestState`. La structure distante et les 114 anciens produits n’ont donc pas changé. La sauvegarde privée est disponible séparément. Le site conserve la recherche précédente tant que la nouvelle RPC manque.
+État du 28 octobre 2026 : script révisé après contrôle des 10 tables, politiques, permissions héritées, séquences, fonctions et clés étrangères du projet. Les 40 tests PostgreSQL passent, ainsi que la répétition du nettoyage sur la sauvegarde. La tentative d'application directe a été interrompue sans résultat confirmé ; le contrôle après interruption confirme que les deux migrations initiales et les 114 anciens produits sont toujours présents. Aucune modification distante n'est confirmée. Le site conserve la recherche précédente tant que la nouvelle RPC manque. Voir [la revue de sécurité](audits/2026-10-28/Revue_SQL.md).
 
 ## Activer la nouvelle base
 
 Dans le SQL Editor du **projet 2HBC `gueuqeqyshhhmxbsiuxg`**, exécuter **tout** le fichier [20261016_reset_catalogue.sql](../supabase/operations/20261016_reset_catalogue.sql).
+
+Utiliser la révision portant en première ligne **« Révision de sécurité du 28 octobre 2026 »** et remplacer entièrement l'ancien texte. La RLS est activée explicitement pour chacune des sept nouvelles tables. Les droits hérités trop larges sont révoqués avant les autorisations nécessaires. Les deux mises à jour de reprise ont un `WHERE` ciblé. Un dernier contrôle refuse la validation s'il manque une protection. L'avertissement sur les opérations destructives reste justifié : cette opération supprime intentionnellement l'ancien catalogue autorisé, sans supprimer de table.
 
 Ce fichier est réservé à l’état sauvegardé le 16 octobre : 114 produits, 148 offres, 7 lignes de panier de démonstration, aucune observation de prix personnel. Une empreinte de l’ensemble du catalogue et de ses dépendances empêche son exécution si les données ont changé. Ne pas supprimer ce contrôle pour forcer une exécution. Il ne contient aucune donnée personnelle de la sauvegarde.
 
