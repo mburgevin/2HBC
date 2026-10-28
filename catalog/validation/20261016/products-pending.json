@@ -1,0 +1,1110 @@
+[
+  {
+    "brand": "Schneider Electric",
+    "reference": "A9P22610",
+    "ean": "3606481381323",
+    "name": "Acti9 iDT40T - Disjoncteur modulaire - 1P+N - 10A - Courbe C - 4500A/6kA",
+    "categories": [
+      "Validation du parseur"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Rexel",
+        "reference": "SCHA9P22610",
+        "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/Disjoncteur-modulaire-4%2C5kA-et-6kA/Acti9-iDT40T---Disjoncteur-modulaire---1P%2BN---10A---Courbe-C---4500A-6kA/SCHA9P22610/p/71941447",
+        "pack": "Unité, conditionnement et multiple de vente à confirmer dans le compte",
+        "collected_at": "2026-10-16T12:17:51+00:00",
+        "page_sha256": "fd7dacc1118abf5f78b460dd23996c213b11712e28cf0bdbb2fd669536005791",
+        "image_url": "https://api.rexel.fr/media/api/fr/content/71941447/EXTRA_LARGE",
+        "raw_attributes": [
+          {
+            "label": "Tension assignée de tenue aux chocs (Uimp)",
+            "value": "4 kV"
+          },
+          {
+            "label": "Pouvoir de coupure assigné Icu selon IEC 60947-2 à 230 V",
+            "value": "6 kA"
+          },
+          {
+            "label": "Pouvoir de coupure assigné Icn selon EN 60898 à 230 V",
+            "value": "4.5 kA"
+          },
+          {
+            "label": "Nombre de pôles (total)",
+            "value": "2"
+          },
+          {
+            "label": "Produits auxiliaires associables",
+            "value": "Oui"
+          },
+          {
+            "label": "Montage encastré",
+            "value": "Non"
+          },
+          {
+            "label": "Température ambiante en fonctionnement",
+            "value": "-25...70 °C"
+          },
+          {
+            "label": "Section de conducteur connectable multifilaire",
+            "value": "1...10 mm²"
+          },
+          {
+            "label": "Section de raccordement cable rigide",
+            "value": "1...16 mm²"
+          },
+          {
+            "label": "Pôle neutre sectionné simultanément",
+            "value": "Oui"
+          },
+          {
+            "label": "Nombre de pôles protégés",
+            "value": "1"
+          },
+          {
+            "label": "Classe de protection (IP)",
+            "value": "IP20"
+          },
+          {
+            "label": "Puissance dissipée",
+            "value": "2.2 W"
+          },
+          {
+            "label": "Antidéflagration",
+            "value": "Non"
+          },
+          {
+            "label": "Largeur en nombre de modules",
+            "value": "1"
+          },
+          {
+            "label": "Degré de pollution",
+            "value": "3"
+          },
+          {
+            "label": "Catégorie de surtension",
+            "value": "3"
+          },
+          {
+            "label": "Classe de limitation d'énergie (I²t)",
+            "value": "3"
+          },
+          {
+            "label": "Tension d'isolement assignée (Ui)",
+            "value": "400 V"
+          },
+          {
+            "label": "Courbe",
+            "value": "C"
+          },
+          {
+            "label": "Fréquence",
+            "value": "50...50 Hz"
+          },
+          {
+            "label": "Tension",
+            "value": "230 V"
+          },
+          {
+            "label": "Calibre",
+            "value": "10 A"
+          },
+          {
+            "label": "Profondeur d'encastrement",
+            "value": "44 mm"
+          },
+          {
+            "label": "Type de tension",
+            "value": "AC"
+          },
+          {
+            "label": "Multiple de vente",
+            "value": "1"
+          },
+          {
+            "label": "Code Douane",
+            "value": "85362010"
+          },
+          {
+            "label": "Gamme",
+            "value": "Acti9 idt40"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Distribution et gestion de l'énergie",
+            "code": "M2_03",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/c/M2_03"
+          },
+          {
+            "label": "Distribution et protection AC",
+            "code": "M2_0302",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/c/M2_0302"
+          },
+          {
+            "label": "Disjoncteur modulaire 4,5kA et 6kA",
+            "code": "M2_030204",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Distribution-et-gestion-de-l'%C3%A9nergie/Distribution-et-protection-AC/Disjoncteur-modulaire-4%2C5kA-et-6kA/c/M2_030204"
+          }
+        ],
+        "description": "Ce disjoncteur modulaire de la gamme Acti9 iDT40T est dédié aux applications tertiaires. En version 1P+N 10A Courbe C, son pouvoir de coupure assigné est de 4500A (EN61009-1) ou de 6kA (EN60947-2) sur les réseaux 230Vca.",
+        "range": "Acti9 idt40"
+      },
+      {
+        "supplier": "Sonepar",
+        "reference": "01887138132",
+        "url": "https://www.sonepar.fr/catalog/fr-fr/products/schneider-electric-acti9-idt40t-disjoncteur-modulaire-1p-n-10a-courbe-c-4500a-6ka-01887138132",
+        "pack": "1 unité(s)",
+        "collected_at": "2026-10-16T12:18:01+00:00",
+        "page_sha256": "da7461adadaac06400594d8d244110ed0ff4ed558f328179375efcb62f1ce6a0",
+        "image_url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1887/PB119541_1500x1500.JPG?ts=1791837641554",
+        "raw_attributes": [
+          {
+            "label": "nombre de pôles (total)",
+            "value": "2"
+          },
+          {
+            "label": "nombre de pôles protégés",
+            "value": "1"
+          },
+          {
+            "label": "calibre/courant nominal assigné (In)",
+            "value": "10 A"
+          },
+          {
+            "label": "caractéristique de déclenchement (type/courbe)",
+            "value": "C"
+          },
+          {
+            "label": "pôle neutre sectionné simultanément",
+            "value": "Oui"
+          },
+          {
+            "label": "profondeur d'encastrement",
+            "value": "44 mm"
+          },
+          {
+            "label": "tension assignée (Ue)",
+            "value": "230 V"
+          },
+          {
+            "label": "tension d'isolement assignée (Ui)",
+            "value": "400 V"
+          },
+          {
+            "label": "tension assignée de tenue aux chocs (Uimp)",
+            "value": "4 kV"
+          },
+          {
+            "label": "pouvoir de coupure assigné selon EN 60898 à 230 V (Icn)",
+            "value": "4.5 kA"
+          },
+          {
+            "label": "type de tension",
+            "value": "AC"
+          },
+          {
+            "label": "pouvoir de coupure assigné selon IEC 60947-2 à 230 V (Icu)",
+            "value": "6 kA"
+          },
+          {
+            "label": "fréquence",
+            "value": "50...50 Hz"
+          },
+          {
+            "label": "classe de limitation d'énergie (I²t)",
+            "value": "3"
+          },
+          {
+            "label": "montage encastré",
+            "value": "Non"
+          },
+          {
+            "label": "catégorie de surtension",
+            "value": "3"
+          },
+          {
+            "label": "degré de pollution",
+            "value": "3"
+          },
+          {
+            "label": "produits auxiliaires associables",
+            "value": "Oui"
+          },
+          {
+            "label": "largeur en nombre de modules",
+            "value": "1"
+          },
+          {
+            "label": "pays de fabrication",
+            "value": "FRANCE"
+          },
+          {
+            "label": "température ambiante en fonctionnement",
+            "value": "-25...70 °C"
+          },
+          {
+            "label": "section de raccordement cable souple",
+            "value": "1...10 mm²"
+          },
+          {
+            "label": "section de raccordement cable rigide",
+            "value": "1...16 mm²"
+          },
+          {
+            "label": "antidéflagration",
+            "value": "Non"
+          },
+          {
+            "label": "puissance dissipée",
+            "value": "2.2 W"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Distribution d'énergie",
+            "code": "SCC04",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/distribution-denergie-SCC04"
+          },
+          {
+            "label": "Tableau tertiaire et armoire de puissance",
+            "code": "SCC0402",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/tableau-tertiaire-et-armoire-de-puissance-SCC0402"
+          },
+          {
+            "label": "Disjoncteur et inter puissance modulaire",
+            "code": "SCC040204",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/disjoncteur-et-inter-puissance-modulaire-SCC040204"
+          }
+        ],
+        "description": "Ce disjoncteur modulaire de la gamme Acti9 iDT40T est dédié aux applications tertiaires. En version 1P+N 10A Courbe C, son pouvoir de coupure assigné est de 4500A (EN61009-1) ou de 6kA (EN60947-2) sur les réseaux 230Vca. Les Atouts de l'article:",
+        "range": null
+      }
+    ],
+    "schema_version": 2,
+    "attributes": [
+      {
+        "code": "courant",
+        "type": "number",
+        "value": 10,
+        "unit": "A",
+        "supplier": "Rexel",
+        "raw_label": "Calibre",
+        "raw_value": "10 A"
+      },
+      {
+        "code": "courbe",
+        "type": "text",
+        "value": "C",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Courbe",
+        "raw_value": "C"
+      },
+      {
+        "code": "icn_230",
+        "type": "number",
+        "value": 4.5,
+        "unit": "kA",
+        "supplier": "Rexel",
+        "raw_label": "Pouvoir de coupure assigné Icn selon EN 60898 à 230 V",
+        "raw_value": "4.5 kA"
+      },
+      {
+        "code": "icu_230",
+        "type": "number",
+        "value": 6,
+        "unit": "kA",
+        "supplier": "Rexel",
+        "raw_label": "Pouvoir de coupure assigné Icu selon IEC 60947-2 à 230 V",
+        "raw_value": "6 kA"
+      },
+      {
+        "code": "ip",
+        "type": "text",
+        "value": "IP20",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Classe de protection (IP)",
+        "raw_value": "IP20"
+      },
+      {
+        "code": "modules",
+        "type": "number",
+        "value": 1,
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Largeur en nombre de modules",
+        "raw_value": "1"
+      },
+      {
+        "code": "poles",
+        "type": "number",
+        "value": 2,
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Nombre de pôles (total)",
+        "raw_value": "2"
+      },
+      {
+        "code": "poles_proteges",
+        "type": "number",
+        "value": 1,
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Nombre de pôles protégés",
+        "raw_value": "1"
+      },
+      {
+        "code": "tension",
+        "type": "number",
+        "value": 230,
+        "unit": "V",
+        "supplier": "Rexel",
+        "raw_label": "Tension",
+        "raw_value": "230 V"
+      },
+      {
+        "code": "type_tension",
+        "type": "text",
+        "value": "AC",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Type de tension",
+        "raw_value": "AC"
+      }
+    ],
+    "attribute_conflicts": [],
+    "category_code": "disjoncteurs",
+    "range": "Acti9 idt40"
+  },
+  {
+    "brand": "Schneider Electric",
+    "reference": "S920042",
+    "ean": "3606487212928",
+    "name": "Odace - prise 2P+T affleurante + chargeur USB-C 18W Power Delivery - blanc craie",
+    "categories": [
+      "Validation du parseur"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Rexel",
+        "reference": "SCHS920042",
+        "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-composable-milieu-de-gamme/Odace---prise-2P%2BT-affleurante-%2B-chargeur-USB-C-18W-Power-Delivery---blanc-craie/SCHS920042/p/74910335",
+        "pack": "Unité, conditionnement et multiple de vente à confirmer dans le compte",
+        "collected_at": "2026-10-16T12:18:06+00:00",
+        "page_sha256": "6ce7f5a78c892acbe6f884eee8e308cef4683f16d004c4497644b881a7523b69",
+        "image_url": "https://api.rexel.fr/media/api/fr/content/74910335/EXTRA_LARGE",
+        "raw_attributes": [
+          {
+            "label": "Multiple de vente",
+            "value": "1"
+          },
+          {
+            "label": "Code Douane",
+            "value": "85366990"
+          },
+          {
+            "label": "Gamme",
+            "value": "Odace"
+          },
+          {
+            "label": "Conforme selon UK Building Regulations (partie M)",
+            "value": "Non"
+          },
+          {
+            "label": "Pour « conditions difficiles » (selon VDE)",
+            "value": "Oui"
+          },
+          {
+            "label": "Traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "Nombre de repiquage",
+            "value": "1"
+          },
+          {
+            "label": "Type de contact de protection",
+            "value": "rond"
+          },
+          {
+            "label": "Nombre de ports USB-C",
+            "value": "1"
+          },
+          {
+            "label": "Avec haut-parleur bluetooth intégré",
+            "value": "Non"
+          },
+          {
+            "label": "Intensité de courant max. pour alimentation USB",
+            "value": "3 A"
+          },
+          {
+            "label": "Finition métallique",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "Avec répéteur de signal Wi-Fi",
+            "value": "Non"
+          },
+          {
+            "label": "Profondeur min. de la boîte d'encastrement",
+            "value": "40 mm"
+          },
+          {
+            "label": "Nombre de contacts actifs (ronds)",
+            "value": "2"
+          },
+          {
+            "label": "Compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "Nombre de modules (construction modulaire)",
+            "value": "2"
+          },
+          {
+            "label": "Avec éclairage d'orientation",
+            "value": "Non"
+          },
+          {
+            "label": "Avec éclairage fonctionnel",
+            "value": "Non"
+          },
+          {
+            "label": "Profondeur d'appareil",
+            "value": "43 mm"
+          },
+          {
+            "label": "Hauteur d'appareil",
+            "value": "73.9 mm"
+          },
+          {
+            "label": "Largeur d'appareil",
+            "value": "73.9 mm"
+          },
+          {
+            "label": "Adapté à l'indice de protection (IP)",
+            "value": "IP21"
+          },
+          {
+            "label": "Repiquage possible",
+            "value": "Non"
+          },
+          {
+            "label": "Avec microfusible",
+            "value": "Non"
+          },
+          {
+            "label": "Finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "Transparent",
+            "value": "Non"
+          },
+          {
+            "label": "Pôle neutre sectionné simultanément",
+            "value": "Non"
+          },
+          {
+            "label": "IK",
+            "value": "IK04"
+          },
+          {
+            "label": "Numéro RAL (équivalent)",
+            "value": "9003"
+          },
+          {
+            "label": "Impression/marquage",
+            "value": "sans"
+          },
+          {
+            "label": "Type de fixation",
+            "value": "fixation à griffes/vis"
+          },
+          {
+            "label": "Sensibilité",
+            "value": "0 mA"
+          },
+          {
+            "label": "Matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "Encastrement isolé",
+            "value": "Non"
+          },
+          {
+            "label": "Protection différentielle",
+            "value": "Non"
+          },
+          {
+            "label": "Protection contre les surtensions",
+            "value": "Oui"
+          },
+          {
+            "label": "Prise inclinée ou inclinable",
+            "value": "Non"
+          },
+          {
+            "label": "Qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "Mécanisme d'éjection",
+            "value": "Non"
+          },
+          {
+            "label": "Zone de texte/surface d'inscription",
+            "value": "Non"
+          },
+          {
+            "label": "Avec dispositif on/off",
+            "value": "Non"
+          },
+          {
+            "label": "Fréquence",
+            "value": "50...60 Hz"
+          },
+          {
+            "label": "Avec eclips / protection enfant",
+            "value": "Oui"
+          },
+          {
+            "label": "Nombre de phases",
+            "value": "1"
+          },
+          {
+            "label": "Avec voyant indicateur",
+            "value": "Non"
+          },
+          {
+            "label": "Traitement de surface",
+            "value": "non traité"
+          },
+          {
+            "label": "Type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "Avec volet de protection",
+            "value": "Non"
+          },
+          {
+            "label": "Verrouillable",
+            "value": "Non"
+          },
+          {
+            "label": "Sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "Modèle type",
+            "value": "broche de contact de protection"
+          },
+          {
+            "label": "Couleur",
+            "value": "blanc"
+          },
+          {
+            "label": "Type de pose",
+            "value": "encastré"
+          },
+          {
+            "label": "Tension nominale",
+            "value": "250 V"
+          },
+          {
+            "label": "Intensité",
+            "value": "16 A"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Appareillage et contrôle du bâtiment",
+            "code": "M2_01",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/c/M2_01"
+          },
+          {
+            "label": "Appareillage mural",
+            "code": "M2_0107",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/c/M2_0107"
+          },
+          {
+            "label": "Appareillage composable milieu de gamme",
+            "code": "M2_010706",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-composable-milieu-de-gamme/c/M2_010706"
+          }
+        ],
+        "description": "Odace - prise de courant 2P+T affleurante avec USB-C 18W PD3.1 - montage griffes possible - 3x2 bornes auto - 1x1,5 à 2x2,5 mm² rigide ou souple - 16A 250VCA 50Hz - cache peinture - blanc RAL 9003 mat - IK04 IP21D - certifié NF",
+        "range": "Odace"
+      }
+    ],
+    "schema_version": 2,
+    "attributes": [
+      {
+        "code": "connexion",
+        "type": "text",
+        "value": "borne automatique",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Type de connexion",
+        "raw_value": "borne automatique"
+      },
+      {
+        "code": "couleur",
+        "type": "text",
+        "value": "blanc",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Couleur",
+        "raw_value": "blanc"
+      },
+      {
+        "code": "courant",
+        "type": "number",
+        "value": 16,
+        "unit": "A",
+        "supplier": "Rexel",
+        "raw_label": "Intensité",
+        "raw_value": "16 A"
+      },
+      {
+        "code": "fixation",
+        "type": "text",
+        "value": "fixation à griffes/vis",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Type de fixation",
+        "raw_value": "fixation à griffes/vis"
+      },
+      {
+        "code": "ip",
+        "type": "text",
+        "value": "IP21",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Adapté à l'indice de protection (IP)",
+        "raw_value": "IP21"
+      },
+      {
+        "code": "materiau",
+        "type": "text",
+        "value": "plastique",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Matériau",
+        "raw_value": "plastique"
+      },
+      {
+        "code": "modules",
+        "type": "number",
+        "value": 2,
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Nombre de modules (construction modulaire)",
+        "raw_value": "2"
+      },
+      {
+        "code": "pose",
+        "type": "text",
+        "value": "encastré",
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Type de pose",
+        "raw_value": "encastré"
+      },
+      {
+        "code": "sans_halogene",
+        "type": "boolean",
+        "value": true,
+        "unit": "",
+        "supplier": "Rexel",
+        "raw_label": "Sans halogène",
+        "raw_value": "Oui"
+      },
+      {
+        "code": "tension",
+        "type": "number",
+        "value": 250,
+        "unit": "V",
+        "supplier": "Rexel",
+        "raw_label": "Tension nominale",
+        "raw_value": "250 V"
+      }
+    ],
+    "attribute_conflicts": [],
+    "category_code": "prises",
+    "range": "Odace"
+  },
+  {
+    "brand": "Schneider Electric",
+    "reference": "S920052",
+    "ean": "3606487212713",
+    "name": "Odace - prise 2P+T affleurante - bornes automatiques - blanc craie",
+    "categories": [
+      "Validation du parseur"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Sonepar",
+        "reference": "01887721271",
+        "url": "https://www.sonepar.fr/catalog/fr-fr/products/schneider-electric-odace-prise-2p-t-affleurante-bornes-automatiques-blanc-craie-01887721271",
+        "pack": "1 unité(s)",
+        "collected_at": "2026-10-16T12:18:11+00:00",
+        "page_sha256": "a52557020ba9fd3dfd95388600c8266208ee31f6c2b2c5167a36eb9fec28f813",
+        "image_url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1887/S920052_DE_42608_4000x4000.jpg?ts=1791838026245",
+        "raw_attributes": [
+          {
+            "label": "modèle",
+            "value": "broche de contact de protection"
+          },
+          {
+            "label": "nombre d'unités",
+            "value": "1"
+          },
+          {
+            "label": "couleur",
+            "value": "blanc"
+          },
+          {
+            "label": "mode de pose",
+            "value": "encastré"
+          },
+          {
+            "label": "courant nominal",
+            "value": "16 A"
+          },
+          {
+            "label": "nombre de pôles coupés (ronds)",
+            "value": "2"
+          },
+          {
+            "label": "avec voyant indicateur",
+            "value": "Non"
+          },
+          {
+            "label": "nombre de modules (construction modulaire)",
+            "value": "2"
+          },
+          {
+            "label": "nombre de phases",
+            "value": "1"
+          },
+          {
+            "label": "impression/marquage",
+            "value": "sans"
+          },
+          {
+            "label": "type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "avec volet de protection",
+            "value": "Non"
+          },
+          {
+            "label": "avec eclips / protection enfant",
+            "value": "Oui"
+          },
+          {
+            "label": "zone de texte/surface d'inscription",
+            "value": "Non"
+          },
+          {
+            "label": "numéro RAL (équivalent)",
+            "value": "9003"
+          },
+          {
+            "label": "finition métallique",
+            "value": "Non"
+          },
+          {
+            "label": "transparent",
+            "value": "Non"
+          },
+          {
+            "label": "verrouillable",
+            "value": "Non"
+          },
+          {
+            "label": "mécanisme d'éjection",
+            "value": "Non"
+          },
+          {
+            "label": "pays de fabrication",
+            "value": "ESPAGNE"
+          },
+          {
+            "label": "avec éclairage fonctionnel",
+            "value": "Non"
+          },
+          {
+            "label": "avec éclairage d'orientation",
+            "value": "Non"
+          },
+          {
+            "label": "protection contre les surtensions",
+            "value": "Non"
+          },
+          {
+            "label": "protection différentielle",
+            "value": "Non"
+          },
+          {
+            "label": "avec microfusible",
+            "value": "Non"
+          },
+          {
+            "label": "alimentation spéciale",
+            "value": "sans alimentation spéciale"
+          },
+          {
+            "label": "type de fixation",
+            "value": "fixation à griffes/vis"
+          },
+          {
+            "label": "matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "traitement de la surface",
+            "value": "non traité"
+          },
+          {
+            "label": "finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "Avec dispositif on/off",
+            "value": "Non"
+          },
+          {
+            "label": "repiquage possible",
+            "value": "Non"
+          },
+          {
+            "label": "prise inclinée ou inclinable",
+            "value": "Non"
+          },
+          {
+            "label": "tension nominale",
+            "value": "250 V"
+          },
+          {
+            "label": "fréquence",
+            "value": "50...60 Hz"
+          },
+          {
+            "label": "sensibilité / courant de défaut nominal (I?n)",
+            "value": "0 mA"
+          },
+          {
+            "label": "adapté à la classe de protection (IP)",
+            "value": "IP41"
+          },
+          {
+            "label": "indice de protection contre les chocs (IK)",
+            "value": "IK04"
+          },
+          {
+            "label": "largeur d'appareil",
+            "value": "73.9 mm"
+          },
+          {
+            "label": "hauteur d'appareil",
+            "value": "73.9 mm"
+          },
+          {
+            "label": "profondeur d'appareil",
+            "value": "37.6 mm"
+          },
+          {
+            "label": "compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "profondeur min. de la boîte d'encastrement",
+            "value": "40 mm"
+          },
+          {
+            "label": "compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "pôle neutre sectionné simultanément",
+            "value": "Non"
+          },
+          {
+            "label": "type de contact de protection",
+            "value": "rond"
+          },
+          {
+            "label": "nombre de repiquage",
+            "value": "1"
+          },
+          {
+            "label": "avec répéteur de signal Wi-Fi",
+            "value": "Non"
+          },
+          {
+            "label": "avec haut-parleur bluetooth intégré",
+            "value": "Non"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Interrupteur - prise - boîte d encastrement",
+            "code": "SCC03",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-prise-boite-d-encastrement-SCC03"
+          },
+          {
+            "label": "Interrupteur et prise",
+            "code": "SCC0301",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-SCC0301"
+          },
+          {
+            "label": "Interrupteur et prise encastré",
+            "code": "SCC030106",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-encastre-SCC030106"
+          }
+        ],
+        "description": "Odace - prise de courant 2P+T affleurante - montage griffes possible - 3x2 bornes auto - 1x1,5 à 2x2,5 mm² rigide ou souple - 16A 250VCA 50Hz - cache peinture - blanc RAL 9003 mat - IK04 IP21D - certifié NF Les Atouts de l'article:",
+        "range": null
+      }
+    ],
+    "schema_version": 2,
+    "attributes": [
+      {
+        "code": "connexion",
+        "type": "text",
+        "value": "borne automatique",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "type de connexion",
+        "raw_value": "borne automatique"
+      },
+      {
+        "code": "couleur",
+        "type": "text",
+        "value": "blanc",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "couleur",
+        "raw_value": "blanc"
+      },
+      {
+        "code": "courant",
+        "type": "number",
+        "value": 16,
+        "unit": "A",
+        "supplier": "Sonepar",
+        "raw_label": "courant nominal",
+        "raw_value": "16 A"
+      },
+      {
+        "code": "fixation",
+        "type": "text",
+        "value": "fixation à griffes/vis",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "type de fixation",
+        "raw_value": "fixation à griffes/vis"
+      },
+      {
+        "code": "ip",
+        "type": "text",
+        "value": "IP41",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "adapté à la classe de protection (IP)",
+        "raw_value": "IP41"
+      },
+      {
+        "code": "materiau",
+        "type": "text",
+        "value": "plastique",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "matériau",
+        "raw_value": "plastique"
+      },
+      {
+        "code": "modules",
+        "type": "number",
+        "value": 2,
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "nombre de modules (construction modulaire)",
+        "raw_value": "2"
+      },
+      {
+        "code": "pose",
+        "type": "text",
+        "value": "encastré",
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "mode de pose",
+        "raw_value": "encastré"
+      },
+      {
+        "code": "sans_halogene",
+        "type": "boolean",
+        "value": true,
+        "unit": "",
+        "supplier": "Sonepar",
+        "raw_label": "sans halogène",
+        "raw_value": "Oui"
+      },
+      {
+        "code": "tension",
+        "type": "number",
+        "value": 250,
+        "unit": "V",
+        "supplier": "Sonepar",
+        "raw_label": "tension nominale",
+        "raw_value": "250 V"
+      }
+    ],
+    "attribute_conflicts": [],
+    "category_code": "prises",
+    "range": null
+  }
+]

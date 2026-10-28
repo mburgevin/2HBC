@@ -2,12 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { PGlite } from '@electric-sql/pglite';
+import { testCatalogueImport } from './catalogue-import.mjs';
 
 // PostgreSQL embarqué ; claims Auth simulés, sans appel au projet cloud.
 test('Migration, catalogue et isolation des comptes', async t => {
  const db = new PGlite();
  const A='11111111-1111-4111-8111-111111111111', B='22222222-2222-4222-8222-222222222222';
- await db.exec(`create role anon nologin; create role authenticated nologin;
+ await db.exec(`create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;
  create schema auth; create table auth.users(id uuid primary key);
  create function auth.uid() returns uuid language sql stable as $$ select (nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'sub')::uuid $$;
  create function auth.jwt() returns jsonb language sql stable as $$ select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb $$;
@@ -36,5 +37,45 @@ test('Migration, catalogue et isolation des comptes', async t => {
  await t.test('Recherche littérale et zéros initiaux',async()=>{assert.equal((await run(null,"select * from rechercher_catalogue('(',0)",[],{},'anon')).length,0);await db.exec("insert into produits(ref_fabricant,nom) values('00123','Produit test (A)')");assert.equal((await run(null,"select * from rechercher_catalogue('00123',0)",[],{},'anon'))[0].ref_fabricant,'00123');assert.equal((await run(null,"select * from rechercher_catalogue('(',0)",[],{},'anon')).length,1);});
  await t.test('Pas de fonction métier SECURITY DEFINER',async()=>assert.equal((await db.query("select count(*)::int n from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.prosecdef")).rows[0].n,0));
  await t.test('Suppression autorisée au propriétaire',async()=>assert.equal((await run(A,'delete from articles_panier where id=$1 returning id',[article])).length,1));
+
+ await db.exec(await readFile(new URL('../supabase/migrations/20261011140316_personal_supplier_prices.sql',import.meta.url),'utf8'));
+ const pilot=await readFile(new URL('../supabase/pilot_catalog.sql',import.meta.url),'utf8');
+ await db.exec(pilot);await db.exec(pilot);
+ await t.test('Photos du pilote : enrichissement idempotent compatible avec le schéma déjà en ligne',async()=>{
+  const images=await readFile(new URL('../supabase/pilot_images.sql',import.meta.url),'utf8');
+  await db.exec(images);await db.exec(images);
+  const p=await run(null,'select * from rechercher_catalogue_personnel()',[],{},'anon');
+  assert.equal(p.length,3);assert(p.every(x=>x.image_url?.startsWith('https://api.rexel.fr/media/api/fr/content/') && x.offres.length===0));
+ });
+ const real=(await run(A,'select * from produits_fournisseurs where reference_verifiee order by id'))[0];
+ await t.test('Catalogue réel : trois produits, six correspondances, aucun tarif inventé',async()=>{
+  const products=await run(A,'select * from rechercher_catalogue_personnel()');
+  assert.equal(products.length,3);assert(products.every(p=>p.offres.length===2 && p.offres.every(o=>o.prix===null && o.reference_verifiee)));
+  const publicProducts=await run(null,'select * from rechercher_catalogue_personnel()',[],{},'anon');
+  assert.equal(publicProducts.length,3);assert(publicProducts.every(p=>p.offres.length===0));
+ });
+ const insert=`insert into prix_personnels(id,client_id,offre_id,contexte_empreinte,quantite,montant_ht,base_prix,unite,source_url,observe_le,expire_le)
+ values($1,$2,$3,$4,10,12.34,1,'piece',$5,now(),now()+interval '10 minutes') returning id`;
+ const observation='33333333-3333-4333-8333-333333333333';
+ const params=[observation,A,real.id,'a'.repeat(64),real.url_produit];
+ await t.test('Prix privés : visibilité limitée au propriétaire, y compris pour un admin',async()=>{
+  await run(A,insert,params);
+  assert.equal((await run(A,'select * from prix_personnels')).length,1);
+  assert.equal((await run(B,'select * from prix_personnels')).length,0);
+  assert.equal((await run(B,'select * from prix_personnels',[],{app_metadata:{role:'admin'}})).length,0);
+  await assert.rejects(run(null,'select * from prix_personnels',[],{},'anon'));
+ });
+ await t.test('Prix privés : attribution à autrui, mauvaise source et remplacement interdits',async()=>{
+  await assert.rejects(run(B,insert,['44444444-4444-4444-8444-444444444444',...params.slice(1)]));
+  await assert.rejects(run(A,insert,['44444444-4444-4444-8444-444444444444',A,real.id,'a'.repeat(64),'https://evil.test']));
+  await assert.rejects(run(A,'update prix_personnels set client_id=$1 where id=$2',[B,observation]));
+  assert.equal((await run(B,'delete from prix_personnels returning id')).length,0);
+  assert.equal((await run(A,'delete from prix_personnels returning id')).length,1);
+ });
+ await t.test('Prix périmé ou base nulle refusés à l’enregistrement',async()=>{
+  await assert.rejects(run(A,insert.replace('now(),now()+',"now()-interval '1 hour',now()-interval '1 hour'+"),params));
+  await assert.rejects(run(A,insert.replace("12.34,1,'piece'","12.34,0,'piece'"),params));
+ });
+ await testCatalogueImport(db,t,run,A,B,real);
  } finally { await db.close(); }
 });

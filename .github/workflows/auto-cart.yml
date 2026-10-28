@@ -1,0 +1,29 @@
+name: Verify auto-cart prototype
+on:
+  pull_request:
+  push:
+    branches: [feat/auto-cart-prototype, feature/2hbc-dev]
+permissions:
+  contents: read
+jobs:
+  extension:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: node projet-millions/scripts/package-extension.cjs
+      - run: unzip -t projet-millions/public/extension-2hbc.zip
+      - run: node --test tests/transfer.test.cjs
+      - run: npm install --no-save --package-lock=false --ignore-scripts @playwright/test@1.55.1
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config playwright.autocart.config.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: extension-2hbc-test
+          path: projet-millions/public/extension-2hbc.zip
+          retention-days: 14
