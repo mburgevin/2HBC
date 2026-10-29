@@ -1,0 +1,1579 @@
+{
+  "version": "1.0.0",
+  "roots": {
+    "appareillage": "Appareillage mural et boîtes",
+    "protection": "Protections et distribution modulaire",
+    "raccordement": "Connexion et raccordement"
+  },
+  "attributes": [
+    {
+      "code": "couleur",
+      "label": "Couleur",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "blanc",
+        "noir",
+        "gris",
+        "anthracite",
+        "beige",
+        "transparent",
+        "incolore",
+        "rouge",
+        "bleu",
+        "vert",
+        "jaune",
+        "orange",
+        "marron"
+      ],
+      "context": {}
+    },
+    {
+      "code": "couleur_secondaire",
+      "label": "Couleur secondaire",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "blanc",
+        "noir",
+        "gris",
+        "anthracite",
+        "transparent",
+        "rouge",
+        "bleu",
+        "vert",
+        "jaune",
+        "orange"
+      ],
+      "context": {}
+    },
+    {
+      "code": "finition",
+      "label": "Finition",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "mat",
+        "brillant",
+        "satine"
+      ],
+      "context": {}
+    },
+    {
+      "code": "materiau",
+      "label": "Matériau",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "plastique",
+        "metal",
+        "bois",
+        "verre",
+        "ceramique"
+      ],
+      "context": {}
+    },
+    {
+      "code": "pose",
+      "label": "Mode de pose",
+      "format": "set",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "encastre",
+        "saillie",
+        "rail_din",
+        "support_modulaire",
+        "montage_direct"
+      ],
+      "context": {}
+    },
+    {
+      "code": "fixation",
+      "label": "Fixation",
+      "format": "set",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "griffes",
+        "clips"
+      ],
+      "context": {}
+    },
+    {
+      "code": "composition",
+      "label": "Composition",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "mecanisme_seul",
+        "mecanisme_enjoliveur",
+        "ensemble_complet",
+        "finition_seule",
+        "support_seul",
+        "boitier_seul"
+      ],
+      "context": {}
+    },
+    {
+      "code": "type_tension",
+      "label": "Type de tension",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "AC",
+        "DC",
+        "AC_DC"
+      ],
+      "context": {}
+    },
+    {
+      "code": "connexion",
+      "label": "Raccordement",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "automatique",
+        "ressort",
+        "embrochable"
+      ],
+      "context": {}
+    },
+    {
+      "code": "standard_prise",
+      "label": "Standard de prise",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "franco_belge",
+        "schuko",
+        "universel"
+      ],
+      "context": {}
+    },
+    {
+      "code": "configuration_contacts",
+      "label": "Configuration des contacts",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "2P",
+        "2P_T"
+      ],
+      "context": {}
+    },
+    {
+      "code": "fonction_commande",
+      "label": "Fonction de commande",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "simple_allumage",
+        "va_et_vient",
+        "permutateur",
+        "double_allumage",
+        "double_va_et_vient"
+      ],
+      "context": {}
+    },
+    {
+      "code": "fonction_voyant",
+      "label": "Fonction du voyant",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "reperage",
+        "temoin"
+      ],
+      "context": {}
+    },
+    {
+      "code": "orientation",
+      "label": "Orientation",
+      "format": "set",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "context": {}
+    },
+    {
+      "code": "parois_admises",
+      "label": "Parois admises",
+      "format": "set",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "cloison_creuse",
+        "maconnerie",
+        "beton"
+      ],
+      "context": {}
+    },
+    {
+      "code": "forme",
+      "label": "Forme",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "ronde",
+        "carree",
+        "rectangulaire",
+        "ovale"
+      ],
+      "context": {}
+    },
+    {
+      "code": "configuration_poles",
+      "label": "Configuration des pôles",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "1P",
+        "1P_N",
+        "2P",
+        "3P",
+        "3P_N",
+        "4P"
+      ],
+      "context": {}
+    },
+    {
+      "code": "courbe",
+      "label": "Courbe",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "B",
+        "C",
+        "D",
+        "K",
+        "Z"
+      ],
+      "context": {}
+    },
+    {
+      "code": "type_differentiel",
+      "label": "Type différentiel",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "AC",
+        "A",
+        "F",
+        "B"
+      ],
+      "context": {}
+    },
+    {
+      "code": "actionnement",
+      "label": "Actionnement",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "levier",
+        "insertion_directe",
+        "vis"
+      ],
+      "context": {}
+    },
+    {
+      "code": "types_conducteurs",
+      "label": "Conducteurs admis",
+      "format": "set",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "massif",
+        "multifilaire_rigide",
+        "souple"
+      ],
+      "context": {}
+    },
+    {
+      "code": "fonction_borne",
+      "label": "Fonction de borne",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "passage",
+        "neutre",
+        "PE"
+      ],
+      "context": {}
+    },
+    {
+      "code": "rail_compatible",
+      "label": "Rail compatible",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "DIN_35",
+        "DIN_15",
+        "DIN_32"
+      ],
+      "context": {}
+    },
+    {
+      "code": "type_accessoire",
+      "label": "Type d’accessoire",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "support",
+        "pontage",
+        "plaque_extremite",
+        "reperage"
+      ],
+      "context": {}
+    },
+    {
+      "code": "nature_capacite_peigne",
+      "label": "Nature de capacité du peigne",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "voies",
+        "appareils",
+        "modules"
+      ],
+      "context": {}
+    },
+    {
+      "code": "connexion_amont",
+      "label": "Connexion amont",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "automatique",
+        "ressort",
+        "embrochable"
+      ],
+      "context": {}
+    },
+    {
+      "code": "connexion_aval",
+      "label": "Connexion aval",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "automatique",
+        "ressort",
+        "embrochable"
+      ],
+      "context": {}
+    },
+    {
+      "code": "connexion_cote_1",
+      "label": "Connexion cote 1",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "automatique",
+        "ressort",
+        "embrochable"
+      ],
+      "context": {}
+    },
+    {
+      "code": "connexion_cote_2",
+      "label": "Connexion cote 2",
+      "format": "choice",
+      "unit": "",
+      "integer": false,
+      "values": [
+        "vis",
+        "automatique",
+        "ressort",
+        "embrochable"
+      ],
+      "context": {}
+    },
+    {
+      "code": "ip",
+      "label": "Indice IP",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "ik",
+      "label": "Indice IK",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "marquage_calibre",
+      "label": "Marquage du calibre",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "fonction_associee",
+      "label": "Fonction associée",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "format_appareillage",
+      "label": "Format de l’appareillage",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "geometrie_montage",
+      "label": "Géométrie de montage",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "systeme_modulaire",
+      "label": "Système modulaire",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "taille_accessoire",
+      "label": "Taille ou capacité de l’accessoire",
+      "format": "text",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "plaque_fournie",
+      "label": "Plaque fournie",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "support_fourni",
+      "label": "Support fourni",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "enjoliveur_fourni",
+      "label": "Enjoliveur fourni",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "boitier_fourni",
+      "label": "Boitier fourni",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "eclairable",
+      "label": "Eclairable",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "source_lumineuse_fournie",
+      "label": "Source lumineuse fournie",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "etanche_air",
+      "label": "Etanche air",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "serre_cable",
+      "label": "Serre cable",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "neutre_sectionne",
+      "label": "Neutre sectionne",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "selectif",
+      "label": "Selectif",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "retard_courte_duree",
+      "label": "Retard courte duree",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "porte_fournie",
+      "label": "Porte fournie",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "bornier_terre_fourni",
+      "label": "Bornier terre fourni",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "bornier_neutre_fourni",
+      "label": "Bornier neutre fourni",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "decoupable",
+      "label": "Decoupable",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "sans_halogene",
+      "label": "Sans halogene",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "volet",
+      "label": "Volet",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "separable",
+      "label": "Separable",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "plaque_extremite_requise",
+      "label": "Plaque extremite requise",
+      "format": "boolean",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "nombre_prises",
+      "label": "Nombre prises",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "nombre_commandes",
+      "label": "Nombre commandes",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "contacts_no",
+      "label": "Contacts no",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "contacts_nc",
+      "label": "Contacts nc",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "contacts_inverseurs",
+      "label": "Contacts inverseurs",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "postes",
+      "label": "Postes",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "poles",
+      "label": "Poles",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "poles_proteges",
+      "label": "Poles proteges",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "rangees",
+      "label": "Rangees",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "modules_par_rangee",
+      "label": "Modules par rangee",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "modules_total",
+      "label": "Modules total",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "points_connexion",
+      "label": "Points connexion",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "potentiels_independants",
+      "label": "Potentiels independants",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "etages",
+      "label": "Etages",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "points_par_etage",
+      "label": "Points par etage",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "points_par_circuit",
+      "label": "Points par circuit",
+      "format": "number",
+      "unit": "",
+      "integer": true,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "courant",
+      "label": "Courant nominal",
+      "format": "number",
+      "unit": "A",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "tension",
+      "label": "Tension assignée",
+      "format": "number",
+      "unit": "V",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "sensibilite",
+      "label": "Sensibilité différentielle",
+      "format": "number",
+      "unit": "mA",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "modules_din",
+      "label": "Largeur DIN",
+      "format": "number",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "modules_appareillage",
+      "label": "Modules d’appareillage",
+      "format": "number",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "capacite_peigne",
+      "label": "Capacité du peigne",
+      "format": "number",
+      "unit": "",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "entraxe",
+      "label": "Entraxe",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "profondeur_utile",
+      "label": "Profondeur utile",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "diametre_percage",
+      "label": "Diamètre de perçage",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "largeur",
+      "label": "Largeur",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "hauteur",
+      "label": "Hauteur",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "profondeur",
+      "label": "Profondeur",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "pas_peigne",
+      "label": "Pas du peigne",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "longueur_peigne",
+      "label": "Longueur du peigne",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "longueur_denudage",
+      "label": "Longueur de dénudage",
+      "format": "number",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "section_rigide",
+      "label": "Section rigide",
+      "format": "range",
+      "unit": "mm²",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "section_multifilaire",
+      "label": "Section multifilaire",
+      "format": "range",
+      "unit": "mm²",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "section_souple",
+      "label": "Section souple",
+      "format": "range",
+      "unit": "mm²",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "section_souple_sans_embout",
+      "label": "Section souple sans embout",
+      "format": "range",
+      "unit": "mm²",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "section_souple_avec_embout",
+      "label": "Section souple avec embout",
+      "format": "range",
+      "unit": "mm²",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "diametre_cable",
+      "label": "Diamètre du câble",
+      "format": "range",
+      "unit": "mm",
+      "integer": false,
+      "values": [],
+      "context": {}
+    },
+    {
+      "code": "icn_230",
+      "label": "ICN 230 V — EN 60898",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "EN 60898",
+        "tension_v": 230
+      }
+    },
+    {
+      "code": "icn_400",
+      "label": "ICN 400 V — EN 60898",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "EN 60898",
+        "tension_v": 400
+      }
+    },
+    {
+      "code": "icn_61009_230",
+      "label": "ICN_61009 230 V — EN 61009",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "EN 61009",
+        "tension_v": 230
+      }
+    },
+    {
+      "code": "icn_61009_400",
+      "label": "ICN_61009 400 V — EN 61009",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "EN 61009",
+        "tension_v": 400
+      }
+    },
+    {
+      "code": "icu_230",
+      "label": "ICU 230 V — IEC/EN 60947-2",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "IEC/EN 60947-2",
+        "tension_v": 230
+      }
+    },
+    {
+      "code": "icu_400",
+      "label": "ICU 400 V — IEC/EN 60947-2",
+      "format": "number",
+      "unit": "kA",
+      "integer": false,
+      "values": [],
+      "context": {
+        "norme": "IEC/EN 60947-2",
+        "tension_v": 400
+      }
+    }
+  ],
+  "families": [
+    {
+      "code": "prises",
+      "label": "Prises de courant",
+      "parent": "appareillage",
+      "essential": [
+        "composition",
+        "standard_prise",
+        "configuration_contacts",
+        "courant",
+        "couleur",
+        "pose"
+      ],
+      "optional": [
+        "fixation",
+        "connexion",
+        "tension",
+        "ip",
+        "ik",
+        "finition",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "sans_halogene",
+        "nombre_prises",
+        "volet",
+        "modules_appareillage",
+        "plaque_fournie",
+        "support_fourni",
+        "enjoliveur_fourni",
+        "boitier_fourni"
+      ],
+      "special": [
+        "gamme"
+      ]
+    },
+    {
+      "code": "interrupteurs",
+      "label": "Interrupteurs et va-et-vient",
+      "parent": "appareillage",
+      "essential": [
+        "fonction_commande",
+        "nombre_commandes",
+        "composition",
+        "courant",
+        "marquage_calibre",
+        "couleur"
+      ],
+      "optional": [
+        "fixation",
+        "connexion",
+        "tension",
+        "ip",
+        "ik",
+        "finition",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "sans_halogene",
+        "pose",
+        "eclairable",
+        "source_lumineuse_fournie",
+        "fonction_voyant",
+        "plaque_fournie",
+        "support_fourni",
+        "enjoliveur_fourni",
+        "boitier_fourni"
+      ],
+      "special": [
+        "gamme"
+      ]
+    },
+    {
+      "code": "poussoirs",
+      "label": "Boutons-poussoirs",
+      "parent": "appareillage",
+      "essential": [
+        "contacts_no",
+        "contacts_nc",
+        "contacts_inverseurs",
+        "nombre_commandes",
+        "composition",
+        "courant",
+        "couleur"
+      ],
+      "optional": [
+        "fixation",
+        "connexion",
+        "tension",
+        "ip",
+        "ik",
+        "finition",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "sans_halogene",
+        "pose",
+        "eclairable",
+        "source_lumineuse_fournie",
+        "fonction_voyant",
+        "plaque_fournie",
+        "support_fourni",
+        "enjoliveur_fourni",
+        "boitier_fourni"
+      ],
+      "special": [
+        "gamme"
+      ]
+    },
+    {
+      "code": "plaques",
+      "label": "Plaques de finition",
+      "parent": "appareillage",
+      "essential": [
+        "postes",
+        "orientation",
+        "couleur"
+      ],
+      "optional": [
+        "entraxe",
+        "finition",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "modules_appareillage",
+        "ip"
+      ],
+      "special": [
+        "compatibilite",
+        "entraxe_multiposte"
+      ]
+    },
+    {
+      "code": "enjoliveurs",
+      "label": "Enjoliveurs et touches",
+      "parent": "appareillage",
+      "essential": [
+        "fonction_associee",
+        "format_appareillage",
+        "couleur"
+      ],
+      "optional": [
+        "finition",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "nombre_commandes",
+        "modules_appareillage"
+      ],
+      "special": [
+        "compatibilite"
+      ]
+    },
+    {
+      "code": "supports",
+      "label": "Supports de fixation",
+      "parent": "appareillage",
+      "essential": [
+        "postes",
+        "modules_appareillage",
+        "fixation"
+      ],
+      "optional": [
+        "entraxe",
+        "orientation",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur"
+      ],
+      "special": [
+        "compatibilite",
+        "entraxe_multiposte"
+      ]
+    },
+    {
+      "code": "boites",
+      "label": "Boîtes d’encastrement",
+      "parent": "appareillage",
+      "essential": [
+        "parois_admises",
+        "postes",
+        "profondeur_utile",
+        "geometrie_montage"
+      ],
+      "optional": [
+        "diametre_percage",
+        "entraxe",
+        "etanche_air",
+        "fixation",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "ip",
+        "forme"
+      ],
+      "special": []
+    },
+    {
+      "code": "boitiers-saillie",
+      "label": "Boîtiers et cadres en saillie",
+      "parent": "appareillage",
+      "essential": [
+        "postes",
+        "modules_appareillage",
+        "profondeur_utile"
+      ],
+      "optional": [
+        "orientation",
+        "couleur",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "ip"
+      ],
+      "special": [
+        "compatibilite"
+      ]
+    },
+    {
+      "code": "boites-derivation",
+      "label": "Boîtes de dérivation",
+      "parent": "appareillage",
+      "essential": [
+        "pose",
+        "forme",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "ip"
+      ],
+      "optional": [
+        "materiau",
+        "fixation",
+        "ik",
+        "couleur"
+      ],
+      "special": []
+    },
+    {
+      "code": "sorties-cable",
+      "label": "Sorties de câble",
+      "parent": "appareillage",
+      "essential": [
+        "composition",
+        "serre_cable",
+        "couleur"
+      ],
+      "optional": [
+        "diametre_cable",
+        "courant",
+        "connexion",
+        "pose",
+        "fixation",
+        "ip",
+        "plaque_fournie",
+        "support_fourni",
+        "enjoliveur_fourni",
+        "boitier_fourni"
+      ],
+      "special": [
+        "gamme_ou_compatibilite"
+      ]
+    },
+    {
+      "code": "disjoncteurs",
+      "label": "Disjoncteurs modulaires",
+      "parent": "protection",
+      "essential": [
+        "courant",
+        "configuration_poles",
+        "courbe",
+        "tension",
+        "type_tension",
+        "modules_din"
+      ],
+      "optional": [
+        "connexion_amont",
+        "connexion_aval",
+        "poles_proteges",
+        "neutre_sectionne",
+        "profondeur",
+        "icn_230",
+        "icn_400",
+        "icu_230",
+        "icu_400"
+      ],
+      "special": [
+        "coupure"
+      ]
+    },
+    {
+      "code": "differentiels",
+      "label": "Interrupteurs différentiels",
+      "parent": "protection",
+      "essential": [
+        "courant",
+        "sensibilite",
+        "type_differentiel",
+        "poles",
+        "tension",
+        "type_tension",
+        "modules_din"
+      ],
+      "optional": [
+        "connexion_amont",
+        "connexion_aval",
+        "selectif",
+        "retard_courte_duree",
+        "profondeur"
+      ],
+      "special": []
+    },
+    {
+      "code": "disjoncteurs-differentiels",
+      "label": "Disjoncteurs différentiels",
+      "parent": "protection",
+      "essential": [
+        "courant",
+        "sensibilite",
+        "type_differentiel",
+        "configuration_poles",
+        "courbe",
+        "tension",
+        "type_tension",
+        "modules_din"
+      ],
+      "optional": [
+        "connexion_amont",
+        "connexion_aval",
+        "poles_proteges",
+        "neutre_sectionne",
+        "profondeur",
+        "icn_230",
+        "icn_400",
+        "icn_61009_230",
+        "icn_61009_400",
+        "icu_230",
+        "icu_400",
+        "selectif",
+        "retard_courte_duree"
+      ],
+      "special": [
+        "coupure"
+      ]
+    },
+    {
+      "code": "coffrets",
+      "label": "Coffrets modulaires à équiper",
+      "parent": "protection",
+      "essential": [
+        "rangees",
+        "modules_par_rangee",
+        "modules_total",
+        "pose",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "ip"
+      ],
+      "optional": [
+        "porte_fournie",
+        "bornier_terre_fourni",
+        "bornier_neutre_fourni",
+        "materiau",
+        "ik",
+        "couleur"
+      ],
+      "special": []
+    },
+    {
+      "code": "peignes",
+      "label": "Peignes d’alimentation",
+      "parent": "protection",
+      "essential": [
+        "configuration_poles",
+        "connexion",
+        "pas_peigne",
+        "longueur_peigne",
+        "capacite_peigne",
+        "nature_capacite_peigne",
+        "courant"
+      ],
+      "optional": [
+        "decoupable",
+        "tension"
+      ],
+      "special": [
+        "compatibilite"
+      ]
+    },
+    {
+      "code": "bornes",
+      "label": "Bornes de connexion rapide",
+      "parent": "raccordement",
+      "essential": [
+        "actionnement",
+        "points_connexion",
+        "potentiels_independants",
+        "types_conducteurs"
+      ],
+      "optional": [
+        "section_rigide",
+        "section_multifilaire",
+        "section_souple",
+        "section_souple_sans_embout",
+        "section_souple_avec_embout",
+        "courant",
+        "tension",
+        "longueur_denudage",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "couleur",
+        "couleur_secondaire"
+      ],
+      "special": [
+        "sections"
+      ]
+    },
+    {
+      "code": "barrettes-vis",
+      "label": "Barrettes de raccordement à vis",
+      "parent": "raccordement",
+      "essential": [
+        "potentiels_independants",
+        "points_par_circuit",
+        "connexion_cote_1",
+        "connexion_cote_2",
+        "types_conducteurs"
+      ],
+      "optional": [
+        "section_rigide",
+        "section_multifilaire",
+        "section_souple",
+        "section_souple_sans_embout",
+        "section_souple_avec_embout",
+        "courant",
+        "tension",
+        "separable",
+        "materiau",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "entraxe"
+      ],
+      "special": [
+        "sections"
+      ]
+    },
+    {
+      "code": "bornes-rail",
+      "label": "Bornes pour rail DIN",
+      "parent": "raccordement",
+      "essential": [
+        "fonction_borne",
+        "rail_compatible",
+        "etages",
+        "potentiels_independants",
+        "points_par_etage",
+        "connexion_cote_1",
+        "connexion_cote_2",
+        "types_conducteurs"
+      ],
+      "optional": [
+        "section_rigide",
+        "section_multifilaire",
+        "section_souple",
+        "section_souple_sans_embout",
+        "section_souple_avec_embout",
+        "courant",
+        "tension",
+        "couleur",
+        "largeur",
+        "hauteur",
+        "profondeur",
+        "plaque_extremite_requise"
+      ],
+      "special": [
+        "sections"
+      ]
+    },
+    {
+      "code": "accessoires-bornes",
+      "label": "Accessoires de bornes",
+      "parent": "raccordement",
+      "essential": [
+        "type_accessoire",
+        "taille_accessoire"
+      ],
+      "optional": [
+        "points_connexion",
+        "fixation",
+        "couleur",
+        "largeur",
+        "hauteur",
+        "profondeur"
+      ],
+      "special": [
+        "compatibilite"
+      ]
+    }
+  ]
+}

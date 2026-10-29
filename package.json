@@ -2,7 +2,7 @@
   "name": "2hbc-infrastructure",
   "private": true,
   "scripts": {
-    "test:db": "node --test tests/database.test.mjs tests/catalogue-facets.test.mjs"
+    "test:db": "node --test tests/database.test.mjs tests/catalogue-facets.test.mjs tests/catalogue-model.test.mjs"
   },
   "devDependencies": {
     "@electric-sql/pglite": "0.5.8"

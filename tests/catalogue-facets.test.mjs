@@ -32,7 +32,9 @@ test('Catalogue v2 : migrations, import, recherche, facettes et RLS',async t=>{
   await db.exec(`alter default privileges in schema public grant all on tables to anon,authenticated,service_role;
    alter default privileges in schema public grant all on sequences to anon,authenticated,service_role;
    alter default privileges in schema public grant execute on functions to anon,authenticated,service_role;`);
-  for(const file of (await readdir('supabase/migrations')).sort()){
+  // v2 contract regression. The stricter v1 business model and publication gate
+  // are exercised against ALL migrations in catalogue-model.test.mjs.
+  for(const file of (await readdir('supabase/migrations')).filter(f=>f<='20261015130122_catalogue_facets.sql').sort()){
    await db.exec(await readFile('supabase/migrations/'+file,'utf8'));
    if(file.endsWith('_initial_mvp.sql'))await db.exec(await readFile('supabase/seed.sql','utf8'));
    if(file.endsWith('_personal_supplier_prices.sql'))await db.exec(await readFile('supabase/pilot_catalog.sql','utf8'));

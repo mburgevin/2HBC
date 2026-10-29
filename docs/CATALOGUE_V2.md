@@ -1,20 +1,14 @@
 # Catalogue 2HBC — catégories, attributs et recherche
 
-État du 28 octobre 2026 : script révisé après contrôle des 10 tables, politiques, permissions héritées, séquences, fonctions et clés étrangères du projet. Les 40 tests PostgreSQL passent, ainsi que la répétition du nettoyage sur la sauvegarde. La tentative d'application directe a été interrompue sans résultat confirmé ; le contrôle après interruption confirme que les deux migrations initiales et les 114 anciens produits sont toujours présents. Aucune modification distante n'est confirmée. Le site conserve la recherche précédente tant que la nouvelle RPC manque. Voir [la revue de sécurité](audits/2026-10-28/Revue_SQL.md).
+État du 29 octobre 2026 : le modèle métier de l’étape 2 est installé et vérifié dans [CATALOGUE_MODELE_V1.md](CATALOGUE_MODELE_V1.md). Il remplace les anciens profils par 3 univers, 19 familles finales et 99 attributs actifs. La vérification distante préalable confirme 0 produit et 0 offre, 2 utilisateurs, 1 client et 3 fournisseurs. Le résultat de l’installation est consigné dans ce nouveau document.
 
-## Activer la nouvelle base
+## Installation sur le catalogue vide
 
-Dans le SQL Editor du **projet 2HBC `gueuqeqyshhhmxbsiuxg`**, exécuter **tout** le fichier [20261016_reset_catalogue.sql](../supabase/operations/20261016_reset_catalogue.sql).
+Le script adapté à cet état est [20261029_install_catalogue_v1.sql](../supabase/operations/20261029_install_catalogue_v1.sql). Il applique les quatre migrations en attente en une transaction et conserve comptes, clients et fournisseurs. Il refuse un catalogue non vide ou un historique inattendu. Aucun nettoyage n’est nécessaire.
 
-Utiliser la révision portant en première ligne **« Révision de sécurité du 28 octobre 2026 »** et remplacer entièrement l'ancien texte. La RLS est activée explicitement pour chacune des sept nouvelles tables. Les droits hérités trop larges sont révoqués avant les autorisations nécessaires. Les deux mises à jour de reprise ont un `WHERE` ciblé. Un dernier contrôle refuse la validation s'il manque une protection. L'avertissement sur les opérations destructives reste justifié : cette opération supprime intentionnellement l'ancien catalogue autorisé, sans supprimer de table.
+**Le script historique `20261016_reset_catalogue.sql` ne correspond plus à l’état actuel : ne pas l’exécuter.** Il reste dans le dépôt pour la traçabilité de l’ancienne opération.
 
-Ce fichier est réservé à l’état sauvegardé le 16 octobre : 114 produits, 148 offres, 7 lignes de panier de démonstration, aucune observation de prix personnel. Une empreinte de l’ensemble du catalogue et de ses dépendances empêche son exécution si les données ont changé. Ne pas supprimer ce contrôle pour forcer une exécution. Il ne contient aucune donnée personnelle de la sauvegarde.
-
-En une transaction, il supprime les anciennes lignes de panier, offres et produits, applique les trois migrations en attente et les enregistre dans l’historique Supabase. Il conserve les comptes, les conteneurs de panier, les fournisseurs et les séquences. Une erreur exige un `ROLLBACK;` si l’éditeur n’a pas déjà annulé la transaction. Ne jamais valider les suppressions séparément.
-
-Résultat attendu : **0 produit, 0 offre, 1 compte et 1 panier conservés, 21 catégories, 22 attributs**. Le second lancement est volontairement refusé. Le catalogue restera vide jusqu’à la prochaine collecte relue et publiée.
-
-Les migrations seules sont également dans `supabase/migrations/` : intégrité/import, images, catégories/facettes. Ne pas les appliquer séparément puis relancer ce fichier sans réviser l’opération.
+Les sections suivantes décrivent le collecteur et le contrat v2 existants. Leur alignement sur les profils métier relève de l’étape 3. Après installation du modèle métier, `--approve` ne suffit plus à publier : chaque fiche doit satisfaire `diagnostic_publication`, puis être publiée explicitement par `publier_produit_catalogue`.
 
 ## Collecter sous Windows
 
@@ -52,7 +46,7 @@ Le rapprochement Rexel/Sonepar exige toujours **EAN + marque + référence fabri
 
 La catégorie de découverte du crawler n’est pas la catégorie finale du produit. Le chemin fournisseur est collecté mais `category_code` reste à attribuer après contrôle. Les catégories fournisseur sont parfois plus larges que nos familles : leur correspondance ne doit pas être généralisée automatiquement. La table `categories_fournisseurs` permet de valider ces correspondances ultérieurement.
 
-Codes de catégories finales initiaux :
+Codes de catégories du contrat v2 historique (remplacés par le référentiel métier v1 ; voir le document lié ci-dessus) :
 
 | Famille | Codes finaux |
 |---|---|
@@ -79,7 +73,7 @@ Exécuter ce SQL dans le projet 2HBC. Il n’affiche pas les fiches dans le cata
 py prepare_catalogue_import.py catalogue-attributs-v040/products-reviewed.json --approve --out publication.sql
 ```
 
-La validation serveur vérifie encore types, unités, provenance, catégorie finale, conflits, GTIN et références. Une erreur annule le lot. Le réimport d’un document v2 approuvé remplace ses attributs canoniques par l’instantané relu, sans remplacer les tarifs existants. La préparation conserve deux documents privés : contrat d’identité historique et document v2 complet.
+Le contrat v2 vérifie types, unités, provenance, catégorie finale, conflits, GTIN et références. Le modèle métier v1 ajoute ses propres observations, valeurs retenues, exigences et qualification avant toute exposition publique. Une erreur annule le lot. Le réimport d’un document v2 approuvé remplace ses attributs canoniques par l’instantané relu, sans remplacer les tarifs existants. La préparation conserve deux documents privés : contrat d’identité historique et document v2 complet.
 
 ## Structure et recherche
 
@@ -99,6 +93,6 @@ Quatre pages publiques ont été relues le 16 octobre : un disjoncteur présent 
 
 Les changements d’HTML peuvent réduire la couverture ; `report.json` permet de les repérer. Les dictionnaires de libellés et les catégories seront enrichis avec les nouvelles familles. Les conditions de réutilisation des catalogues/photos et les accords de données à grande échelle restent à établir avec les fournisseurs.
 
-Les écritures Supabase et le parcours réel après activation ne sont pas validés tant que l’erreur du connecteur persiste. Le mode de compatibilité n’affiche pas de filtres fictifs : ils apparaîtront dès que la nouvelle RPC sera disponible.
+Le statut d’installation Supabase est suivi dans `CATALOGUE_MODELE_V1.md`. La RPC existante conserve les facettes de `produit_attributs` ; l’interface et la recherche des ensembles, intervalles et contextes de `valeurs_catalogue` restent à adapter. La présence des nouvelles tables ne signifie pas que ces nouveaux filtres sont déjà disponibles sur le site.
 
 Le contrôle en navigateur automatisé local est préparé dans `tests/catalogue-browser.mjs`, mais n’a pas pu démarrer ici : Chromium est absent et son téléchargement échoue. Les interactions React sont couvertes par Testing Library, et le contrat complet de collecte/import/recherche par PostgreSQL embarqué. Le contrôle visuel en navigateur reste à effectuer après activation.
