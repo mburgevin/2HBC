@@ -14,7 +14,12 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, quote, unquote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-COLLECTOR_VERSION = "0.4.0"
+try:
+    from scripts import catalogue_metier as metier
+except ModuleNotFoundError:
+    import catalogue_metier as metier
+
+COLLECTOR_VERSION = "0.5.0"
 AGENT = f"2HBCCatalogue/{COLLECTOR_VERSION} (+https://github.com/mburgevin/2HBC)"
 HOSTS = {"www.rexel.fr": "Rexel", "www.sonepar.fr": "Sonepar"}
 MAX_BYTES = 8 * 1024 * 1024
@@ -41,18 +46,7 @@ DEFAULT_SEEDS = [
         "category": "Connectique et raccordement",
         "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Produits-Industriels/Connectique-et-raccordement/c/M2_0203"
     },
-    {
-        "category": "Fils et câbles",
-        "url": "https://www.sonepar.fr/catalog/fr-fr/category/fil-et-cable-SCC01"
-    },
-    {
-        "category": "Éclairage",
-        "url": "https://www.sonepar.fr/catalog/fr-fr/category/eclairage-SCC06"
-    },
-    {
-        "category": "Outillage et accessoires",
-        "url": "https://www.sonepar.fr/catalog/fr-fr/category/outillage-et-accessoires-d-installation-SCC09"
-    }
+
 ]
 
 
@@ -246,7 +240,7 @@ def extract_product(page, url, category, collected_at):
     photo = extract_image(page, url, supplier)
     if photo:
         product["offers"][0]["image_url"] = photo
-    product["schema_version"] = 2
+    product["schema_version"] = 3
     product["offers"][0].update(extract_details(page.html, url, supplier))
     enrich_product(product)
     return product
@@ -306,70 +300,8 @@ def label_key(value):
                         if not unicodedata.combining(c))).rstrip(" :")
 
 
-# Deliberately exact supplier labels: never infer specifications from product names.
-# Unit omitted by supplier is accepted only for a label whose physical unit is unambiguous.
-ATTRIBUTE_LABELS = {
-    "couleur": ("couleur", "text", ""),
-    "materiau": ("materiau", "text", ""),
-    "mode de pose": ("pose", "text", ""), "type de pose": ("pose", "text", ""),
-    "type de fixation": ("fixation", "text", ""),
-    "type de connexion": ("connexion", "text", ""),
-    "courant nominal": ("courant", "number", "A"), "intensite": ("courant", "number", "A"),
-    "calibre": ("courant", "number", "A"),
-    "calibre/courant nominal assigne (in)": ("courant", "number", "A"),
-    "tension nominale": ("tension", "number", "V"),
-    "tension": ("tension", "number", "V"), "tension assignee (ue)": ("tension", "number", "V"),
-    "nombre de poles": ("poles", "number", ""),
-    "nombre de poles (total)": ("poles", "number", ""),
-    "nombre de poles proteges": ("poles_proteges", "number", ""),
-    "caracteristique de declenchement": ("courbe", "text", ""),
-    "courbe de declenchement": ("courbe", "text", ""),
-    "courbe": ("courbe", "text", ""),
-    "caracteristique de declenchement (type/courbe)": ("courbe", "text", ""),
-    "type de tension": ("type_tension", "text", ""),
-    "pouvoir de coupure assigne icn selon en 60898 a 230 v": ("icn_230", "number", "kA"),
-    "pouvoir de coupure assigne selon en 60898 a 230 v (icn)": ("icn_230", "number", "kA"),
-    "pouvoir de coupure assigne icu selon iec 60947-2 a 230 v": ("icu_230", "number", "kA"),
-    "pouvoir de coupure assigne selon iec 60947-2 a 230 v (icu)": ("icu_230", "number", "kA"),
-    "section nominale du conducteur": ("section", "number", "mm²"),
-    "nombre de conducteurs": ("conducteurs", "number", ""),
-    "longueur": ("longueur", "number", "m"),
-    "puissance nominale": ("puissance", "number", "W"),
-    "flux lumineux": ("flux", "number", "lm"),
-    "temperature de couleur": ("temperature", "number", "K"),
-    "adapte a l'indice de protection (ip)": ("ip", "text", ""),
-    "adapte a la classe de protection (ip)": ("ip", "text", ""),
-    "indice de protection (ip)": ("ip", "text", ""),
-    "classe de protection (ip)": ("ip", "text", ""),
-    "sans halogene": ("sans_halogene", "boolean", ""),
-    "nombre de modules (construction modulaire)": ("modules", "number", ""),
-    "largeur en nombre de modules": ("modules", "number", ""),
-}
-
-
 def canonical_attribute(label, value):
-    spec = ATTRIBUTE_LABELS.get(label_key(label))
-    if not spec:
-        return None
-    code, kind, unit = spec
-    if kind == "number":
-        # Ranges such as 50...60 and inequalities are not single-valued facets.
-        match = re.fullmatch(r"([0-9]+(?:[.,][0-9]+)?)\s*([A-Za-z²2]*)", tidy(value))
-        if not match or (match[2] and match[2] != unit):
-            return None
-        number = float(match[1].replace(",", "."))
-        if number > 1000000000:
-            return None
-        value = int(number) if number.is_integer() else number
-    elif kind == "boolean":
-        if label_key(value) not in {"oui", "non"}:
-            return None
-        value = label_key(value) == "oui"
-    else:
-        value = norm(value)
-        if code in {"courbe", "ip", "type_tension"}:
-            value = value.upper()
-    return {"code": code, "type": kind, "value": value, "unit": unit}
+    return metier.proposal(label, value)
 
 
 def extract_details(html, url, supplier):
@@ -416,24 +348,7 @@ def extract_details(html, url, supplier):
 
 
 def enrich_product(product):
-    candidates = {}
-    for offer in product["offers"]:
-        for raw in offer.get("raw_attributes", []):
-            item = canonical_attribute(raw["label"], raw["value"])
-            if item:
-                item.update(supplier=offer["supplier"], raw_label=raw["label"], raw_value=raw["value"])
-                candidates.setdefault(item["code"], []).append(item)
-    product["attributes"], product["attribute_conflicts"] = [], []
-    for code, values in sorted(candidates.items()):
-        if len({json.dumps(v["value"], ensure_ascii=False) for v in values}) == 1:
-            product["attributes"].append(values[0])
-        else:
-            product["attribute_conflicts"].append(code)
-    # Classification is explicitly reviewed. A discovery category or product name
-    # must never silently become an approved canonical category.
-    product.setdefault("category_code", None)
-    ranges = {o["range"] for o in product["offers"] if o.get("range")}
-    product["range"] = next(iter(ranges)) if len(ranges) == 1 else None
+    return metier.enrich(product)
 
 
 class Robots:
@@ -573,8 +488,8 @@ def merge(products, incoming, allow_new=True):
     elif old["url"] == offer["url"]:
         old.update(offer)
     existing["categories"] = sorted(set(existing["categories"] + incoming["categories"]))
-    if incoming.get("schema_version") == 2:
-        existing["schema_version"] = 2
+    if incoming.get("schema_version") in (2, 3):
+        existing["schema_version"] = 3
         enrich_product(existing)
     return True
 
@@ -608,8 +523,8 @@ def catalogue_row(product):
         row[prefix + "_url"] = offer.get("url")
         row[prefix + "_image_url"] = offer.get("image_url")
     row["missing_fields"] = [key for key in ("rexel_code", "sonepar_code", "image_url") if not row[key]]
-    row.update(category_code=product.get("category_code"), attributes=product.get("attributes", []),
-               attribute_conflicts=product.get("attribute_conflicts", []),
+    row.update(category_code=product.get("category_code"), observations=product.get("observations", []),
+               review=metier.review_report(product),
                supplier_categories={o["supplier"]: o.get("category_path", []) for o in product["offers"]})
     return row
 
@@ -619,6 +534,7 @@ def save(state, output, limit):
     atomic_json(output / "products.json", state["products"])
     overview = [catalogue_row(p) for p in state["products"]]
     atomic_json(output / "catalogue.json", overview)
+    atomic_json(output / "review.json", [{"brand": p["brand"], "reference": p["reference"], **metier.review_report(p)} for p in state["products"]])
     count = len(state["products"])
     paired = sum(len(p["offers"]) == 2 for p in state["products"])
     pictured = sum(any(o.get("image_url") for o in p["offers"]) for p in state["products"])
@@ -626,9 +542,9 @@ def save(state, output, limit):
         "updated_at": now(), "target": limit, "products": count,
         "both_suppliers": paired, "single_supplier": count - paired, "complete": count >= limit,
         "products_with_image": pictured, "products_without_image": count - pictured,
-        "products_with_attributes": sum(bool(p.get("attributes")) for p in state["products"]),
+        "products_with_attributes": sum(bool(p.get("observations")) for p in state["products"]),
         "products_with_raw_attributes": sum(any(o.get("raw_attributes") for o in p["offers"]) for p in state["products"]),
-        "products_with_attribute_conflicts": sum(bool(p.get("attribute_conflicts")) for p in state["products"]),
+        "products_with_attribute_conflicts": sum(bool(metier.review_report(p)["conflicts"]) for p in state["products"]),
         "products_needing_classification": sum(not p.get("category_code") for p in state["products"]),
         "both_codes_and_image": sum(not row["missing_fields"] for row in overview),
         "missing_codes": {name: sum(not row[name.lower() + "_code"] for row in overview) for name in ("Rexel", "Sonepar")},
@@ -726,7 +642,7 @@ def collect(state, fetcher, limit, max_pages, checkpoint=lambda: None, emit=prin
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--version", action="version",
-                        version=f"2HBC Catalogue {COLLECTOR_VERSION} - attributs + catégories + photos + codes Rexel/Sonepar")
+                        version=f"2HBC Catalogue {COLLECTOR_VERSION} - modèle métier v3 + observations + photos + codes Rexel/Sonepar")
     parser.add_argument("--limit", type=int, default=100, help="Nombre de produits distincts visé (défaut : 100)")
     parser.add_argument("--supplier", choices=["both", "rexel", "sonepar"], default="both")
     parser.add_argument("--out", type=Path, default=Path.cwd() / "catalogue-2hbc", help="Dossier de résultats et de reprise")
@@ -741,10 +657,10 @@ def main(argv=None):
     state_path = args.out / "state.json"
     if state_path.exists():
         state = json.loads(state_path.read_text(encoding="utf-8"))
-        if state.get("version") != 2 or state.get("supplier") != args.supplier:
-            parser.error("Ancien dossier incompatible avec les attributs ; utilisez --out catalogue-attributs-v040 pour une nouvelle collecte.")
+        if state.get("version") != 3 or state.get("supplier") != args.supplier:
+            parser.error("Ancien dossier incompatible avec les attributs ; utilisez --out catalogue-metier-v050 pour une nouvelle collecte.")
     else:
-        state = {"version": 2, "supplier": args.supplier, "products": [], "pending": [], "seen": [], "issues": []}
+        state = {"version": 3, "supplier": args.supplier, "products": [], "pending": [], "seen": [], "issues": []}
     seeds = DEFAULT_SEEDS
     if args.urls:
         seeds = [{"url": line.strip(), "category": "Sélection personnalisée"}
@@ -755,7 +671,7 @@ def main(argv=None):
         supplier = HOSTS[urlsplit(seed["url"]).hostname].lower()
         if args.supplier in {"both", supplier}:
             enqueue(state, seed["url"], seed["category"])
-    print(f"2HBC Catalogue {COLLECTOR_VERSION} - attributs + catégories + photos + codes Rexel/Sonepar")
+    print(f"2HBC Catalogue {COLLECTOR_VERSION} - modèle métier v3 + observations + photos + codes Rexel/Sonepar")
     print("Script exécuté :", Path(__file__).resolve())
     print("Collecte publique, sans connexion ni prix. Reprise automatique dans", args.out)
     snapshot = lambda: save(state, args.out, args.limit)

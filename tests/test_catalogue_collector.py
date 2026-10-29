@@ -50,11 +50,11 @@ class CollectorTests(unittest.TestCase):
           <div><p class="w-50">Sans halogène</p><div><h4>Non</h4></div></div>
         </div></mf-pdp-technical-attributes>'''
         p = c.extract_product(c.Page(html), R, "Découverte", DATE)
-        self.assertEqual(p["schema_version"], 2)
+        self.assertEqual(p["schema_version"], 3)
         self.assertEqual(p["range"], "Odace")
         self.assertIsNone(p["category_code"])
         self.assertEqual([x["code"] for x in p["offers"][0]["category_path"]], ["M2_010706"])
-        values = {a["code"]: a["value"] for a in p["attributes"]}
+        values = {a["code"]: a["value"] for a in p["observations"]}
         self.assertEqual(values, {"courant": 16, "sans_halogene": False})
 
     def test_sonepar_attributes_decimal_units_and_unknown_values_preserved(self):
@@ -63,7 +63,8 @@ class CollectorTests(unittest.TestCase):
         <div data-testid="tech-spec-panel"><p>couleur:</p><p>blanc</p></div>'''
         p = c.extract_product(c.Page(html), S, "Découverte", DATE)
         self.assertEqual(len(p["offers"][0]["raw_attributes"]), 3)
-        self.assertEqual(next(a for a in p["attributes"] if a["code"] == "section")["value"], 2.5)
+        self.assertEqual([a["code"] for a in p["observations"]], ["couleur"])
+        self.assertEqual(len(c.metier.review_report(p)["unmapped_raw"]), 2)
         self.assertIsNone(c.canonical_attribute("Intensité", "10...16 A"))
         self.assertIsNone(c.canonical_attribute("Intensité", "16 mA"))
         self.assertIsNone(c.canonical_attribute("Nombre de pôles", "1P+N"))
@@ -74,8 +75,9 @@ class CollectorTests(unittest.TestCase):
         two["offers"][0]["raw_attributes"] = [{"label": "couleur", "value": "noir"}]
         products = [one]
         c.merge(products, two)
-        self.assertEqual(products[0]["attribute_conflicts"], ["couleur"])
-        self.assertEqual(products[0]["attributes"], [])
+        self.assertEqual(c.metier.review_report(products[0])["conflicts"], [{"code":"couleur","context":{}}])
+        self.assertEqual(len(products[0]["observations"]), 2)
+        self.assertTrue(all(not a["selected"] for a in products[0]["observations"]))
         self.assertEqual(len(products[0]["offers"]), 2)
 
     def test_old_resume_folder_requires_fresh_collection(self):
@@ -91,7 +93,7 @@ class CollectorTests(unittest.TestCase):
                                     cwd=folder, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn(c.COLLECTOR_VERSION, result.stdout)
-            self.assertIn("photos + codes Rexel/Sonepar", result.stdout)
+            self.assertIn("photos + codes Rexel/Sonepar", " ".join(result.stdout.split()))
             self.assertEqual(list(Path(folder).iterdir()), [])
 
     def test_rexel_photo_is_main_media_for_exact_product(self):

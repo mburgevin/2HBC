@@ -1,0 +1,2262 @@
+[
+  {
+    "brand": "Legrand",
+    "reference": "069511L",
+    "ean": "3414971877986",
+    "name": "Interrupteur ou va-et-vient 10AX 250V étanche Plexo composable gris",
+    "categories": [
+      "Sélection personnalisée"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Rexel",
+        "reference": "LEG069511L",
+        "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/Interrupteur-ou-va-et-vient-10AX-250V-%C3%A9tanche-Plexo-composable-gris/LEG069511L/p/73224603",
+        "pack": "Unité, conditionnement et multiple de vente à confirmer dans le compte",
+        "collected_at": "2026-10-29T23:27:40+00:00",
+        "page_sha256": "7a9d356ee3c90a2426ceb64d44acf94991b3d25cb596e88ef7857c5bd6a84b66",
+        "image_url": "https://api.rexel.fr/media/api/fr/content/73224603/EXTRA_LARGE",
+        "raw_attributes": [
+          {
+            "label": "Multiple de vente",
+            "value": "1"
+          },
+          {
+            "label": "Code Douane",
+            "value": "85365080"
+          },
+          {
+            "label": "Gamme",
+            "value": "PLEXO"
+          },
+          {
+            "label": "Traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Couleur de l'opérateur de commutation",
+            "value": "gris"
+          },
+          {
+            "label": "Compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "Zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "Profondeur d'appareil",
+            "value": "49 mm"
+          },
+          {
+            "label": "Hauteur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "Largeur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "Adapté à l'indice de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "Finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "IK",
+            "value": "IK08"
+          },
+          {
+            "label": "Interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "Courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Numéro RAL (équivalent)",
+            "value": "7046"
+          },
+          {
+            "label": "Nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "Type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "Type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "Matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "Qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "Calibre",
+            "value": "10 A"
+          },
+          {
+            "label": "Profondeur d'encastrement",
+            "value": "28.5 mm"
+          },
+          {
+            "label": "Traitement de surface",
+            "value": "non traité"
+          },
+          {
+            "label": "Type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "Avec plaque de montage",
+            "value": "Non"
+          },
+          {
+            "label": "Sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "Couleur",
+            "value": "gris"
+          },
+          {
+            "label": "Type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "Composition",
+            "value": "mécanisme avec enjoliveur (ou doigt)"
+          },
+          {
+            "label": "Type de pose",
+            "value": "autre"
+          },
+          {
+            "label": "Tension nominale",
+            "value": "250 V"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Appareillage et contrôle du bâtiment",
+            "code": "M2_01",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/c/M2_01"
+          },
+          {
+            "label": "Appareillage mural",
+            "code": "M2_0107",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/c/M2_0107"
+          },
+          {
+            "label": "Appareillage étanche sup. IP55",
+            "code": "M2_010702",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/c/M2_010702"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 à équiper de support plaque ou boîtier saillie, livré avec enjoliveur finition gris",
+        "range": "PLEXO"
+      },
+      {
+        "supplier": "Sonepar",
+        "reference": "00001187798",
+        "url": "https://www.sonepar.fr/catalog/fr-fr/products/legrand-interrupteur-ou-va-et-vient-10ax-250v-etanche-plexo-composable-gris-00001187798",
+        "pack": "10 unité(s)",
+        "collected_at": "2026-10-29T23:27:53+00:00",
+        "page_sha256": "74c0c5063d5bc79aa66524b77fb5e13b4fe24ab5077f482b964ea3034b7d7f3c",
+        "image_url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069511L-WEB-R.jpg?ts=1781668678896",
+        "raw_attributes": [
+          {
+            "label": "type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "mode de pose",
+            "value": "autre"
+          },
+          {
+            "label": "couleur",
+            "value": "gris"
+          },
+          {
+            "label": "composition",
+            "value": "mécanisme avec enjoliveur (ou doigt)"
+          },
+          {
+            "label": "interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "avec cadre/support de montage",
+            "value": "Non"
+          },
+          {
+            "label": "matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "traitement de la surface",
+            "value": "non traité"
+          },
+          {
+            "label": "finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "numéro RAL (équivalent)",
+            "value": "7046"
+          },
+          {
+            "label": "zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "adapté à la classe de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "indice de protection contre les chocs (IK)",
+            "value": "IK08"
+          },
+          {
+            "label": "pays de fabrication",
+            "value": "FRANCE"
+          },
+          {
+            "label": "calibre/courant nominal assigné (In)",
+            "value": "10 A"
+          },
+          {
+            "label": "courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "largeur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "hauteur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "profondeur d'appareil",
+            "value": "49 mm"
+          },
+          {
+            "label": "profondeur d'encastrement",
+            "value": "28.5 mm"
+          },
+          {
+            "label": "compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "couleur de l'opérateur de commutation",
+            "value": "gris"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Interrupteur - prise - boîte d encastrement",
+            "code": "SCC03",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-prise-boite-d-encastrement-SCC03"
+          },
+          {
+            "label": "Interrupteur et prise",
+            "code": "SCC0301",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-SCC0301"
+          },
+          {
+            "label": "Interrupteur et prise étanche",
+            "code": "SCC030102",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-etanche-SCC030102"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 à équiper de support plaque ou boîtier saillie, livré avec enjoliveur finition gris Les Atouts de l'article: Interrupteur ou va-et-vient 10AX - Connexion rapide sans outil",
+        "range": null
+      }
+    ],
+    "schema_version": 3,
+    "category_code": null,
+    "exceptions": [],
+    "compatibilities": [],
+    "observations": [
+      {
+        "code": "profondeur",
+        "value": 49.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Profondeur d'appareil",
+        "raw_value": "49 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Hauteur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Largeur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "ik",
+        "value": "IK08",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "IK",
+        "raw_value": "IK08",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Calibre",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "gris",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Couleur",
+        "raw_value": "gris",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "composition",
+        "value": "mecanisme_enjoliveur",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Composition",
+        "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "tension",
+        "value": 250.0,
+        "unit": "V",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Tension nominale",
+        "raw_value": "250 V",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "gris",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "couleur",
+        "raw_value": "gris",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "composition",
+        "value": "mecanisme_enjoliveur",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "composition",
+        "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "ik",
+        "value": "IK08",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "indice de protection contre les chocs (IK)",
+        "raw_value": "IK08",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "calibre/courant nominal assigné (In)",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "largeur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "hauteur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "profondeur",
+        "value": 49.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "profondeur d'appareil",
+        "raw_value": "49 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      }
+    ],
+    "range": "PLEXO"
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069611L",
+    "ean": "3414971880092",
+    "name": "Interrupteur ou va-et-vient 10AX 250V Plexo composable blanc",
+    "categories": [
+      "Sélection personnalisée"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Rexel",
+        "reference": "LEG069611L",
+        "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/Interrupteur-ou-va-et-vient-10AX-250V-Plexo-composable-blanc/LEG069611L/p/73224659",
+        "pack": "Unité, conditionnement et multiple de vente à confirmer dans le compte",
+        "collected_at": "2026-10-29T23:27:57+00:00",
+        "page_sha256": "a7516d454c10a89dd83613a18d46ad1ef69fae7263c106602345c0462787a082",
+        "image_url": "https://api.rexel.fr/media/api/fr/content/73224659/EXTRA_LARGE",
+        "raw_attributes": [
+          {
+            "label": "Multiple de vente",
+            "value": "1"
+          },
+          {
+            "label": "Code Douane",
+            "value": "85365080"
+          },
+          {
+            "label": "Gamme",
+            "value": "PLEXO"
+          },
+          {
+            "label": "Traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Couleur de l'opérateur de commutation",
+            "value": "blanc"
+          },
+          {
+            "label": "Compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "Zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "Profondeur d'appareil",
+            "value": "49 mm"
+          },
+          {
+            "label": "Hauteur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "Largeur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "Adapté à l'indice de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "Finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "IK",
+            "value": "IK08"
+          },
+          {
+            "label": "Interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "Courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Numéro RAL (équivalent)",
+            "value": "9003"
+          },
+          {
+            "label": "Nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "Type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "Type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "Matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "Qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "Calibre",
+            "value": "10 A"
+          },
+          {
+            "label": "Profondeur d'encastrement",
+            "value": "28.5 mm"
+          },
+          {
+            "label": "Traitement de surface",
+            "value": "non traité"
+          },
+          {
+            "label": "Type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "Avec plaque de montage",
+            "value": "Non"
+          },
+          {
+            "label": "Sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "Couleur",
+            "value": "blanc"
+          },
+          {
+            "label": "Type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "Composition",
+            "value": "mécanisme avec enjoliveur (ou doigt)"
+          },
+          {
+            "label": "Type de pose",
+            "value": "autre"
+          },
+          {
+            "label": "Tension nominale",
+            "value": "250 V"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Appareillage et contrôle du bâtiment",
+            "code": "M2_01",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/c/M2_01"
+          },
+          {
+            "label": "Appareillage mural",
+            "code": "M2_0107",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/c/M2_0107"
+          },
+          {
+            "label": "Appareillage étanche sup. IP55",
+            "code": "M2_010702",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/c/M2_010702"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 à équiper de support plaque ou boîtier saillie, livré avec enjoliveur finition blanc",
+        "range": "PLEXO"
+      },
+      {
+        "supplier": "Sonepar",
+        "reference": "00001188009",
+        "url": "https://www.sonepar.fr/catalog/fr-fr/products/legrand-interrupteur-ou-va-et-vient-10ax-250v-plexo-composable-blanc-00001188009",
+        "pack": "10 unité(s)",
+        "collected_at": "2026-10-29T23:28:05+00:00",
+        "page_sha256": "53d89736ea1c43e4193d95a5b058df161537b0a74b99fff527fe701d1f881c95",
+        "image_url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069611L-WEB-R.jpg?ts=1781668816492",
+        "raw_attributes": [
+          {
+            "label": "type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "mode de pose",
+            "value": "autre"
+          },
+          {
+            "label": "couleur",
+            "value": "blanc"
+          },
+          {
+            "label": "composition",
+            "value": "mécanisme avec enjoliveur (ou doigt)"
+          },
+          {
+            "label": "interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "avec cadre/support de montage",
+            "value": "Non"
+          },
+          {
+            "label": "matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "traitement de la surface",
+            "value": "non traité"
+          },
+          {
+            "label": "finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "numéro RAL (équivalent)",
+            "value": "9003"
+          },
+          {
+            "label": "zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "adapté à la classe de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "indice de protection contre les chocs (IK)",
+            "value": "IK08"
+          },
+          {
+            "label": "pays de fabrication",
+            "value": "FRANCE"
+          },
+          {
+            "label": "calibre/courant nominal assigné (In)",
+            "value": "10 A"
+          },
+          {
+            "label": "courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "largeur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "hauteur d'appareil",
+            "value": "70.5 mm"
+          },
+          {
+            "label": "profondeur d'appareil",
+            "value": "49 mm"
+          },
+          {
+            "label": "profondeur d'encastrement",
+            "value": "28.5 mm"
+          },
+          {
+            "label": "compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "couleur de l'opérateur de commutation",
+            "value": "blanc"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Interrupteur - prise - boîte d encastrement",
+            "code": "SCC03",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-prise-boite-d-encastrement-SCC03"
+          },
+          {
+            "label": "Interrupteur et prise",
+            "code": "SCC0301",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-SCC0301"
+          },
+          {
+            "label": "Interrupteur et prise étanche",
+            "code": "SCC030102",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-etanche-SCC030102"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 à équiper de support plaque ou boîtier saillie, livré avec enjoliveur finition blanc Les Atouts de l'article: Interrupteur ou va-et-vient 10AX - Connexion rapide sans outi",
+        "range": null
+      }
+    ],
+    "schema_version": 3,
+    "category_code": null,
+    "exceptions": [],
+    "compatibilities": [],
+    "observations": [
+      {
+        "code": "profondeur",
+        "value": 49.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Profondeur d'appareil",
+        "raw_value": "49 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Hauteur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Largeur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "ik",
+        "value": "IK08",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "IK",
+        "raw_value": "IK08",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Calibre",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "blanc",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Couleur",
+        "raw_value": "blanc",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "composition",
+        "value": "mecanisme_enjoliveur",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Composition",
+        "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "tension",
+        "value": 250.0,
+        "unit": "V",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Tension nominale",
+        "raw_value": "250 V",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "blanc",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "couleur",
+        "raw_value": "blanc",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "composition",
+        "value": "mecanisme_enjoliveur",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "composition",
+        "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "ik",
+        "value": "IK08",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "indice de protection contre les chocs (IK)",
+        "raw_value": "IK08",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "calibre/courant nominal assigné (In)",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "largeur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 70.5,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "hauteur d'appareil",
+        "raw_value": "70.5 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "profondeur",
+        "value": 49.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "profondeur d'appareil",
+        "raw_value": "49 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      }
+    ],
+    "range": "PLEXO"
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069711L",
+    "ean": "3414971881778",
+    "name": "Interrupteur ou va-et-vient 10AX 250V étanche Plexo complet saillie gris",
+    "categories": [
+      "Sélection personnalisée"
+    ],
+    "review_status": "pending",
+    "offers": [
+      {
+        "supplier": "Rexel",
+        "reference": "LEG069711L",
+        "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/Interrupteur-ou-va-et-vient-10AX-250V-%C3%A9tanche-Plexo-complet-saillie-gris/LEG069711L/p/73224702",
+        "pack": "Unité, conditionnement et multiple de vente à confirmer dans le compte",
+        "collected_at": "2026-10-29T23:28:10+00:00",
+        "page_sha256": "3e74c261314697d2ae642f76c40ce583a112cbe57bffb437404dca93de79f082",
+        "image_url": "https://api.rexel.fr/media/api/fr/content/73224702/EXTRA_LARGE",
+        "raw_attributes": [
+          {
+            "label": "Multiple de vente",
+            "value": "1"
+          },
+          {
+            "label": "Code Douane",
+            "value": "85365080"
+          },
+          {
+            "label": "Gamme",
+            "value": "PLEXO"
+          },
+          {
+            "label": "Traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Couleur de l'opérateur de commutation",
+            "value": "gris"
+          },
+          {
+            "label": "Compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "Compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "Zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "Profondeur d'appareil",
+            "value": "61 mm"
+          },
+          {
+            "label": "Hauteur d'appareil",
+            "value": "85 mm"
+          },
+          {
+            "label": "Largeur d'appareil",
+            "value": "82 mm"
+          },
+          {
+            "label": "Adapté à l'indice de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "Finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "IK",
+            "value": "IK08"
+          },
+          {
+            "label": "Interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "Courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Numéro RAL (équivalent)",
+            "value": "7046"
+          },
+          {
+            "label": "Nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "Type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "Type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "Matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "Qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "Calibre",
+            "value": "10 A"
+          },
+          {
+            "label": "Traitement de surface",
+            "value": "non traité"
+          },
+          {
+            "label": "Éclairage",
+            "value": "non"
+          },
+          {
+            "label": "Type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "Avec plaque de montage",
+            "value": "Non"
+          },
+          {
+            "label": "Sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "Couleur",
+            "value": "gris"
+          },
+          {
+            "label": "Type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "Composition",
+            "value": "mécanisme complet avec cadre"
+          },
+          {
+            "label": "Type de pose",
+            "value": "saillie"
+          },
+          {
+            "label": "Tension nominale",
+            "value": "250 V"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Appareillage et contrôle du bâtiment",
+            "code": "M2_01",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/c/M2_01"
+          },
+          {
+            "label": "Appareillage mural",
+            "code": "M2_0107",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/c/M2_0107"
+          },
+          {
+            "label": "Appareillage étanche sup. IP55",
+            "code": "M2_010702",
+            "url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Appareillage-et-contr%C3%B4le-du-b%C3%A2timent/Appareillage-mural/Appareillage-%C3%A9tanche-sup-IP55/c/M2_010702"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 livré complet avec boîtier à embouts pour fixation en saillie - gris",
+        "range": "PLEXO"
+      },
+      {
+        "supplier": "Sonepar",
+        "reference": "00001188177",
+        "url": "https://www.sonepar.fr/catalog/fr-fr/products/legrand-interrupteur-ou-va-et-vient-10ax-250v-etanche-plexo-complet-saillie-gris-00001188177",
+        "pack": "10 unité(s)",
+        "collected_at": "2026-10-29T23:28:19+00:00",
+        "page_sha256": "e8204f8d1f74719915ed64dfa94fcdce8b0f609e2adc36313787c73faf647810",
+        "image_url": "https://fra-connect.mo.cloudinary.net/PRODUCT/IMAGE/1/LG-069711L-WEB-R.jpg?ts=1781668695270",
+        "raw_attributes": [
+          {
+            "label": "type de commutation",
+            "value": "va-et-vient"
+          },
+          {
+            "label": "type de commande",
+            "value": "bascule/bouton"
+          },
+          {
+            "label": "nombre de bascules d'actionnement",
+            "value": "1"
+          },
+          {
+            "label": "mode de pose",
+            "value": "saillie"
+          },
+          {
+            "label": "couleur",
+            "value": "gris"
+          },
+          {
+            "label": "composition",
+            "value": "mécanisme complet avec cadre"
+          },
+          {
+            "label": "interrupteur à bouton-poussoir",
+            "value": "Non"
+          },
+          {
+            "label": "type de fixation",
+            "value": "fixation à vis"
+          },
+          {
+            "label": "avec cadre/support de montage",
+            "value": "Non"
+          },
+          {
+            "label": "matériau",
+            "value": "plastique"
+          },
+          {
+            "label": "qualité du matériau",
+            "value": "thermoplastique"
+          },
+          {
+            "label": "sans halogène",
+            "value": "Oui"
+          },
+          {
+            "label": "traitement antibactérien",
+            "value": "Non"
+          },
+          {
+            "label": "traitement de la surface",
+            "value": "non traité"
+          },
+          {
+            "label": "finition de la surface",
+            "value": "mat"
+          },
+          {
+            "label": "numéro RAL (équivalent)",
+            "value": "7046"
+          },
+          {
+            "label": "zone de texte/surface d'inscription",
+            "value": "non"
+          },
+          {
+            "label": "voyant",
+            "value": "non"
+          },
+          {
+            "label": "adapté à la classe de protection (IP)",
+            "value": "IP55"
+          },
+          {
+            "label": "pays de fabrication",
+            "value": "FRANCE"
+          },
+          {
+            "label": "tension nominale",
+            "value": "250 V"
+          },
+          {
+            "label": "calibre/courant nominal assigné (In)",
+            "value": "10 A"
+          },
+          {
+            "label": "courant de commutation pour lampes fluorescentes",
+            "value": "10 AX"
+          },
+          {
+            "label": "Contact de report",
+            "value": "Non"
+          },
+          {
+            "label": "type de connexion",
+            "value": "borne automatique"
+          },
+          {
+            "label": "interrupteur de chauffage",
+            "value": "Non"
+          },
+          {
+            "label": "Interrupteur de machine à laver",
+            "value": "Non"
+          },
+          {
+            "label": "largeur d'appareil",
+            "value": "82 mm"
+          },
+          {
+            "label": "hauteur d'appareil",
+            "value": "85 mm"
+          },
+          {
+            "label": "profondeur d'appareil",
+            "value": "61 mm"
+          },
+          {
+            "label": "compatible avec Apple HomeKit",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Google Assistant",
+            "value": "Non"
+          },
+          {
+            "label": "compatible avec Amazon Alexa",
+            "value": "Non"
+          },
+          {
+            "label": "compatible IFTTT",
+            "value": "Non"
+          },
+          {
+            "label": "couleur de l'opérateur de commutation",
+            "value": "gris"
+          }
+        ],
+        "category_path": [
+          {
+            "label": "Interrupteur - prise - boîte d encastrement",
+            "code": "SCC03",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-prise-boite-d-encastrement-SCC03"
+          },
+          {
+            "label": "Interrupteur et prise",
+            "code": "SCC0301",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-SCC0301"
+          },
+          {
+            "label": "Interrupteur et prise étanche",
+            "code": "SCC030102",
+            "url": "https://www.sonepar.fr/catalog/fr-fr/category/interrupteur-et-prise-etanche-SCC030102"
+          }
+        ],
+        "description": "Interrupteur ou va-et-vient étanche Plexo 10AX 250V~ IP55 IK08 livré complet avec boîtier à embouts pour fixation en saillie - gris Les Atouts de l'article: Interrupteur ou va-et-vient 10AX - Connexion rapide sans outil avec repérage",
+        "range": null
+      }
+    ],
+    "schema_version": 3,
+    "category_code": null,
+    "exceptions": [],
+    "compatibilities": [],
+    "observations": [
+      {
+        "code": "profondeur",
+        "value": 61.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Profondeur d'appareil",
+        "raw_value": "61 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 85.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Hauteur d'appareil",
+        "raw_value": "85 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 82.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Largeur d'appareil",
+        "raw_value": "82 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "ik",
+        "value": "IK08",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "IK",
+        "raw_value": "IK08",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Calibre",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "gris",
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Couleur",
+        "raw_value": "gris",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "pose",
+        "value": [
+          "saillie"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Type de pose",
+        "raw_value": "saillie",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "tension",
+        "value": 250.0,
+        "unit": "V",
+        "context": {},
+        "supplier": "Rexel",
+        "raw_label": "Tension nominale",
+        "raw_value": "250 V",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fonction_commande",
+        "value": "va_et_vient",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de commutation",
+        "raw_value": "va-et-vient",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "nombre_commandes",
+        "value": 1.0,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "nombre de bascules d'actionnement",
+        "raw_value": "1",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "pose",
+        "value": [
+          "saillie"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "mode de pose",
+        "raw_value": "saillie",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "couleur",
+        "value": "gris",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "couleur",
+        "raw_value": "gris",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "fixation",
+        "value": [
+          "vis"
+        ],
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de fixation",
+        "raw_value": "fixation à vis",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "materiau",
+        "value": "plastique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "matériau",
+        "raw_value": "plastique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "sans_halogene",
+        "value": true,
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "sans halogène",
+        "raw_value": "Oui",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "finition",
+        "value": "mat",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "finition de la surface",
+        "raw_value": "mat",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "tension",
+        "value": 250.0,
+        "unit": "V",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "tension nominale",
+        "raw_value": "250 V",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "courant",
+        "value": 10.0,
+        "unit": "A",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "calibre/courant nominal assigné (In)",
+        "raw_value": "10 A",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "connexion",
+        "value": "automatique",
+        "unit": "",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "type de connexion",
+        "raw_value": "borne automatique",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "largeur",
+        "value": 82.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "largeur d'appareil",
+        "raw_value": "82 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "hauteur",
+        "value": 85.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "hauteur d'appareil",
+        "raw_value": "85 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      },
+      {
+        "code": "profondeur",
+        "value": 61.0,
+        "unit": "mm",
+        "context": {},
+        "supplier": "Sonepar",
+        "raw_label": "profondeur d'appareil",
+        "raw_value": "61 mm",
+        "rule_version": "2hbc-metier-0.5.0",
+        "status": "pending",
+        "selected": false,
+        "review_note": null
+      }
+    ],
+    "range": "PLEXO"
+  }
+]

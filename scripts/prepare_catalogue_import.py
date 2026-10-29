@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Convertit la collecte publique en SQL contrôlé, sans connexion ni secret."""
 import argparse
+import copy
 import json
 import re
 import sys
@@ -8,6 +9,11 @@ import math
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qsl
+
+try:
+    from scripts import catalogue_metier as metier
+except ModuleNotFoundError:
+    import catalogue_metier as metier
 
 PRODUCT_KEYS = {"brand", "reference", "ean", "name", "categories", "review_status", "offers"}
 OFFER_KEYS = {"supplier", "reference", "url", "pack", "collected_at", "page_sha256", "image_url"}
@@ -122,6 +128,22 @@ def image_url_valid(value, supplier):
 def validate(products, approve=False):
     if not isinstance(products, list) or not 1 <= len(products) <= 1000:
         raise ValueError("Attendu : une liste de 1 à 1000 produits")
+    # Reuse the established v2 contract for identities, raw evidence and sources.
+    base_products=[]
+    for p in products:
+        if isinstance(p,dict) and p.get('schema_version')==3:
+            base={k:v for k,v in p.items() if k not in ('observations','exceptions','compatibilities')}
+            base.update(schema_version=2,attributes=[],attribute_conflicts=[])
+            validate([base],approve)
+            metier.validate_details(p,approve)
+            if len(json.dumps(p,ensure_ascii=False).encode('utf-8'))>64000:
+                raise ValueError('Fiche trop volumineuse')
+            base_products.append(base)
+        else:
+            base_products.append(p)
+    if any(isinstance(p,dict) and p.get('schema_version')==3 for p in products):
+        validate(base_products,approve)  # cross-document identity/SKU collisions
+        return products
     identities, gtins, supplier_refs = set(), set(), set()
     for p in products:
         if not isinstance(p, dict) or set(p) - (PRODUCT_V2_KEYS if p.get("schema_version") == 2 else PRODUCT_KEYS):
@@ -188,14 +210,19 @@ def validate(products, approve=False):
     return products
 
 
-def generate_sql(products, approve=False):
+def generate_sql(products, approve=False, publish=False):
     validate(products, approve)
+    if publish and (not approve or any(p.get('schema_version')!=3 for p in products)):
+        raise ValueError('--publish exige --approve et des fiches métier v3')
     lines = ["-- 2HBC : aucun prix importé. Exécuter dans le SQL Editor du projet 2HBC.",
-             "-- Mode : " + ("publication des fiches relues" if approve else "préparation privée uniquement"),
+             "-- Mode : " + ("publication métier vérifiée" if publish else "qualification privée des fiches relues" if approve else "préparation privée uniquement"),
              "begin;", "set local standard_conforming_strings = on;"]
     for p in products:
         # JSON as a SQL string literal, not executable identifiers or interpolated SQL.
         payload = json.dumps(p, ensure_ascii=False, separators=(",", ":")).replace("'", "''")
+        if p.get('schema_version')==3:
+            lines.append(f"select public.importer_catalogue_v3('{payload}'::jsonb, {'true' if approve else 'false'}, {'true' if publish else 'false'});")
+            continue
         function = "importer_catalogue_v2" if p.get("schema_version") == 2 else "importer_produit_collecte"
         lines.append(f"select public.{function}('{payload}'::jsonb, {'true' if approve else 'false'});")
     lines.append("commit;")
@@ -206,7 +233,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path, help="products.json du collecteur")
     parser.add_argument("--out", type=Path, default=Path("catalogue-preparation.sql"))
-    parser.add_argument("--approve", action="store_true", help="Publier uniquement un fichier entièrement relu et marqué approved")
+    parser.add_argument("--approve", action="store_true", help="Qualifier en privé des fiches dont les identités ont été relues (approved)")
+    parser.add_argument("--publish", action="store_true", help="Publier après --approve ; la base exige toutes les validations métier")
+    parser.add_argument("--review-out", type=Path, help="Écrire le rapport de revue métier (sans le confondre avec le diagnostic serveur)")
+    parser.add_argument("--upgrade-out", type=Path, help="Convertir un ancien JSON v2 en propositions v3 non approuvées, sans collecte réseau")
     args = parser.parse_args()
     try:
         if args.input.resolve() == args.out.resolve():
@@ -214,7 +244,26 @@ def main():
         if args.input.stat().st_size > 20 * 1024 * 1024:
             raise ValueError("Fichier trop volumineux (20 Mio maximum)")
         products = json.loads(args.input.read_text(encoding="utf-8"))
-        sql = generate_sql(products, args.approve)
+        if args.upgrade_out:
+            if args.approve or args.publish or args.upgrade_out.resolve()==args.input.resolve():
+                raise ValueError('Conversion : fichier de sortie distinct et sans approbation')
+            validate(products)
+            if any(p.get('schema_version') not in (2,3) for p in products):
+                raise ValueError('La conversion exige les données brutes du contrat v2 ou v3')
+            upgraded=[metier.enrich(copy.deepcopy(p)) for p in products]
+            for p in upgraded:
+                p['category_code']=None; p['exceptions']=[]; p['compatibilities']=[]
+            validate(upgraded)
+            args.upgrade_out.parent.mkdir(parents=True,exist_ok=True)
+            args.upgrade_out.write_text(json.dumps(upgraded,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+            print(f'{len(upgraded)} fiches converties en propositions à revoir ; aucune donnée publiée.')
+            return 0
+        sql = generate_sql(products, args.approve, args.publish)
+        if args.review_out:
+            if args.review_out.resolve() in (args.input.resolve(),args.out.resolve()):
+                raise ValueError('Le rapport doit avoir un chemin distinct')
+            args.review_out.parent.mkdir(parents=True,exist_ok=True)
+            args.review_out.write_text(json.dumps([{'brand':p['brand'],'reference':p['reference'],**metier.review_report(p)} for p in products],ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(sql, encoding="utf-8")
         print(f"{len(products)} produits contrôlés ; SQL écrit dans {args.out}. Aucune connexion à Supabase effectuée.")

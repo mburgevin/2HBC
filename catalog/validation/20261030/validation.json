@@ -1,0 +1,10 @@
+{
+  "method": "Live public HTML: six official product pages, collector 0.5.0; no remote product import",
+  "products": 3,
+  "offers": 6,
+  "raw_attributes": 219,
+  "proposed_observations": 87,
+  "unmapped_raw": 132,
+  "all_pending": true,
+  "normalization_note": "Proposals regenerated offline after adding exact labels observed on the same six pages; raw offers unchanged."
+}

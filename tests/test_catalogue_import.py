@@ -32,8 +32,8 @@ class ImportTests(unittest.TestCase):
         products = [product()]
         c.merge(products, product("Sonepar"))
         sql = imp.generate_sql(products)
-        self.assertIn("importer_catalogue_v2", sql)
-        self.assertIn("'::jsonb, false)", sql)
+        self.assertIn("importer_catalogue_v3", sql)
+        self.assertIn("'::jsonb, false, false)", sql)
         self.assertIn("00001187798", sql)
         products[0]["offers"][0]["url"] = "https://www.rexel.fr/frx/p/73224603"
         imp.validate(products)
@@ -44,8 +44,8 @@ class ImportTests(unittest.TestCase):
             imp.generate_sql([p], True)
         p["review_status"] = "approved"
         p["category_code"] = "interrupteurs"
-        self.assertIn("'::jsonb, false)", imp.generate_sql([p]))
-        self.assertIn("'::jsonb, true)", imp.generate_sql([p], True))
+        self.assertIn("'::jsonb, false, false)", imp.generate_sql([p]))
+        self.assertIn("'::jsonb, true, false)", imp.generate_sql([p], True))
 
     def test_missing_fields_numeric_refs_and_unknown_data_rejected(self):
         for key in ("brand", "reference", "ean", "name", "categories", "offers", "review_status"):

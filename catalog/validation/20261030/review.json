@@ -1,0 +1,704 @@
+[
+  {
+    "brand": "Legrand",
+    "reference": "069511L",
+    "category_code": null,
+    "family_suggestions": [],
+    "missing_essential": [],
+    "special_requirements": [],
+    "not_applicable_to_family": [],
+    "conflicts": [],
+    "unmapped_raw": [
+      {
+        "supplier": "Rexel",
+        "label": "Multiple de vente",
+        "value": "1"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Code Douane",
+        "value": "85365080"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Gamme",
+        "value": "PLEXO"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Couleur de l'opérateur de commutation",
+        "value": "gris"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Adapté à l'indice de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Numéro RAL (équivalent)",
+        "value": "7046"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Profondeur d'encastrement",
+        "value": "28.5 mm"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement de surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Avec plaque de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Type de pose",
+        "value": "autre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "mode de pose",
+        "value": "autre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "avec cadre/support de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement de la surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "numéro RAL (équivalent)",
+        "value": "7046"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "adapté à la classe de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "pays de fabrication",
+        "value": "FRANCE"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "profondeur d'encastrement",
+        "value": "28.5 mm"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "couleur de l'opérateur de commutation",
+        "value": "gris"
+      }
+    ],
+    "pending_observations": 29,
+    "publication_checked_by_database": false
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069611L",
+    "category_code": null,
+    "family_suggestions": [],
+    "missing_essential": [],
+    "special_requirements": [],
+    "not_applicable_to_family": [],
+    "conflicts": [],
+    "unmapped_raw": [
+      {
+        "supplier": "Rexel",
+        "label": "Multiple de vente",
+        "value": "1"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Code Douane",
+        "value": "85365080"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Gamme",
+        "value": "PLEXO"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Couleur de l'opérateur de commutation",
+        "value": "blanc"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Adapté à l'indice de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Numéro RAL (équivalent)",
+        "value": "9003"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Profondeur d'encastrement",
+        "value": "28.5 mm"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement de surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Avec plaque de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Type de pose",
+        "value": "autre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "mode de pose",
+        "value": "autre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "avec cadre/support de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement de la surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "numéro RAL (équivalent)",
+        "value": "9003"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "adapté à la classe de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "pays de fabrication",
+        "value": "FRANCE"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "profondeur d'encastrement",
+        "value": "28.5 mm"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "couleur de l'opérateur de commutation",
+        "value": "blanc"
+      }
+    ],
+    "pending_observations": 29,
+    "publication_checked_by_database": false
+  },
+  {
+    "brand": "Legrand",
+    "reference": "069711L",
+    "category_code": null,
+    "family_suggestions": [],
+    "missing_essential": [],
+    "special_requirements": [],
+    "not_applicable_to_family": [],
+    "conflicts": [],
+    "unmapped_raw": [
+      {
+        "supplier": "Rexel",
+        "label": "Multiple de vente",
+        "value": "1"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Code Douane",
+        "value": "85365080"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Gamme",
+        "value": "PLEXO"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Couleur de l'opérateur de commutation",
+        "value": "gris"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Adapté à l'indice de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Numéro RAL (équivalent)",
+        "value": "7046"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Traitement de surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Éclairage",
+        "value": "non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Avec plaque de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Rexel",
+        "label": "Composition",
+        "value": "mécanisme complet avec cadre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "type de commande",
+        "value": "bascule/bouton"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "composition",
+        "value": "mécanisme complet avec cadre"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur à bouton-poussoir",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "avec cadre/support de montage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "qualité du matériau",
+        "value": "thermoplastique"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement antibactérien",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "traitement de la surface",
+        "value": "non traité"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "numéro RAL (équivalent)",
+        "value": "7046"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "zone de texte/surface d'inscription",
+        "value": "non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "voyant",
+        "value": "non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "adapté à la classe de protection (IP)",
+        "value": "IP55"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "pays de fabrication",
+        "value": "FRANCE"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "courant de commutation pour lampes fluorescentes",
+        "value": "10 AX"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Contact de report",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "interrupteur de chauffage",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "Interrupteur de machine à laver",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Apple HomeKit",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Google Assistant",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible avec Amazon Alexa",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "compatible IFTTT",
+        "value": "Non"
+      },
+      {
+        "supplier": "Sonepar",
+        "label": "couleur de l'opérateur de commutation",
+        "value": "gris"
+      }
+    ],
+    "pending_observations": 29,
+    "publication_checked_by_database": false
+  }
+]

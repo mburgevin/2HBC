@@ -59,6 +59,6 @@ Le script d’installation exige exactement les deux migrations initiales et l�
 
 ## Suite du travail
 
-L’étape 3 doit adapter le collecteur et le contrat d’import aux nouveaux profils, conserver les observations et proposer les correspondances à revoir. Ensuite, la recherche et le site doivent lire `valeurs_catalogue` pour exposer les ensembles, intervalles et contextes. La RPC v2 actuelle continue à utiliser ses anciennes valeurs `produit_attributs` pour les facettes ; seuls les accès et la navigation sont alignés à cette étape. Aucun filtre métier nouveau n’est prétendu opérationnel dans l’interface.
+L’étape 3 est livrée le 30 octobre 2026 : voir [le collecteur et l’import v3](ETAPE_3_IMPORT_METIER.md). Elle conserve les observations et propose les correspondances à revoir. Ensuite, la recherche et le site doivent lire `valeurs_catalogue` pour exposer les ensembles, intervalles et contextes. La RPC v2 actuelle continue à utiliser ses anciennes valeurs `produit_attributs` pour les facettes ; seuls les accès et la navigation sont alignés à cette étape. Aucun filtre métier nouveau n’est prétendu opérationnel dans l’interface.
 
 Les quantités décimales du panier et de l’extension nécessitent toujours une adaptation coordonnée distincte.

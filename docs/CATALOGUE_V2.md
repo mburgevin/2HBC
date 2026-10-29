@@ -8,7 +8,7 @@ Le script adapté à cet état est [20261029_install_catalogue_v1.sql](../supaba
 
 **Le script historique `20261016_reset_catalogue.sql` ne correspond plus à l’état actuel : ne pas l’exécuter.** Il reste dans le dépôt pour la traçabilité de l’ancienne opération.
 
-Les sections suivantes décrivent le collecteur et le contrat v2 existants. Leur alignement sur les profils métier relève de l’étape 3. Après installation du modèle métier, `--approve` ne suffit plus à publier : chaque fiche doit satisfaire `diagnostic_publication`, puis être publiée explicitement par `publier_produit_catalogue`.
+Les sections suivantes décrivent le collecteur et le contrat v2 existants. Le collecteur 0.5.0 et l’import v3 sont désormais décrits dans [COLLECTE_CATALOGUE.md](COLLECTE_CATALOGUE.md) ; utiliser ce nouveau guide pour toute nouvelle collecte. Après installation du modèle métier, `--approve` ne suffit plus à publier : chaque fiche doit satisfaire `diagnostic_publication`, puis être publiée explicitement par `publier_produit_catalogue`.
 
 ## Collecter sous Windows
 
