@@ -1,0 +1,1986 @@
+{
+  "review_version": "revue-pilote-20261030-v1",
+  "source_filename": "products(3).json",
+  "source_sha256": "6675c219db679377d21cc41fa6aec69d7c0249a9028277b39a84a2e080eb0f30",
+  "source_date": "2026-10-28",
+  "review_date": "2026-10-30",
+  "scope": "Revue documentaire ponctuelle des preuves fournies. Pas de certification fabricant ni de règle automatique pour de nouvelles références.",
+  "decisions": [
+    {
+      "brand": "Legrand",
+      "reference": "069731L",
+      "ean": "3414971882072",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard de prise non explicitement documenté dans les champs retenus ; 2P+T seul ne suffit pas. Revue restante.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600335",
+      "ean": "3414971006102",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard de prise non explicitement documenté dans les champs retenus ; 2P+T seul ne suffit pas. Revue restante.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "MUR35031",
+      "ean": "3606480789564",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Couleur/RAL contradictoires : description gris RAL 7016, attributs anthracite et RAL 7035. À vérifier avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920052",
+      "ean": "3606487212713",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CM0001",
+      "ean": "3414972416580",
+      "category_code": "interrupteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "086027L",
+      "ean": "3414972654593",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077111L",
+      "ean": "3414971575967",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077890",
+      "ean": "3245060778903",
+      "category_code": "boitiers-saillie",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600801",
+      "ean": "3414971019539",
+      "category_code": "plaques",
+      "decision": "hold",
+      "reason": "Compatibilité exacte de la plaque avec un système/version ou une référence encore à documenter.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "67801",
+      "ean": "3233620678015",
+      "category_code": "interrupteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "080251",
+      "ean": "3245060802516",
+      "category_code": "supports",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CM0031",
+      "ean": "3414972421171",
+      "category_code": "poussoirs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600001",
+      "ean": "3414971004252",
+      "category_code": "interrupteurs",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "nombre_commandes",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre de bascules d'actionnement",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "composition",
+          "value": "mecanisme_enjoliveur",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Composition",
+          "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "courant",
+          "value": 10,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "10 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "couleur",
+          "value": "blanc",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Couleur",
+          "raw_value": "blanc",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 250,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Tension nominale",
+          "raw_value": "250 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "pose",
+          "value": [
+            "encastre"
+          ],
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de pose",
+          "raw_value": "encastré",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "fixation",
+          "value": [
+            "vis"
+          ],
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de fixation",
+          "raw_value": "fixation à vis",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "marquage_calibre",
+          "value": "10 AX",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Interrupteur ou va-et-vient dooxie 10AX 250V~ finition blanc équipé d'un support - à équiper de plaque de finition",
+          "origin": "description",
+          "note": "La description de la référence indique 10AX ; cette désignation est conservée séparément du courant 10 A."
+        },
+        {
+          "code": "fonction_commande",
+          "value": "va_et_vient",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de commutation",
+          "raw_value": "va-et-vient",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "connexion",
+          "value": "automatique",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de connexion",
+          "raw_value": "borne automatique",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CM0111",
+      "ean": "3414972421553",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "069791L",
+      "ean": "3414971882850",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard de prise non explicitement documenté dans les champs retenus ; 2P+T seul ne suffit pas. Revue restante.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077142L",
+      "ean": "3414971576384",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "086127L",
+      "ean": "3414972655132",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920214",
+      "ean": "3606487212362",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077831",
+      "ean": "3245060778316",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard français explicite, mais finition chrome absente du vocabulaire couleur actuel. Révision du dictionnaire à étudier.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "67802",
+      "ean": "3233620678022",
+      "category_code": "interrupteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077143L",
+      "ean": "3414971576414",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "086001L",
+      "ean": "3414972643566",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600376",
+      "ean": "3414971093485",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600002",
+      "ean": "3414971004283",
+      "category_code": "interrupteurs",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "nombre_commandes",
+          "value": 2,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre de bascules d'actionnement",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "composition",
+          "value": "mecanisme_enjoliveur",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Composition",
+          "raw_value": "mécanisme avec enjoliveur (ou doigt)",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "courant",
+          "value": 10,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "10 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "couleur",
+          "value": "blanc",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Couleur",
+          "raw_value": "blanc",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 250,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Tension nominale",
+          "raw_value": "250 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "pose",
+          "value": [
+            "encastre"
+          ],
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de pose",
+          "raw_value": "encastré",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "fixation",
+          "value": [
+            "vis"
+          ],
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de fixation",
+          "raw_value": "fixation à vis",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "marquage_calibre",
+          "value": "10 AX",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Double interrupteur ou va-et-vient dooxie 10AX 250V~ finition blanc équipé d'un support - à équiper de plaque de finition",
+          "origin": "description",
+          "note": "La description de la référence indique 10AX ; cette désignation est conservée séparément du courant 10 A."
+        },
+        {
+          "code": "fonction_commande",
+          "value": "double_va_et_vient",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Double interrupteur ou va-et-vient dooxie 10AX 250V~ finition blanc équipé d'un support - à équiper de plaque de finition",
+          "origin": "description",
+          "note": "Description explicite « Double interrupteur ou va-et-vient » et deux bascules : fonction double va-et-vient."
+        }
+      ],
+      "rejections": [
+        {
+          "code": "fonction_commande",
+          "value": "va_et_vient",
+          "supplier": "Rexel",
+          "raw_label": "Type de commutation",
+          "raw_value": "va-et-vient",
+          "note": "Libellé générique va-et-vient incomplet : la description et les deux bascules établissent la fonction double va-et-vient."
+        },
+        {
+          "code": "fonction_commande",
+          "value": "va_et_vient",
+          "supplier": "Sonepar",
+          "raw_label": "type de commutation",
+          "raw_value": "va-et-vient",
+          "note": "Libellé générique va-et-vient incomplet : la description et les deux bascules établissent la fonction double va-et-vient."
+        }
+      ],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CM0181",
+      "ean": "3414972422765",
+      "category_code": "sorties-cable",
+      "decision": "hold",
+      "reason": "Couleur et composition du mécanisme à qualifier sans interpréter « autre » comme une exception.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920702",
+      "ean": "3606487342304",
+      "category_code": "plaques",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "069781L",
+      "ean": "3414971882768",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard de prise non explicitement documenté dans les champs retenus ; 2P+T seul ne suffit pas. Revue restante.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920052P",
+      "ean": "3606487212768",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Conditionnement du lot et quantité commerciale à vérifier avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077851",
+      "ean": "3245060778514",
+      "category_code": "plaques",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "67831",
+      "ean": "3233620678312",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600802",
+      "ean": "3414971019560",
+      "category_code": "plaques",
+      "decision": "hold",
+      "reason": "Compatibilité exacte et entraxe multiposte encore à documenter.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CM0345",
+      "ean": "3414972574242",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920204",
+      "ean": "3606487212256",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "086101L",
+      "ean": "3414972643597",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "S920476",
+      "ean": "3606487213178",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600004",
+      "ean": "3414971004313",
+      "category_code": "poussoirs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "BLM",
+      "reference": "682710",
+      "ean": "3701217912229",
+      "category_code": "boites",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "069776L",
+      "ean": "3414972110556",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Standard de prise non explicitement documenté dans les champs retenus ; 2P+T seul ne suffit pas. Revue restante.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "CP1102",
+      "ean": "3414972418096",
+      "category_code": "plaques",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077833",
+      "ean": "3245060778330",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Standard français explicite, mais finition chrome absente du vocabulaire couleur actuel. Révision du dictionnaire à étudier.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "67832",
+      "ean": "3233620678329",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "600611",
+      "ean": "3414972516327",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Conditionnement du lot et quantité commerciale à vérifier avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9Y62625",
+      "ean": "3606481383358",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "077144L",
+      "ean": "3414971576445",
+      "category_code": "prises",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "411650",
+      "ean": "3245064116503",
+      "category_code": "differentiels",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "courant",
+          "value": 63,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "63 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "poles",
+          "value": 2,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "nombre de pôles",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 230,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "tension assignée (Ue)",
+          "raw_value": "230 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "type_tension",
+          "value": "AC",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de tension",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "selectif",
+          "value": false,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Sélectif",
+          "raw_value": "Non",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "sensibilite",
+          "value": 30,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Sensibilité",
+          "raw_value": "0.03 A",
+          "origin": "raw_attribute",
+          "note": "Conversion explicite de 0,03 A en 30 mA ; confirmée par la description de la même référence."
+        },
+        {
+          "code": "type_differentiel",
+          "value": "AC",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de courant différentiel",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "modules_din",
+          "value": 2,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Largeur en nombre de modules",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Appareil différentiel modulaire : largeur de 2 modules DIN, confirmée par la description, sans confusion avec les modules d’appareillage."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9P22610",
+      "ean": "3606481381323",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Norme de coupure contradictoire : description EN 61009-1, attribut Icn EN 60898. Vérification fabricant nécessaire.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "406783",
+      "ean": "3245064067836",
+      "category_code": "disjoncteurs",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "courant",
+          "value": 16,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "16 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "courbe",
+          "value": "C",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Courbe",
+          "raw_value": "C",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 230,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "tension assignée (Ue)",
+          "raw_value": "230 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "type_tension",
+          "value": "AC",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de tension",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "icn_230",
+          "value": 4.5,
+          "context": {
+            "norme": "EN 60898",
+            "tension_v": 230
+          },
+          "supplier": "Rexel",
+          "raw_label": "Pouvoir de coupure assigné Icn selon EN 60898 à 230 V",
+          "raw_value": "4.5 kA",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "icu_230",
+          "value": 6,
+          "context": {
+            "norme": "IEC/EN 60947-2",
+            "tension_v": 230
+          },
+          "supplier": "Sonepar",
+          "raw_label": "pouvoir de coupure assigné selon IEC 60947-2 à 230 V (Icu)",
+          "raw_value": "6 kA",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "poles_proteges",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre de pôles protégés",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "configuration_poles",
+          "value": "1P_N",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Disjoncteur DNX³4500 6kA Phase + Neutre 230V~ pour peigne HX³ optimisé universel monophasé ou tétrapolaire 16A courbe C arrivée haute et sortie basse par borne automatique pour protection des départs - 1 module",
+          "origin": "description",
+          "note": "Description « Phase + Neutre » ; un seul pôle protégé. Ne pas convertir deux pôles totaux en 2P."
+        },
+        {
+          "code": "modules_din",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Largeur en nombre de modules",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Disjoncteur modulaire : largeur de 1 module DIN, également explicite dans la description."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9R11440",
+      "ean": "3606480091322",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "710272",
+      "ean": "3700882131188",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9P22616",
+      "ean": "3606481381330",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9F77216",
+      "ean": "3606480094132",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9S60220",
+      "ean": "3606480088681",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9Q11225",
+      "ean": "3606480393419",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9DXA2616",
+      "ean": "3606487643920",
+      "category_code": "disjoncteurs-differentiels",
+      "decision": "hold",
+      "reason": "Configuration 1P+N et information de sectionnement du neutre à vérifier avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "C4044B400",
+      "ean": "3606481995179",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "LV429518",
+      "ean": "3606480019920",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9DA2616",
+      "ean": "3606481382313",
+      "category_code": "disjoncteurs-differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9F94210",
+      "ean": "3606480084249",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Hager",
+      "reference": "MFS716",
+      "ean": "3250614319464",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "421057",
+      "ean": "3245064210577",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Hager",
+      "reference": "CDS764F",
+      "ean": "3250611612810",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Hager",
+      "reference": "CDS765F",
+      "ean": "3250611612827",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "411651",
+      "ean": "3245064116510",
+      "category_code": "differentiels",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "courant",
+          "value": 63,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "63 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "poles",
+          "value": 2,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "nombre de pôles",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 230,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "tension assignée (Ue)",
+          "raw_value": "230 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "type_tension",
+          "value": "AC",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de tension",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "selectif",
+          "value": false,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Sélectif",
+          "raw_value": "Non",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "sensibilite",
+          "value": 30,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Sensibilité",
+          "raw_value": "0.03 A",
+          "origin": "raw_attribute",
+          "note": "Conversion explicite de 0,03 A en 30 mA ; confirmée par la description de la même référence."
+        },
+        {
+          "code": "type_differentiel",
+          "value": "A",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de courant différentiel",
+          "raw_value": "A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "modules_din",
+          "value": 2,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Largeur en nombre de modules",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Appareil différentiel modulaire : largeur de 2 modules DIN, confirmée par la description, sans confusion avec les modules d’appareillage."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Hager",
+      "reference": "MFS710",
+      "ean": "3250614319440",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "406782",
+      "ean": "3245064067829",
+      "category_code": "disjoncteurs",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "courant",
+          "value": 10,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Calibre",
+          "raw_value": "10 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "courbe",
+          "value": "C",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Courbe",
+          "raw_value": "C",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 230,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "tension assignée (Ue)",
+          "raw_value": "230 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "type_tension",
+          "value": "AC",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de tension",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "icn_230",
+          "value": 4.5,
+          "context": {
+            "norme": "EN 60898",
+            "tension_v": 230
+          },
+          "supplier": "Rexel",
+          "raw_label": "Pouvoir de coupure assigné Icn selon EN 60898 à 230 V",
+          "raw_value": "4.5 kA",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "icu_230",
+          "value": 6,
+          "context": {
+            "norme": "IEC/EN 60947-2",
+            "tension_v": 230
+          },
+          "supplier": "Sonepar",
+          "raw_label": "pouvoir de coupure assigné selon IEC 60947-2 à 230 V (Icu)",
+          "raw_value": "6 kA",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "poles_proteges",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre de pôles protégés",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "configuration_poles",
+          "value": "1P_N",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Disjoncteur DNX³4500 6kA Phase + Neutre 230V~ pour peigne HX³ optimisé universel monophasé ou tétrapolaire 10A courbe C arrivée haute et sortie basse par borne automatique pour protection des départs - 1 module",
+          "origin": "description",
+          "note": "Description « Phase + Neutre » ; un seul pôle protégé. Ne pas convertir deux pôles totaux en 2P."
+        },
+        {
+          "code": "modules_din",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Largeur en nombre de modules",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Disjoncteur modulaire : largeur de 1 module DIN, également explicite dans la description."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9ERC263",
+      "ean": "3606481100283",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "720800",
+      "ean": "3700882145680",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9R11463",
+      "ean": "3606480091346",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "410705",
+      "ean": "3245064107051",
+      "category_code": "disjoncteurs-differentiels",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "courant",
+          "value": 16,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "calibre/courant nominal assigné (In)",
+          "raw_value": "16 A",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "courbe",
+          "value": "C",
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "caractéristique de déclenchement (type/courbe)",
+          "raw_value": "C",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "tension",
+          "value": 230,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "tension assignée (Ue)",
+          "raw_value": "230 V",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "type_tension",
+          "value": "AC",
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "type de tension",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "poles_proteges",
+          "value": 1,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "nombre de pôles protégés",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "configuration_poles",
+          "value": "1P_N",
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Disjoncteur différentiel DX³4500 uni + Neutre 230V~ pour peigne optimisé universel monophasé ou tétrapolaire TypeAC 30mA 16A - courbe C arrivée haute et départ bas par bornes à vis pour protection des départs - 2 modules Les Atouts de l'article:",
+          "origin": "description",
+          "note": "Description « uni + Neutre » et un pôle protégé : configuration 1P+N."
+        },
+        {
+          "code": "sensibilite",
+          "value": 30,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "sensibilité / courant de défaut nominal (I?n)",
+          "raw_value": "0.03 A",
+          "origin": "raw_attribute",
+          "note": "0,03 A = 30 mA ; description de la même référence concordante."
+        },
+        {
+          "code": "type_differentiel",
+          "value": "AC",
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "type de courant différentiel",
+          "raw_value": "AC",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "modules_din",
+          "value": 2,
+          "context": {},
+          "supplier": "Sonepar",
+          "raw_label": "largeur en nombre de modules",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Disjoncteur différentiel modulaire : 2 modules DIN, description concordante."
+        },
+        {
+          "code": "icn_61009_230",
+          "value": 4.5,
+          "context": {
+            "norme": "EN 61009",
+            "tension_v": 230
+          },
+          "supplier": "Sonepar",
+          "raw_label": "pouvoir de coupure assigné selon EN 61009",
+          "raw_value": "4.5 kA",
+          "origin": "raw_attribute",
+          "note": "Revue croisée de la même offre Sonepar : 4,5 kA EN 61009, tension assignée Ue 230 V et description uni+Neutre 230 V. Aucune extrapolation à 400 V ni confusion avec Icu 6 kA."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9F77210",
+      "ean": "3606480094125",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9PFC616",
+      "ean": "3606481160522",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "A9S65463",
+      "ean": "3606480531118",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9HPNFC15137P",
+      "ean": "3606482128835",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9PRC263",
+      "ean": "3606481102690",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "LV429387",
+      "ean": "3606480019098",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "C254250S",
+      "ean": "3606481999306",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "225009",
+      "ean": "3700420331148",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9PFC610",
+      "ean": "3606481160515",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "230021",
+      "ean": "3700420331339",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "C40F44B400",
+      "ean": "3606481995162",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "701100",
+      "ean": "3701395131924",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9ERA263",
+      "ean": "3606481100269",
+      "category_code": "differentiels",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "037550",
+      "ean": "3245060375508",
+      "category_code": "accessoires-bornes",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "type_accessoire",
+          "value": "plaque_extremite",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Cloison terminale pour blocs de jonction à vis Viking 3 avec 1 entrée 1 sortie pas de 5mm, 6mm, 8mm ou 10mm - gris",
+          "origin": "description",
+          "note": "Cloison terminale, confirmée par « finition de la plaque de fermeture : Oui »."
+        },
+        {
+          "code": "taille_accessoire",
+          "value": "Pas de 5, 6, 8 ou 10 mm ; blocs à vis, 1 entrée / 1 sortie",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Cloison terminale pour blocs de jonction à vis Viking 3 avec 1 entrée 1 sortie pas de 5mm, 6mm, 8mm ou 10mm - gris",
+          "origin": "description",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "couleur",
+          "value": "gris",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Couleur",
+          "raw_value": "gris",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": [
+        {
+          "system": "Legrand Viking — blocs de jonction à vis, 1 entrée / 1 sortie, pas 5/6/8/10 mm",
+          "version": "3",
+          "role": "accessoire_pour",
+          "source_url": "https://www.rexel.fr/frx/Cat%C3%A9gorie/Produits-Industriels/Connectique-et-raccordement/Bloc-de-jonction-borne-de-c%C3%A2blage/Cloison-terminale-pr-bloc-jonc-Viking-3-%C3%A0-vis---1-entr-1-sort---pas-5%2C6%2C8%2C10/LEG037550/p/67538572",
+          "observed_at": "2026-10-28T22:26:32+00:00",
+          "evidence": "Cloison terminale pour blocs de jonction à vis Viking 3 avec 1 entrée 1 sortie pas de 5mm, 6mm, 8mm ou 10mm - gris"
+        }
+      ]
+    },
+    {
+      "brand": "Schneider Electric",
+      "reference": "R9EFC616",
+      "ean": "3606481160409",
+      "category_code": "disjoncteurs",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "225004",
+      "ean": "3700420331094",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "230012",
+      "ean": "3700420331308",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "701103",
+      "ean": "3701395131955",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "037160",
+      "ean": "3245060371609",
+      "category_code": "bornes-rail",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "225007",
+      "ean": "3700420331124",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "230022",
+      "ean": "3700420331346",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "701106",
+      "ean": "3701395131986",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "037161",
+      "ean": "3245060371616",
+      "category_code": "bornes-rail",
+      "decision": "hold",
+      "reason": "Qualification des critères essentiels et des preuves restant à effectuer.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "225005",
+      "ean": "3700420331100",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "245001",
+      "ean": "3700420331452",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "701112",
+      "ean": "3701395132044",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Legrand",
+      "reference": "037162",
+      "ean": "3245060371623",
+      "category_code": "bornes-rail",
+      "decision": "publish",
+      "reason": "Identité, catégorie, offre(s), critères essentiels et exigences spéciales revus dans les preuves collectées.",
+      "selections": [
+        {
+          "code": "fonction_borne",
+          "value": "passage",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Bloc de jonction de passage connexion à vis Viking 3 pour câble cuivre avec 1 jonction 1 entrée 1 sortie section 6mm² - pas 8mm - capacité conducteur rigide 0,5mm² à 10mm² et conducteur souple 0,25mm² à 6mm² - gris",
+          "origin": "description",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "potentiels_independants",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Description collectée — revue pilote",
+          "raw_value": "Bloc de jonction de passage connexion à vis Viking 3 pour câble cuivre avec 1 jonction 1 entrée 1 sortie section 6mm² - pas 8mm - capacité conducteur rigide 0,5mm² à 10mm² et conducteur souple 0,25mm² à 6mm² - gris",
+          "origin": "description",
+          "note": "Une jonction de passage, une entrée et une sortie : un potentiel indépendant, pas deux potentiels pour deux serrages."
+        },
+        {
+          "code": "rail_compatible",
+          "value": "DIN_35",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Type de pose",
+          "raw_value": "profilé chapeau 35 mm",
+          "origin": "raw_attribute",
+          "note": "Le profilé chapeau 35 mm est explicite dans la fiche : rail DIN 35."
+        },
+        {
+          "code": "etages",
+          "value": 1,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre d'étages",
+          "raw_value": "1",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "points_par_etage",
+          "value": 2,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Nombre de positions de serrage par étage",
+          "raw_value": "2",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "connexion_cote_1",
+          "value": "vis",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Finition raccordement électrique 1",
+          "raw_value": "raccordement à vis",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "connexion_cote_2",
+          "value": "vis",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Finition raccordement électrique 2",
+          "raw_value": "raccordement à vis",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "types_conducteurs",
+          "value": [
+            "souple"
+          ],
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Section de conducteur connectable à fil fin avec embout de câble",
+          "raw_value": "0.25...6 mm²",
+          "origin": "raw_attribute",
+          "note": "Fil fin identifié comme souple. Le pilote ne prétend pas couvrir les autres types dont la qualification reste à faire."
+        },
+        {
+          "code": "section_souple_avec_embout",
+          "value": {
+            "min": 0.25,
+            "max": 6
+          },
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Section de conducteur connectable à fil fin avec embout de câble",
+          "raw_value": "0.25...6 mm²",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "section_souple_sans_embout",
+          "value": {
+            "min": 0.25,
+            "max": 10
+          },
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Section de conducteur connectable à fil fin sans embout de câble",
+          "raw_value": "0.25...10 mm²",
+          "origin": "raw_attribute",
+          "note": "Plage explicitement sans embout. La description générique souple jusqu’à 6 mm² ne précise pas la terminaison et ne remplace pas cette donnée contextualisée."
+        },
+        {
+          "code": "couleur",
+          "value": "gris",
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Couleur",
+          "raw_value": "gris",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "largeur",
+          "value": 8,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Largeur",
+          "raw_value": "8 mm",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "hauteur",
+          "value": 46.5,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Hauteur",
+          "raw_value": "46.5 mm",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "profondeur",
+          "value": 52.5,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Profondeur",
+          "raw_value": "52.5 mm",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        },
+        {
+          "code": "plaque_extremite_requise",
+          "value": true,
+          "context": {},
+          "supplier": "Rexel",
+          "raw_label": "Plaque de fermeture requise",
+          "raw_value": "Oui",
+          "origin": "raw_attribute",
+          "note": "Revue du lot du 28/10/2026 : valeur explicite dans la source de cette référence."
+        }
+      ],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "225008",
+      "ean": "3700420331131",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "230011",
+      "ean": "3700420331292",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Bizline",
+      "reference": "701115",
+      "ean": "3701395132075",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    },
+    {
+      "brand": "Europole",
+      "reference": "57016C",
+      "ean": "3666592122048",
+      "category_code": null,
+      "decision": "hold",
+      "reason": "Hors des 19 familles actuelles ou fonction ambiguë : classification à préciser avant qualification.",
+      "selections": [],
+      "rejections": [],
+      "compatibilities": []
+    }
+  ]
+}

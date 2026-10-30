@@ -1,6 +1,6 @@
-# 2HBC — catalogue v2
+# 2HBC — catalogue métier
 
-Le chantier catégories, attributs et recherche filtrée est documenté dans [CATALOGUE_V2.md](docs/CATALOGUE_V2.md). Collecteur actuel : **0.4.0**. Le nettoyage et les migrations Supabase restent à appliquer ; le connecteur refuse les écritures au 16 octobre 2026. [Script atomique prêt pour le SQL Editor](supabase/operations/20261016_reset_catalogue.sql).
+État vérifié le **30 octobre 2026** : modèle métier v1 et import v3 installés dans Supabase, collecteur **0.5.0**. La collecte de 100 références est conservée en préparation privée ; **9 produits relus sont publiés**, avec 16 offres et 81 valeurs métier validées. [Bilan et preuves du pilote](docs/ETAPE_4_LOT_PILOTE.md). La recherche et les filtres techniques du site doivent encore être raccordés aux nouvelles valeurs métier.
 
 # 2HBC — pilote Supabase et Vercel
 
@@ -22,7 +22,7 @@ Les builds de production utilisent la configuration **publique** du projet pilot
 
 Voir [le guide de déploiement](docs/DEPLOIEMENT.md) pour le schéma, les décisions à discuter, les tests et les paramètres Vercel.
 
-Cette version est un pilote : les tarifs importés sont de démonstration et les économies ne sont pas simulées.
+Cette version est un pilote. Le lot réel actuel ne contient aucun prix importé ; les économies ne sont pas simulées. Le seed de démonstration est réservé aux environnements de test.
 
 ## Auto-panier — prototype
 
@@ -44,22 +44,19 @@ publics, sans prix ni écriture en base, avec dédoublonnage et reprise automati
 Il conserve les photos et les codes article Rexel/Sonepar, puis poursuit une recherche
 bornée des codes manquants. `catalogue.json` rassemble les références et photos pour
 le contrôle ; `products.json` reste le fichier à importer.
-Le script peut aussi être téléchargé seul. Voir [le guide Windows et les limites](docs/COLLECTE_CATALOGUE.md).
-Le 15 octobre 2026, une collecte de 100 produits a été importée dans Supabase avec
-113 offres et 99 photos. Le catalogue réel compte désormais 103 produits en incluant
-les trois pilotes. [Trace d'import et limites](catalog/imports/20261015/README.md).
+Le [paquet autonome 0.5.0](releases/collecteur-metier-v0.5.0.zip) inclut les modules et le référentiel nécessaires. Voir [le guide Windows et les limites](docs/COLLECTE_CATALOGUE.md).
+L'import du 15 octobre (103 produits à l'époque) a été remplacé après remise à zéro et installation du modèle métier. Sa [trace historique](catalog/imports/20261015/README.md) ne décrit pas l'état actuel.
 
 L'[audit du 15 octobre sur les catégories et la recherche](docs/audits/2026-10-15/Audit_BDD_2HBC.md)
 précise les évolutions nécessaires après l'import des 100 produits.
 L'[audit initial de la BDD](docs/AUDIT_BDD.md) décrit les contrôles d'intégrité et
 l'import en deux étapes. `scripts/prepare_catalogue_import.py` convertit la collecte
-en SQL de préparation privée ; une publication nécessite des fiches relues et
-`--approve`. La migration correspondante reste à appliquer à Supabase (erreur de
-session du connecteur lors de la tentative du 12 octobre 2026).
+en SQL de préparation privée ; `--approve` qualifie les fiches relues en privé,
+et `--approve --publish` demande leur publication après contrôle métier serveur.
+Les sept migrations jusqu'à `catalogue_import_metier_v3` sont installées dans Supabase.
 
 Depuis le 13 octobre, le collecteur relève aussi la photo principale sur les fiches
 Rexel et Sonepar, avec sa provenance et un bilan de couverture. Les trois produits
-pilotes ont désormais une photo dans Supabase (`supabase/pilot_images.sql`), vérifiée
-sur les pages réelles. Les cartes, la comparaison et le panier affichent les photos.
-Pour les futurs imports avec images, appliquer ensuite la migration `catalogue_images` ;
-elle dépend de `catalogue_integrity_import`, toujours en attente côté cloud.
+pilotes avaient alors une photo dans Supabase (`supabase/pilot_images.sql`), vérifiée
+sur les pages réelles à cette date. Ces anciennes données ont depuis été remplacées.
+Les 9 produits du pilote actuel disposent d'une photo sourcée ; les cartes, la comparaison et le panier peuvent les afficher.

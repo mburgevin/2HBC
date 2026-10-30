@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-30",
+  "project_id": "gueuqeqyshhhmxbsiuxg",
+  "source_date": "2026-10-28",
+  "baseline": {
+    "products": 0,
+    "offers": 0,
+    "collections": 0,
+    "users": 2,
+    "clients": 1,
+    "suppliers": 3,
+    "personal_prices": 0
+  },
+  "live": {
+    "users": 2,
+    "offers": 16,
+    "clients": 1,
+    "families": [
+      {
+        "code": "accessoires-bornes",
+        "products": 1
+      },
+      {
+        "code": "bornes-rail",
+        "products": 1
+      },
+      {
+        "code": "differentiels",
+        "products": 2
+      },
+      {
+        "code": "disjoncteurs",
+        "products": 2
+      },
+      {
+        "code": "disjoncteurs-differentiels",
+        "products": 1
+      },
+      {
+        "code": "interrupteurs",
+        "products": 2
+      }
+    ],
+    "products": 9,
+    "published": 9,
+    "suppliers": 3,
+    "observations": 163,
+    "compatibilities": 1,
+    "personal_prices": 0,
+    "private_receipts": 316,
+    "validated_values": 81,
+    "staged_identities": 100,
+    "offers_with_prices": 0,
+    "unprotected_tables": 0,
+    "all_diagnostics_valid": true
+  },
+  "anonymous": {
+    "products": 9,
+    "values": 81,
+    "compatibilities": 1,
+    "search_total": 9,
+    "legacy_attribute_facets": 0
+  },
+  "client": {
+    "offers": 16,
+    "products": 9,
+    "search_total": 9,
+    "reference_search": 1,
+    "private_collections": 0,
+    "private_observations": 0
+  },
+  "tests": {
+    "python": 46,
+    "postgresql": 74
+  }
+}
